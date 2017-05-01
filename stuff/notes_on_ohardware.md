@@ -7,6 +7,8 @@ permalink: open-hardware-bio.html
 These are the websites that I am keeping track of in order to get an overview
 of the current state of open hardware in biology.
 
+I'll try to update this list regularly.
+
 ### OpenTrons
 
 <https://opentrons.com/> - open source / hardware robot; plans, software and
