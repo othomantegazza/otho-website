@@ -4,21 +4,25 @@ title: "A Collection of Resources for Open Hardware in Biology"
 permalink: open-hardware-bio.html
 ---
 
-These are the websites that I am keeping track of in order to get an overview
-of the current state of open hardware in biology.
+This is a collection of websites that I am keeping track of in order to get an
+overview of the current state of open hardware in biology.
 
 I'll try to update this list regularly.
 
 ### OpenTrons
 
-<https://opentrons.com/> - open source / hardware robot; plans, software and
+<https://opentrons.com/>
+
+Open source/hardware robot. Plans, software and
 script for protocols are tracked on github <https://github.com/OpenTrons>
 
 ### Bio Academany
 
-<http://bio.academany.org/> - Distributed course run by George Church;
-expensive, at (5000$ year?), run through Fablabs? The classes are hosted on Vimeo
-and contain info on open hardware for biology.
+<http://bio.academany.org/>
+
+Distributed course on synthetic biology;
+expensive, (at 5000$ / year ?), but provides hands on time through Fablabs (?).
+The classes are hosted on Vimeo, and contain info on open hardware for biology.
 <http://bio.academany.org/doc/tool_chains>
 <https://vimeo.com/fabacademy>
 
@@ -31,8 +35,11 @@ Open lab, an advanced list of resource is available on their website.
 ### Manu Prakash lab
 
 Manu Prakash lab, home of impressive frugal science:
+
 <https://profiles.stanford.edu/manu-prakash>
+
 <http://web.stanford.edu/group/prakash-lab/cgi-bin/labsite/>
+
 Tools they develop:
 
 - [folding microscope](https://www.foldscope.com/)
@@ -40,10 +47,9 @@ Tools they develop:
 - [citizen mosquito surveillance](http://biorxiv.org/content/early/2017/03/25/120519)
 - [paperfuge](http://biorxiv.org/content/early/2016/08/30/072207)
 
-Looks like the last two elements haven't gone through peer review yet?
+Looks like the last two elements haven't gone through peer review yet.
 
 ### Hackteria
-
 <http://www.hackteria.org/>
 
 ### Generics
