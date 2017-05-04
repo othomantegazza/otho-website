@@ -8,6 +8,11 @@ nav ul, footer ul {
     list-style: none;
     font-weight: bold;
 }
+
+nav a {
+  color: #999
+}
+
 nav ul li, footer ul li {
     display: inline;
     margin-right: 20px;
@@ -31,6 +36,10 @@ p {
 footer {
     border-top: 1px solid #d5d5d5;
     font-size: .8em;
+}
+
+footer a {
+  color: #999
 }
 
 ul {
