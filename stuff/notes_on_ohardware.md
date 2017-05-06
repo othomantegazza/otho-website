@@ -9,53 +9,48 @@ overview of the current state of open hardware in biology.
 
 I'll try to update this list regularly.
 
-## OpenTrons
+## Opentrons
 
-<https://opentrons.com/>
+[Opentrons](https://opentrons.com/) is an open source/hardware robot. Its
+hardware, software and scripts for protocols are tracked on
+[Github](https://github.com/OpenTrons).
 
-Open source/hardware robot. Plans, software and
-script for protocols are tracked on github <https://github.com/OpenTrons>
+## GaudiLabs
 
-## Gaudi lab
-
-Open lab, an advanced list of resource is available on their website.
-<http://www.gaudi.ch/GaudiLabs/> plus many current projects <http://www.gaudi.ch/GaudiLabs/?page_id=19>
-<http://www.gaudi.ch/OpenDrop/>
+[GaudiLabs](http://www.gaudi.ch/GaudiLabs/) are open labs.
+Their website contains a detailed list of
+[Open Hardware projects for lab equipment](http://www.gaudi.ch/GaudiLabs/?page_id=19),
+including cool stuff such as the [OpenDrop](http://www.gaudi.ch/OpenDrop/).
 
 ## Open hardware microfluidics
 
-StreyLab - [Blog](http://streylab.com/blog/2015/4/8/open-hardware-microfluidics-controller-arduino-shield), [Github page](https://github.com/hstrey)
+The [StreyLab](http://streylab.com/) developed an Open Hardware Microfluidic
+Controller, which is documented on their
+[Github page](https://github.com/hstrey) and on [their blog](http://streylab.com/blog/2015/4/8/open-hardware-microfluidics-controller-arduino-shield).
 
 ## Manu Prakash lab
 
-Manu Prakash lab, home of impressive frugal science:
+The [Manu Prakash lab](http://web.stanford.edu/group/prakash-lab/cgi-bin/labsite/) is home of impressive frugal science.
 
-<https://profiles.stanford.edu/manu-prakash>
+They develop tools such as:
 
-<http://web.stanford.edu/group/prakash-lab/cgi-bin/labsite/>
-
-Tools they develop:
-
-- [folding microscope](https://www.foldscope.com/)
-- [punchcard microfuidic](https://arxiv.org/abs/1408.4874)
-- [citizen mosquito surveillance](http://biorxiv.org/content/early/2017/03/25/120519)
-- [paperfuge](http://biorxiv.org/content/early/2016/08/30/072207)
+- A [folding microscope](https://www.foldscope.com/),
+- A [punchcard microfuidic device](https://arxiv.org/abs/1408.4874),
+- A [citizen mosquito surveillance ](http://biorxiv.org/content/early/2017/03/25/120519),
+- And the [paperfuge](http://biorxiv.org/content/early/2016/08/30/072207).
 
 Looks like the last two elements haven't gone through peer review yet.
 
 ## Bio Academany
 
-<http://bio.academany.org/>
-
-Distributed course on synthetic biology;
-expensive, (at 5000$ / year ?), but provides hands on time through Fablabs (?).
-The classes are hosted on Vimeo, and contain info on open hardware for biology.
-<http://bio.academany.org/doc/tool_chains>
-<https://vimeo.com/fabacademy>
+[Bio Academany](http://bio.academany.org/) hosts a distributed course on
+synthetic biology; it is expensive, (at 5000$ / year ?), but provides hands on time through Fablabs (?).
+The [classes](https://vimeo.com/fabacademy) are hosted on Vimeo, and the website contain [info on open hardware for biology](http://bio.academany.org/doc/tool_chains).
 
 
 ## Hackteria
-<http://www.hackteria.org/>
+
+The [Hacteria](http://www.hackteria.org/) DIY Bio community.
 
 ## Generics
 
@@ -72,5 +67,5 @@ new projects.
 
 
 ## Bonus ;)
-<https://youtu.be/SGJ5cZnoodY> - Wired UK documentary on open
+<https://youtu.be/SGJ5cZnoodY> - A Wired UK documentary on open
 hardware development in the city of Shenzhen.
