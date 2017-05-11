@@ -28,6 +28,16 @@ The [StreyLab](http://streylab.com/) developed an Open Hardware Microfluidic
 Controller, which is documented on their
 [Github page](https://github.com/hstrey) and on [their blog](http://streylab.com/blog/2015/4/8/open-hardware-microfluidics-controller-arduino-shield).
 
+### Microfluidics PCR
+
+Microfluidics can help to automate and scale down the volume of PCR and qPCR,
+Open Hardware can have a great impact in this field.
+
+Not Open Hardware, but Elveflow provides a nice overview of
+[microfluidic PCR development](http://www.elveflow.com/microfluidic-tutorials/microfluidic-reviews-and-tutorials/microfluidic-pcr-qpcr-rtpcr/).
+
+And a [peer reviewed paper on the topic](http://www.sciencedirect.com/science/article/pii/S2214753515000285)
+
 ## Manu Prakash lab
 
 The [Manu Prakash lab](http://web.stanford.edu/group/prakash-lab/cgi-bin/labsite/) is home of impressive frugal science.
@@ -47,6 +57,12 @@ Looks like the last two elements haven't gone through peer review yet.
 synthetic biology; it is expensive, (at 5000$ / year ?), but provides hands on time through Fablabs (?).
 The [classes](https://vimeo.com/fabacademy) are hosted on Vimeo, and the website contain [info on open hardware for biology](http://bio.academany.org/doc/tool_chains).
 
+## Open qPCR
+
+[Chaibio](https://www.chaibio.com/) developed and is selling a [qPCR with open
+source software and hardware](https://www.chaibio.com/openqpcr). They are also
+developing the [Chai Green](https://www.chaibio.com/chai-green), a freely
+licensed DNA binding dye.
 
 ## Hackteria
 
@@ -54,6 +70,8 @@ The [Hacteria](http://www.hackteria.org/) DIY Bio community.
 
 ## Generics
 
+- [Public Lab](https://publiclab.org/) more oriented toward environmental
+ science, contains great project and inspiration.
 - [Open Hardware Science](http://openhardware.science/)
 - [Open Source hardware association](https://www.oshwa.org/)
 
