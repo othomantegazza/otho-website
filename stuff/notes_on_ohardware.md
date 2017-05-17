@@ -64,6 +64,11 @@ source software and hardware](https://www.chaibio.com/openqpcr). They are also
 developing the [Chai Green](https://www.chaibio.com/chai-green), a freely
 licensed DNA binding dye.
 
+## Farming
+
+- The [Open Agriculture](https://www.media.mit.edu/groups/open-agriculture-openag/overview/) group at MIT and their [Github page](https://github.com/OpenAgInitiative).
+- The mighty [FarmBot](https://farmbot.io/) and, again, its [Github page](https://github.com/farmbot)
+
 ## Hackteria
 
 The [Hacteria](http://www.hackteria.org/) DIY Bio community.
