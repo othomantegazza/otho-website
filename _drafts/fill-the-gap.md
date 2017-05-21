@@ -108,4 +108,4 @@ hardware model**?
 [Some organizations](http://greenwave.org/) are already investing on this
 model. I am moving a little bit outside of my field of expertise right here,
 so I might not be the best person to answer those questions; but as always,
-the success of Open Source Software rises hopes that yes, this can happen.
+the success of Open Source Software raises hope that yes, this can happen.
