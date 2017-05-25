@@ -6,8 +6,9 @@ title: "Fill the Gap"
 Can **Open Source Hardware** help fill the gap and bring technology within
 reach for everybody?
 
-I am a biologist and I am curious about how open source hardware can improve the
-way we do research and how we distribute our results and knowledge.
+I am a biologist in academia and I am curious about how open source hardware
+can improve the way we do research and the way in which we distribute the
+results, the knowledge and the technology that we produce.
 
 ## Definitions first
 
@@ -16,8 +17,10 @@ Hardware as:
 
 > "hardware whose design is made publicly available so that anyone can study, modify, distribute, make, and sell the design or hardware based on that design"  
 
-We know that at least since 1999 many engineers, passionate users, companies and
-organization have tried to define standards for Open Source Hardware and to advertise for it, they were probably inspired by the success of Open Source Software.
+Starting from the late 90s many engineers, passionate users, companies and
+organization have tried to define standards for Open Source Hardware and to
+advertise for it, they were probably inspired by the success of Open Source
+Software.
 
 ## Lessons from Software
 
@@ -39,23 +42,22 @@ control of it and on how to modify any aspect of it.
 Then, the community could redistribute the modified and improved products thanks to **permissive** and **copyleft** licenses.
 
 The success of this model highlights the **benefits that
-arise from a widespread and diffuse access to knowledge** for everybody.
+arise from a widespread and distributed access to knowledge** for everybody.
 
-## Switch to hardware
 
-Can this be **applied to hardware development**? shortly: yes, it is
-already being done.
-
-**Companies** and **Universities** have already recognized the potential of **Open Source Hardware** and are investing in it.
-Certifications are also available.
-
-## A role for Universities
+## In Universities and in biology
 
 Through **synthetic biology**, open source hardware is already making its way to
 biology and biotechnology.
 
-I am interested in its role and impact on academic research,
-specifically in the fields of biology and plant science.
+I am trying to collect a [list of projects](https://othomantegazza.github.io/open-hardware-bio.html)
+that are related to Open Source Hardware and Biology and among homemade
+centrifuges, open PCR machines, microfluidics devices, I have the impression that
+they are rapidly growing.
+
+As stated above, I am interested in its role and impact on academic research,
+specifically in the fields of biology and plant science. (and eventually I would
+like to use them myself for my research :) )
 
 ### Redistributing knowledge
 
@@ -84,36 +86,43 @@ In details, this might cause that:
 - Laboratories depend more and more on **high level funding**;
   low funded labs get left behind, which could be an issue on the global scale.
 
-  Since this system is productive in the short term, laboratories that try
+  Since the end user model is productive in the short term, laboratories that try
   different approaches might get left behind,
 - This relegates researchers to a **performer / technical** position, in
   which they are required to perform a high number of repetitive tasks with
   little chances to modify the workflows of their experiments.
 
-  This could be substituted by a model in which researchers gain
-  more control on the technology they are using and thus they can spend time optimizing their experimental workflows. For example, making them simpler, less polluting and more accessible.
+  If researchers would gain
+  more control on the technology that they use, they might have a bigger margin for optimizing their experimental workflows. For example, making them simpler, less polluting and more accessible.
 - This might have an effect also on **reproducibility** and distributed
   collaborative development, simply because the chances of making
   reproducible something on which you have no control are small.
 
-Since only few labs implement open hardware methodically, this is mainly
-a speculation. But based on the impact of open source software, open hardware
-might have a role in solving those issues.
+Open Source Hardware might have a role solving those issues but since only few laboratories implement open hardware methodically I can not be sure about it.
+
+But open source software already helped biologist a lot, especially in
+bioinformatics and in data analysis fields through impressive frameworks such as,
+for example, [BioConductor](http://bioconductor.org/). This raises hopes that
+Open Source Hardware could have a similar impact for wet lab scientists.
 
 Of course the issue of a [funding system that might encourage bad scientific behavior](https://simplystatistics.org/2016/02/16/when-it-comes-to-science-its-the-economy-stupid/)
 remains, but Open Hardware could be a move in the
-right direction and could improve the life of young biologists.
+right direction and improve the life of young biologists.
 
-### Impact on farming
+### An Impact on farming?
 
-Can Open Source Hardware, if methodically implemented, improve farming by
-**lowering the costs** of tools and technology, such as plant breeding,
-machinery, pest control? Can it also shift the role of a farmer from end user
-to **user/developer**?
+As academic researcher I often wonder what will be the impact of my research.
 
-And, especially, can **Academic Research improve its impact**, down the
+I work in genetics and plant biology, so my research might have impact on
+agriculture and farming, especially in breeding new crop varieties.
+
+If we, plant biologists, would apply open hardware systematically, we might
+improve farming by **lowering the costs** necessary to access technologies such
+as plant breeding, but also, pest control.
+
+So, can **Academic Research improve its impact**, down the
 line, on farming by adopting an **open knowledge / open source software and
-hardware model**?
+hardware model**? And also, could it help shift the role of a farmer from end user to **user/developer**?
 
 [Some organizations](http://greenwave.org/) are already investing on this
 model. I am moving a little bit outside of my field of expertise right here,
