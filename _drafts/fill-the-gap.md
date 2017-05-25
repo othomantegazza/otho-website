@@ -6,9 +6,22 @@ title: "Fill the Gap"
 Can **Open Source Hardware** help fill the gap and bring technology within
 reach for everybody?
 
+I am a biologist and I am curious about how open source hardware can improve the
+way we do research and how we distribute our results and knowledge.
+
+## Definitions first
+
+The [Open Source Hardware Association](https://www.oshwa.org) defines Open Source
+Hardware as:
+
+> "hardware whose design is made publicly available so that anyone can study, modify, distribute, make, and sell the design or hardware based on that design"  
+
+We know that at least since 1999 many engineers, passionate users, companies and
+organization have tried to define standards for Open Source Hardware and to advertise for it, they were probably inspired by the success of Open Source Software.
+
 ## Lessons from Software
 
-A couple of decades ago now, the **Open Source** movement made a strong
+A couple of decades ago, the **Open Source** movement made a strong
 statement on how the source code of commonly used software should be
 available to everybody.
 
@@ -20,28 +33,25 @@ last decades and the broad start-up environment that thrived around it.
 
 It is worth mentioning that sharing the source code is good enough, but many
 open source projects went further than that.
-They made a strong statement about providing **extensive and sometimes
-redundant documentation** on how to use their product, on how to take
+They provided **extensive and sometimes redundant documentation** on how to use
+their product, on how to take
 control of it and on how to modify any aspect of it.
-Thanks to **permissive** and **copyleft** licenses, then, the modified /
-improved products could be distributed to the community.  
+Then, the community could redistribute the modified and improved products thanks to **permissive** and **copyleft** licenses.
 
-The success of this model makes a strong statement on the **benefits that
-arise from a widespread and diffuse access to knowledge** for everybody in a
-democratic society.
+The success of this model highlights the **benefits that
+arise from a widespread and diffuse access to knowledge** for everybody.
 
 ## Switch to hardware
 
 Can this be **applied to hardware development**? shortly: yes, it is
 already being done.
 
-**Companies** and **Universities** have already recognized the potential of
-**Open Hardware** or **Open Source Hardware** and are investing in it.
+**Companies** and **Universities** have already recognized the potential of **Open Source Hardware** and are investing in it.
 Certifications are also available.
 
 ## A role for Universities
 
-Through **synthetic biology**, open hardware is already making its way to
+Through **synthetic biology**, open source hardware is already making its way to
 biology and biotechnology.
 
 I am interested in its role and impact on academic research,
@@ -49,33 +59,33 @@ specifically in the fields of biology and plant science.
 
 ### Redistributing knowledge
 
-While it can be discussed that Open Source Hardware can have an effect on how
-research is done, implementing it will have an effect on how knowledge and
-technology are made available.
+By definition **Open Source** software and hardware are about how we distribute
+knowledge.
 
-By definition **Open Source** software and hardware are about how knowledge
-gets redistributed.
-
-Implementing a model that makes a strong statement on **openly
-redistributing knowledge as widely as possible** and on **facilitating
+A model that stresses the importance of **openly
+redistributing knowledge as widely as possible** and of **facilitating
 re-use of that knowledge / technology** seems only reasonable for
 **Universities**, which indeed have the **role in society** of generating knowledge and making it available.
 
-### Improving research experience for academics
+What I am also really curious about is to figure out if Open Source Hardware could impact and improve the way we do research and not exclusively the way we distribute it.
+
+
+### Making research easier for academics
 
 In my (small) experience as academic researcher, one of the main issues that
 we, young biologists, face is that we are mostly **end users** of very
 expensive and sophisticated machines and technologies.
 
-While the positive aspect of this is that we can perform very
-complex tasks and experiments with relatively little effort.
-The downside, in my opinion, is that, in this way, we partially lose control
-on what we are doing.
+In this way, we can perform very complex tasks and experiments with relatively
+little effort, but we also partially lose control on what we are doing.
 
-Possible consequences are that:
+In details, this might cause that:
 
 - Laboratories depend more and more on **high level funding**;
   low funded labs get left behind, which could be an issue on the global scale.
+
+  Since this system is productive in the short term, laboratories that try
+  different approaches might get left behind,
 - This relegates researchers to a **performer / technical** position, in
   which they are required to perform a high number of repetitive tasks with
   little chances to modify the workflows of their experiments.
@@ -91,7 +101,7 @@ a speculation. But based on the impact of open source software, open hardware
 might have a role in solving those issues.
 
 Of course the issue of a [funding system that might encourage bad scientific behavior](https://simplystatistics.org/2016/02/16/when-it-comes-to-science-its-the-economy-stupid/)
-remains, but Open Hardware could be anyway a move in the
+remains, but Open Hardware could be a move in the
 right direction and could improve the life of young biologists.
 
 ### Impact on farming
