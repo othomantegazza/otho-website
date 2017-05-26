@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Fill the Gap"
+date: 2017-05-26
 ---
 
 Can **Open Source Hardware** help fill the gap and bring technology within
 reach for everybody?
 
 I am a biologist in academia and I am curious about how open source hardware
-can improve the way we do research and the way in which we distribute the
-results, the knowledge and the technology that we produce.
+can improve the way we do research and the way in which we distribute our
+results and the knowledge and technology that we produce.
 
 ## Definitions first
 
@@ -51,13 +52,13 @@ Through **synthetic biology**, open source hardware is already making its way to
 biology and biotechnology.
 
 I am trying to collect a [list of projects](https://othomantegazza.github.io/open-hardware-bio.html)
-that are related to Open Source Hardware and Biology and among homemade
+that are related to Open Source Hardware and Biology and looking at homemade
 centrifuges, open PCR machines, microfluidics devices, I have the impression that
-they are rapidly growing.
+this way of doing things is rapidly growing.
 
 As stated above, I am interested in its role and impact on academic research,
 specifically in the fields of biology and plant science. (and eventually I would
-like to use them myself for my research :) )
+like to use those tools myself for my research :) )
 
 ### Redistributing knowledge
 
@@ -87,21 +88,21 @@ In details, this might cause that:
   low funded labs get left behind, which could be an issue on the global scale.
 
   Since the end user model is productive in the short term, laboratories that try
-  different approaches might get left behind,
+  different approaches, again, might get left behind,
 - This relegates researchers to a **performer / technical** position, in
   which they are required to perform a high number of repetitive tasks with
   little chances to modify the workflows of their experiments.
 
   If researchers would gain
-  more control on the technology that they use, they might have a bigger margin for optimizing their experimental workflows. For example, making them simpler, less polluting and more accessible.
+  more control on the technology that they use, they might have bigger chances of optimizing their experimental workflows. For example, making them simpler, less polluting and more accessible.
 - This might have an effect also on **reproducibility** and distributed
   collaborative development, simply because the chances of making
   reproducible something on which you have no control are small.
 
-Open Source Hardware might have a role solving those issues but since only few laboratories implement open hardware methodically I can not be sure about it.
+Open Source Hardware might have a role solving those issues but since only few laboratories implement open hardware methodically I can't be sure about it.
 
 But open source software already helped biologist a lot, especially in
-bioinformatics and in data analysis fields through impressive frameworks such as,
+bioinformatics and in data analysis through impressive frameworks such as,
 for example, [BioConductor](http://bioconductor.org/). This raises hopes that
 Open Source Hardware could have a similar impact for wet lab scientists.
 
@@ -113,18 +114,22 @@ right direction and improve the life of young biologists.
 
 As academic researcher I often wonder what will be the impact of my research.
 
-I work in genetics and plant biology, so my research might have impact on
+I am specialized genetics and plant biology, so my research might have impact on
 agriculture and farming, especially in breeding new crop varieties.
 
-If we, plant biologists, would apply open hardware systematically, we might
-improve farming by **lowering the costs** necessary to access technologies such
-as plant breeding, but also, pest control.
+If we, plant biologists, would apply open hardware systematically, we might, for
+example, improve farming by **lowering the costs** necessary to access technologies such
+as plant breeding.
 
 So, can **Academic Research improve its impact**, down the
 line, on farming by adopting an **open knowledge / open source software and
-hardware model**? And also, could it help shift the role of a farmer from end user to **user/developer**?
+hardware model**? And also, could it help shift the role of a farmer from **end user** to **user/developer**?
 
 [Some organizations](http://greenwave.org/) are already investing on this
 model. I am moving a little bit outside of my field of expertise right here,
 so I might not be the best person to answer those questions; but as always,
 the success of Open Source Software raises hope that yes, this can happen.
+
+---
+
+*Thanks to Silvia, Leone and Alessandro for the help and the ideas*
