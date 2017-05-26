@@ -7,9 +7,9 @@ date: 2017-05-26
 Can **Open Source Hardware** help fill the gap and bring technology within
 reach for everybody?
 
-I am a biologist in academia and I am curious about how open source hardware
+I am a biologist in academia. I am curious about how Open Source Hardware
 can improve the way we do research and the way in which we distribute our
-results and the knowledge and technology that we produce.
+results and the technology that we produce.
 
 ## Definitions first
 
@@ -70,7 +70,7 @@ redistributing knowledge as widely as possible** and of **facilitating
 re-use of that knowledge / technology** seems only reasonable for
 **Universities**, which indeed have the **role in society** of generating knowledge and making it available.
 
-What I am also really curious about is to figure out if Open Source Hardware could impact and improve the way we do research and not exclusively the way we distribute it.
+What I am also really curious about is to figure out if Open Source Hardware could also improve the way we do research and not exclusively the way we distribute it.
 
 
 ### Making research easier for academics
@@ -111,10 +111,10 @@ right direction and improve the life of young biologists.
 
 As academic researcher I often wonder what will be the impact of my research.
 
-I am specialized genetics and plant biology, so my research might have impact on
+I am specialized in genetics and plant biology, so my research might have impact on
 agriculture and farming, especially in breeding new crop varieties.
 
-If we, plant biologists, would apply open hardware systematically, we might, for
+If we, plant biologists, would apply Open Source Hardware systematically, we might, for
 example, improve farming by **lowering the costs** necessary to access technologies such
 as plant breeding.
 
@@ -129,4 +129,4 @@ the success of Open Source Software raises hope that yes, this can happen.
 
 ---
 
-*Thanks to Silvia, Leone and Alessandro for the help and the ideas*
+*Thanks to Silvia, Leone and Alessandro for the help and the ideas.*
