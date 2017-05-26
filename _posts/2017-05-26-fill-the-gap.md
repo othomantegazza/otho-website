@@ -86,14 +86,11 @@ In details, this might cause that:
 
 - Laboratories depend more and more on **high level funding**;
   low funded labs get left behind, which could be an issue on the global scale.
-
   Since the end user model is productive in the short term, laboratories that try
   different approaches, again, might get left behind,
 - This relegates researchers to a **performer / technical** position, in
   which they are required to perform a high number of repetitive tasks with
-  little chances to modify the workflows of their experiments.
-
-  If researchers would gain
+  little chances to modify the workflows of their experiments. If researchers would gain
   more control on the technology that they use, they might have bigger chances of optimizing their experimental workflows. For example, making them simpler, less polluting and more accessible.
 - This might have an effect also on **reproducibility** and distributed
   collaborative development, simply because the chances of making
