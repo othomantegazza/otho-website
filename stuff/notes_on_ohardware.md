@@ -28,6 +28,8 @@ The [StreyLab](http://streylab.com/) developed an Open Hardware Microfluidic
 Controller, which is documented on their
 [Github page](https://github.com/hstrey) and on [their blog](http://streylab.com/blog/2015/4/8/open-hardware-microfluidics-controller-arduino-shield).
 
+[Metafluidics](https://metafluidics.org/devices/) collects open source microfluidics projects for biology.
+
 ### Microfluidics PCR
 
 Microfluidics can help to automate and scale down the volume of PCR and qPCR,
