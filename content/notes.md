@@ -1,7 +1,5 @@
 ---
-layout: stuff
 title: "A Collection of Resources for Open Hardware in Biology"
-permalink: open-hardware-bio.html
 ---
 
 This is a collection of websites that I am keeping track of in order to get an

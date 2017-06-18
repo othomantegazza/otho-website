@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Enabling Tools"
 date: 2017-05-16
 ---

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Otho | Notes on stuff</title>
+    <link>/</link>
+    <description>Recent content on Otho | Notes on stuff</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 19 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I am Otho,
+I am a plant biologist, I am interested in genetics, data analysis and methods for making research easier and more accessible, such as open source software and hardware.
+I am a postdoc at CEPLAS
+Opinions here are my own.</description>
+    </item>
+    
+    <item>
+      <title>Fill the Gap</title>
+      <link>/2017/05/26/fill-the-gap/</link>
+      <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/05/26/fill-the-gap/</guid>
+      <description>Can Open Source Hardware help fill the gap and bring technology within reach for everybody?
+I am a biologist in academia. I am curious about how Open Source Hardware can improve the way we do research and the way in which we distribute our results and the technology that we produce.
+Definitions first The Open Source Hardware Association defines Open Source Hardware as:
+ &amp;ldquo;hardware whose design is made publicly available so that anyone can study, modify, distribute, make, and sell the design or hardware based on that design&amp;rdquo;</description>
+    </item>
+    
+    <item>
+      <title>Enabling Tools</title>
+      <link>/2017/05/16/enabling-tools/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/05/16/enabling-tools/</guid>
+      <description>As a young scientist, I find myself facing these challenges (or, at least, let&amp;rsquo;s say that I am trying to improve in these areas):
+ make research in an interdisciplinary and distributed context, maximize the chances that anybody can access and reproduce my results, engage with the wide public.  Learning these enabling tools are helping me dealing with this:
+ A programming language, easier if it is a high level one such as R or Python.</description>
+    </item>
+    
+    <item>
+      <title>A Collection of Resources for Open Hardware in Biology</title>
+      <link>/notes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/notes/</guid>
+      <description>This is a collection of websites that I am keeping track of in order to get an overview of the current state of open hardware in biology.
+I&amp;rsquo;ll try to update this list regularly.
+Opentrons Opentrons is an open source/hardware robot. Its hardware, software and scripts for protocols are tracked on Github.
+GaudiLabs GaudiLabs are open labs. Their website contains a detailed list of Open Hardware projects for lab equipment, including cool stuff such as the OpenDrop.</description>
+    </item>
+    
+  </channel>
+</rss>

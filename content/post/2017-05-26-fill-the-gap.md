@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Fill the Gap"
 date: 2017-05-26
 ---
