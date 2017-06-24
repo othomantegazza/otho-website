@@ -3,7 +3,7 @@ relativeurls = true
 languageCode = "en-us"
 title = "Otho | Notes on stuff"
 theme = "hugo-lithium-theme"
-googleAnalytics = ""
+googleAnalytics = "UA-101634279-1"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$", "_drafts$"]
 
