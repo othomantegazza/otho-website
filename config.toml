@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://otho.netlify.com/"
 relativeurls = true
 languageCode = "en-us"
 title = "Otho | Notes on stuff"
