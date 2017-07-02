@@ -1,10 +1,9 @@
 ---
 title: Back to the books
-date: 2017-06-01
----
-+++
+date: "2017-06-01"
 draft: true
-+++
+---
+
 
 
 # Back To The Books
