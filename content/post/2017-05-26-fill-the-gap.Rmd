@@ -1,6 +1,10 @@
 ---
 title: "Fill the Gap"
+author: "Otho Mantegazza"
 date: 2017-05-26
+output:
+  blogdown::html_page:
+    fig_width: 6
 ---
 
 Can **Open Source Hardware** help fill the gap and bring technology within
@@ -10,7 +14,7 @@ I am a biologist in academia. I am curious about how Open Source Hardware
 can improve the way we do research and the way in which we distribute our
 results and the technology that we produce.
 
-## Definitions first
+# Definitions first
 
 The [Open Source Hardware Association](https://www.oshwa.org) defines Open Source
 Hardware as:
@@ -22,7 +26,7 @@ organization have tried to define standards for Open Source Hardware and to
 advertise for it, they were probably inspired by the success of Open Source
 Software.
 
-## Lessons from Software
+# Lessons from Software
 
 A couple of decades ago, the **Open Source** movement made a strong
 statement on how the source code of commonly used software should be
@@ -45,7 +49,7 @@ The success of this model highlights the **benefits that
 arise from a widespread and distributed access to knowledge** for everybody.
 
 
-## In Universities and in biology
+# In Universities and in biology
 
 Through **synthetic biology**, open source hardware is already making its way to
 biology and biotechnology.
@@ -59,7 +63,7 @@ As stated above, I am interested in its role and impact on academic research,
 specifically in the fields of biology and plant science. (and eventually I would
 like to use those tools myself for my research :) )
 
-### Redistributing knowledge
+## Redistributing knowledge
 
 By definition **Open Source** software and hardware are about how we distribute
 knowledge.
@@ -72,7 +76,7 @@ re-use of that knowledge / technology** seems only reasonable for
 What I am also really curious about is to figure out if Open Source Hardware could also improve the way we do research and not exclusively the way we distribute it.
 
 
-### Making research easier for academics
+## Making research easier for academics
 
 In my (small) experience as academic researcher, one of the main issues that
 we, young biologists, face is that we are mostly **end users** of very
@@ -106,7 +110,7 @@ Of course the issue of a [funding system that might encourage bad scientific beh
 remains, but Open Hardware could be a move in the
 right direction and improve the life of young biologists.
 
-### An Impact on farming?
+# An Impact on farming?
 
 As academic researcher I often wonder what will be the impact of my research.
 

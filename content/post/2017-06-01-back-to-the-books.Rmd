@@ -1,7 +1,11 @@
 ---
 title: Back to the books
 date: "2017-06-01"
+author: "Otho Mantegazza"
 draft: true
+output:
+  blogdown::html_page:
+    fig_width: 6
 ---
 
 
