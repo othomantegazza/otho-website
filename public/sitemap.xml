@@ -3,43 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://otho.netlify.com/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2017-06-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://otho.netlify.com/2017/05/26/fill-the-gap/</loc>
+    <loc>/2017/06/01/back-to-the-books/</loc>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/05/26/fill-the-gap/</loc>
     <lastmod>2017-05-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://otho.netlify.com/2017/05/16/enabling-tools/</loc>
+    <loc>/2017/05/16/enabling-tools/</loc>
     <lastmod>2017-05-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://otho.netlify.com/notes/</loc>
+    <loc>/notes/</loc>
   </url>
   
   <url>
-    <loc>https://otho.netlify.com/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://otho.netlify.com/</loc>
+    <loc>/</loc>
     <lastmod>2017-06-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://otho.netlify.com/post/</loc>
-    <lastmod>2017-05-26T00:00:00+00:00</lastmod>
+    <loc>/post/</loc>
+    <lastmod>2017-06-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://otho.netlify.com/tags/</loc>
+    <loc>/tags/</loc>
     <priority>0</priority>
   </url>
   

@@ -54,7 +54,7 @@
 
   <article class="article">
     
-    <span class="article-duration">5 min read</span>
+    <span class="article-duration">6 min read</span>
     
 
     <h1 class="article-title">Back to the books</h1>
@@ -64,128 +64,57 @@
     
 
     <div class="article-content">
-      
-
-<h1 id="back-to-the-books">Back To The Books</h1>
-
-<p>Recently, toward the end of my PhD, I was struggling to learn new
-skills such as writing with LaTeX and R programming.
-At that time I somehow rediscovered (duh!) books.</p>
-
-<p>I also have been always fascinated by <strong>Open source
-Software</strong> and by the <strong>copyleft movement</strong> (I also was not earning a
-huge amount of money during my PhD and I did not know how long it would take to
-find a job afterwards). It was at that time that I discovered
-open books: such as <em>wikibooks</em>, <em>Git books</em> and any other kind of openly
-licensed book.</p>
-
-<h2 id="communication-in-academia">Communication in academia</h2>
-
-<p>As young scientist in plant biology, I feel strongly pushed toward writing
-academics papers. This make sense, we communicate our research through peer
-reviewed papers, and use this to make a career; but I often feel that we are
-focusing too much on writing papers and that we neglect other forms of
-communication.</p>
-
-<p>Today we have a many communication media at hand, such as, indeed, the
-<strong>academic paper</strong> or <strong>review</strong>, but also relatively new media such as <strong>blogs</strong>,
-<strong>wikis</strong>, <strong>videos</strong> and <strong>podcasts</strong> and nevertheless <strong>classes</strong>, online
-and not. Among those, for personal experience, <strong>books</strong> have a great impact when
-somebody has to <strong>learn something completely new</strong> and when kept as reference.</p>
-
-<p>Overall, books remain a practical <strong>unit of knowledge</strong> and since the role of
-academics is to generate and redistribute knowledge, book writing should be highly
-rated in an academic career.</p>
-
-<h2 id="git-tracked-books">Git tracked books</h2>
-
+      <div id="back-to-the-books" class="section level1">
+<h1>Back To The Books</h1>
+<p>Toward the end of my PhD I was struggling to learn new skills such as data analysis and programming; it was at that time that I (duh!) rediscovered books and, moreover, discovered a very special kind of books, known as <strong>open books</strong> or <strong>open source books</strong>. We might regard as open source books any book that is distributed on a <strong>permissive license</strong>, but there is much more. Not only open source books can be accessed for free, there is a <strong>whole framework around this on the tools</strong> that can be used to <strong>write</strong> such books, the tools that allow to <strong>distribute</strong> them (and also to sell it on side), but especially the tools that allow to <strong>collaborate</strong> while writing them. I was struck by the potential of open source books, especially regarding the tasks of young academics like me, so I decided to write a post about it.</p>
+<p>I have to specify that I come here as a beginner, I have no experience in writing open source books. But this is a possibility that really attracts me and something that I would like to do in the future. In order to do so I collected a series of tools for open book writing and informed myself on the technology available, and this is what this post will be about.</p>
+<p>There are also ethical consequences of writing an open book: during my PhD I was not earning so much money and I did not know how long would it take to get a job afterwards, and under this condition open book had helped me a lot developing skills that I could not have accessed otherwise. But here I would like to concentrate on the technical side detailing tools and technology available.</p>
+<div id="communication-in-academia" class="section level2">
+<h2>Communication in academia</h2>
+<p>As young scientist in plant biology, I feel strongly pushed toward writing academics papers. This make sense, we communicate our research through peer reviewed papers, and use this to smake a career; but I often feel that we are focusing too much on writing papers and that we neglect other forms of communication.</p>
+<p>Today we have a many communication media at hand, such as, indeed, the <strong>academic paper</strong> or <strong>review</strong>, but also relatively new media such as <strong>blogs</strong>, <strong>wikis</strong>, <strong>videos</strong> and <strong>podcasts</strong> and nevertheless <strong>classes</strong>, online and not. Among those, for personal experience, <strong>books</strong> have a great impact when somebody has to <strong>learn something completely new</strong> and when kept as reference.</p>
+<p>Overall, books remain a practical <strong>unit of knowledge</strong> and since the role of academics is to generate and redistribute knowledge, book writing should be highly rated in an academic career.</p>
+</div>
+<div id="git-tracked-books" class="section level2">
+<h2>Git tracked books</h2>
 <p>I am impressed by the potential of <strong>open Git tracked books</strong>. people from statistics, programming and data analysis are already implementing this model.</p>
-
-<p>For example Hadley Wickham&rsquo;s <a href="https://github.com/hadley/adv-r">Advanced R</a>,
-R. Irizarry and M. Love <a href="https://github.com/genomicsclass/book">Biomedical data science</a>,
-or R. Peng <a href="https://github.com/rdpeng/rprogdatascience">R programming</a> are all
-tracked on Git. (<em>all links point to the source code</em>)</p>
-
-<p>This makes sense, since people in those fields are often very familiar with the
-open source culture and Git. But I could also find a <a href="https://www.gitbook.com/book/towcenter/curious-journalist-s-guide-to-data/details">book on journalism</a>
-(I could not find the source for this one, even though it is free and it is
-definitely tracked with Git).</p>
-
-<h3 id="why-git">why git</h3>
-
-<p>Git was written by Linus Torvald&rsquo;s team in 2005 and it is a version control tool
-that, while developing a program, it keeps track of the changes are inserted and
-allows collaborative programming.</p>
-
-<p>The trick here is that the source code of programs is a collection of text files,
-so git essentially is designed to track text files, so it can be easily adapted
-for book writing, especially text books.</p>
-
-<h2 id="technical-details">Technical details</h2>
-
-<p>I have to say that I never tried to write a book, and more important, I have never
-tried to write using Git and Github.</p>
-
-<p>So there is <strong>Gitbook</strong> that since 2014 provides and easy framework and it&rsquo;s free
-for open source. I have to say that I did not understand where they store the
-source of the book, Github?</p>
-
-<p>As I understood, Hadley Wickham writes in <strong>markdown</strong> and uses a combination of
-<strong>Jekyll</strong> and <strong>bookdown</strong> on <a href="https://travis-ci.org/">travis</a> for compiling his
-book and push it to his website.</p>
-
-<p>Overall looks like the R package <a href="https://bookdown.org/yihui/bookdown/">Bookdown</a>
-might be the choice right now. It takes a <strong>markdown</strong> input and nicely converts it in:</p>
-
+<p>For example Hadley Wickham’s <a href="https://github.com/hadley/adv-r">Advanced R</a>, R. Irizarry and M. Love <a href="https://github.com/genomicsclass/book">Biomedical data science</a>, or R. Peng <a href="https://github.com/rdpeng/rprogdatascience">R programming</a> are all tracked on Git. (<em>all links point to the source code</em>)</p>
+<p>This makes sense, since people in those fields are often very familiar with the open source culture and Git. But I could also find a <a href="https://www.gitbook.com/book/towcenter/curious-journalist-s-guide-to-data/details">book on journalism</a> (I could not find the source for this one, even though it is free and it is definitely tracked with Git).</p>
+<div id="why-git" class="section level3">
+<h3>why git</h3>
+<p>Git was written by Linus Torvald’s team in 2005 and it is a version control tool that, while developing a program, it keeps track of the changes are inserted and allows collaborative programming.</p>
+<p>The trick here is that the source code of programs is a collection of text files, so git essentially is designed to track text files, so it can be easily adapted for book writing, especially text books.</p>
+</div>
+</div>
+<div id="technical-details" class="section level2">
+<h2>Technical details</h2>
+<p>I have to say that I never tried to write a book, and more important, I have never tried to write using Git and Github.</p>
+<p>So there is <strong>Gitbook</strong> that since 2014 provides and easy framework and it’s free for open source. I have to say that I did not understand where they store the source of the book, Github?</p>
+<p>As I understood, Hadley Wickham writes in <strong>markdown</strong> and uses a combination of <strong>Jekyll</strong> and <strong>bookdown</strong> on <a href="https://travis-ci.org/">travis</a> for compiling his book and push it to his website.</p>
+<p>Overall looks like the R package <a href="https://bookdown.org/yihui/bookdown/">Bookdown</a> might be the choice right now. It takes a <strong>markdown</strong> input and nicely converts it in:</p>
 <ul>
 <li><strong>HTML</strong> through <strong>pandoc</strong>,</li>
 <li><strong>PDF</strong> through LaTeX,</li>
 <li><strong>epub</strong> (always through pandoc?) and also <strong>mobi</strong> through <strong>Calibre</strong></li>
 </ul>
-
-<p>Moreover Bookdown is very nicely documented and easy to use
-and would be my choice if I would write a book.</p>
-
-<h2 id="good-for-academics">good for academics</h2>
-
-<p>Git traked open books might (but it is not sure) not bring as much profits as a
-normal book. But on the other side a regular book could have much less impact.</p>
-
-<p>And given that <a href="https://leanpub.com/">Leanpub</a> allows to sell open books written in Git
-with a very transparent process while leaving copyright to the author, and given that also
-printers as <a href="https://www.oreilly.com/">O&rsquo;Reilly</a>
-already publish some of its books under permissive licenses; it might be that open
-book can also provide some monetary profit (I mean, somebody might buy them anyway,
-I did).</p>
-
-<p>But most of all, we, academics, want to get credit for our work, because this is
-generally how we get our next contract in academia (and they never last long).</p>
-
-<p>And writing a nice book, rich of content that introduces people to a topic that
-we deal with in academia, that goes into the details and that serve as a reference,
-might be a good thing to get credit for.</p>
-
+<p>Moreover Bookdown is very nicely documented and easy to use and would be my choice if I would write a book.</p>
+</div>
+<div id="good-for-academics" class="section level2">
+<h2>good for academics</h2>
+<p>Git traked open books might (but it is not sure) not bring as much profits as a normal book. But on the other side a regular book could have much less impact.</p>
+<p>And given that <a href="https://leanpub.com/">Leanpub</a> allows to sell open books written in Git with a very transparent process while leaving copyright to the author, and given that also printers as <a href="https://www.oreilly.com/">O’Reilly</a> already publish some of its books under permissive licenses; it might be that open book can also provide some monetary profit (I mean, somebody might buy them anyway, I did).</p>
+<p>But most of all, we, academics, want to get credit for our work, because this is generally how we get our next contract in academia (and they never last long).</p>
+<p>And writing a nice book, rich of content that introduces people to a topic that we deal with in academia, that goes into the details and that serve as a reference, might be a good thing to get credit for.</p>
 <p>Github allows to get exact credit for your work, because every contribution is tracked.</p>
-
-<p>Another thing is that we want is control on what we do, with Github we can control
-contribution, and at the same time if somebody want anyway to introduce
-contributions that we might reject, they can always fork our project and go on
-on their own path, developing their own product.</p>
-
-<p>In this I think that Books on Github are superior for us academics to wikibooks
-We can get credit for it and control the content</p>
-
-<p>While open books might not provide the same profit as static books published
-through traditional publishers, they might have much higher impact. Think about a static and expensive book, against a book that people can get for free or for low price, but
-moreover, that can be constantly updated and that anybody can edit.</p>
-
-<h2 id="next">next</h2>
-
-<p>So, looks like the perfect modern tools for text book writing are already there;
-right now I do not feel enough
-an expert in any of my area of interest to write a book on it. But it sounds like
-a good long term project, to identify an area in which I know enough about it
-and then start writing an open book. As stated above the tools are all there.</p>
+<p>Another thing is that we want is control on what we do, with Github we can control contribution, and at the same time if somebody want anyway to introduce contributions that we might reject, they can always fork our project and go on on their own path, developing their own product.</p>
+<p>In this I think that Books on Github are superior for us academics to wikibooks We can get credit for it and control the content</p>
+<p>While open books might not provide the same profit as static books published through traditional publishers, they might have much higher impact. Think about a static and expensive book, against a book that people can get for free or for low price, but moreover, that can be constantly updated and that anybody can edit.</p>
+</div>
+<div id="next" class="section level2">
+<h2>next</h2>
+<p>So, looks like the perfect modern tools for text book writing are already there; right now I do not feel enough an expert in any of my area of interest to write a book on it. But it sounds like a good long term project, to identify an area in which I know enough about it and then start writing an open book. As stated above the tools are all there.</p>
+</div>
+</div>
 
     </div>
   </article>
