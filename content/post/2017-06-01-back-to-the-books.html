@@ -1,63 +1,148 @@
 ---
-title: Back to the books
+title: Back To The Books
 date: "2017-06-01"
 author: "Otho Mantegazza"
 draft: true
 output:
   blogdown::html_page:
     fig_width: 6
+    toc: true
+    toc_depth: 2
+    number_sections: true
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#back-to-the-books"><span class="toc-section-number">1</span> Back To The Books</a></li>
+<li><a href="#tools-for-writing-open-books-on-github"><span class="toc-section-number">2</span> Tools For Writing Open Books on Github</a><ul>
+<li><a href="#markdown"><span class="toc-section-number">2.1</span> Markdown</a></li>
+<li><a href="#git-and-github"><span class="toc-section-number">2.2</span> Git and Github</a></li>
+<li><a href="#putting-it-together-books-authorship-and-contributions"><span class="toc-section-number">2.3</span> Putting it together: Books, authorship and contributions</a></li>
+<li><a href="#bonus-bookdown"><span class="toc-section-number">2.4</span> Bonus: Bookdown</a></li>
+</ul></li>
+<li><a href="#publishing"><span class="toc-section-number">3</span> Publishing</a><ul>
+<li><a href="#own-website"><span class="toc-section-number">3.1</span> Own website</a></li>
+<li><a href="#rstudio-connect-through-bookdown"><span class="toc-section-number">3.2</span> Rstudio connect, through Bookdown</a></li>
+<li><a href="#publishers"><span class="toc-section-number">3.3</span> Publishers</a></li>
+</ul></li>
+<li><a href="#impact"><span class="toc-section-number">4</span> Impact</a><ul>
+<li><a href="#paywall"><span class="toc-section-number">4.1</span> Paywall</a></li>
+<li><a href="#updates-and-crowdsourcing"><span class="toc-section-number">4.2</span> Updates and crowdsourcing</a></li>
+</ul></li>
+<li><a href="#wrapping-it-up-and-whats-next"><span class="toc-section-number">5</span> Wrapping it up and what’s next</a></li>
+</ul>
+</div>
 
 <div id="back-to-the-books" class="section level1">
-<h1>Back To The Books</h1>
-<p>Toward the end of my PhD I was struggling to learn new skills such as data analysis and programming; it was at that time that I (duh!) rediscovered books and, moreover, discovered a very special kind of books, known as <strong>open books</strong> or <strong>open source books</strong>. We might regard as open source books any book that is distributed on a <strong>permissive license</strong>, but there is much more. Not only open source books can be accessed for free, there is a <strong>whole framework around this on the tools</strong> that can be used to <strong>write</strong> such books, the tools that allow to <strong>distribute</strong> them (and also to sell it on side), but especially the tools that allow to <strong>collaborate</strong> while writing them. I was struck by the potential of open source books, especially regarding the tasks of young academics like me, so I decided to write a post about it.</p>
-<p>I have to specify that I come here as a beginner, I have no experience in writing open source books. But this is a possibility that really attracts me and something that I would like to do in the future. In order to do so I collected a series of tools for open book writing and informed myself on the technology available, and this is what this post will be about.</p>
-<p>There are also ethical consequences of writing an open book: during my PhD I was not earning so much money and I did not know how long would it take to get a job afterwards, and under this condition open book had helped me a lot developing skills that I could not have accessed otherwise. But here I would like to concentrate on the technical side detailing tools and technology available.</p>
-<div id="communication-in-academia" class="section level2">
-<h2>Communication in academia</h2>
-<p>As young scientist in plant biology, I feel strongly pushed toward writing academics papers. This make sense, we communicate our research through peer reviewed papers, and use this to smake a career; but I often feel that we are focusing too much on writing papers and that we neglect other forms of communication.</p>
-<p>Today we have a many communication media at hand, such as, indeed, the <strong>academic paper</strong> or <strong>review</strong>, but also relatively new media such as <strong>blogs</strong>, <strong>wikis</strong>, <strong>videos</strong> and <strong>podcasts</strong> and nevertheless <strong>classes</strong>, online and not. Among those, for personal experience, <strong>books</strong> have a great impact when somebody has to <strong>learn something completely new</strong> and when kept as reference.</p>
-<p>Overall, books remain a practical <strong>unit of knowledge</strong> and since the role of academics is to generate and redistribute knowledge, book writing should be highly rated in an academic career.</p>
-</div>
-<div id="git-tracked-books" class="section level2">
-<h2>Git tracked books</h2>
-<p>I am impressed by the potential of <strong>open Git tracked books</strong>. people from statistics, programming and data analysis are already implementing this model.</p>
-<p>For example Hadley Wickham’s <a href="https://github.com/hadley/adv-r">Advanced R</a>, R. Irizarry and M. Love <a href="https://github.com/genomicsclass/book">Biomedical data science</a>, or R. Peng <a href="https://github.com/rdpeng/rprogdatascience">R programming</a> are all tracked on Git. (<em>all links point to the source code</em>)</p>
-<p>This makes sense, since people in those fields are often very familiar with the open source culture and Git. But I could also find a <a href="https://www.gitbook.com/book/towcenter/curious-journalist-s-guide-to-data/details">book on journalism</a> (I could not find the source for this one, even though it is free and it is definitely tracked with Git).</p>
-<div id="why-git" class="section level3">
-<h3>why git</h3>
-<p>Git was written by Linus Torvald’s team in 2005 and it is a version control tool that, while developing a program, it keeps track of the changes are inserted and allows collaborative programming.</p>
-<p>The trick here is that the source code of programs is a collection of text files, so git essentially is designed to track text files, so it can be easily adapted for book writing, especially text books.</p>
-</div>
-</div>
-<div id="technical-details" class="section level2">
-<h2>Technical details</h2>
-<p>I have to say that I never tried to write a book, and more important, I have never tried to write using Git and Github.</p>
-<p>So there is <strong>Gitbook</strong> that since 2014 provides and easy framework and it’s free for open source. I have to say that I did not understand where they store the source of the book, Github?</p>
-<p>As I understood, Hadley Wickham writes in <strong>markdown</strong> and uses a combination of <strong>Jekyll</strong> and <strong>bookdown</strong> on <a href="https://travis-ci.org/">travis</a> for compiling his book and push it to his website.</p>
-<p>Overall looks like the R package <a href="https://bookdown.org/yihui/bookdown/">Bookdown</a> might be the choice right now. It takes a <strong>markdown</strong> input and nicely converts it in:</p>
+<h1><span class="header-section-number">1</span> Back To The Books</h1>
+<p>Toward the end of my PhD I was struggling to learn new skills such as data analysis and programming, it was at that time that I first rediscovered books (duh!) and then discovered a very special kind of them, known as <strong>open books</strong> or <strong>open source books</strong>. This kind of tools helped me in my professional development, so I feel particularly attached to them.</p>
+<p>By now I have found three types of open source books:</p>
 <ul>
-<li><strong>HTML</strong> through <strong>pandoc</strong>,</li>
-<li><strong>PDF</strong> through LaTeX,</li>
-<li><strong>epub</strong> (always through pandoc?) and also <strong>mobi</strong> through <strong>Calibre</strong></li>
+<li>Books that are simply distributed by the author on their own website,</li>
+<li>Books that are written through wikis, known as <strong>wikibooks</strong>,</li>
+<li>Books that are written through Github.</li>
 </ul>
-<p>Moreover Bookdown is very nicely documented and easy to use and would be my choice if I would write a book.</p>
+<p>I will discuss the last type because Github is powerful tool to write books that <strong>fits perfectly to academics</strong>.</p>
+<p>A disclaimer first: I come here as a beginner. My area of expertise is biology and I have never written a book about it, but I would really like to do so. Meanwhile I collected the necessary tools and some idea on why we should do it. And I would like to share them with you.</p>
 </div>
-<div id="good-for-academics" class="section level2">
-<h2>good for academics</h2>
-<p>Git traked open books might (but it is not sure) not bring as much profits as a normal book. But on the other side a regular book could have much less impact.</p>
-<p>And given that <a href="https://leanpub.com/">Leanpub</a> allows to sell open books written in Git with a very transparent process while leaving copyright to the author, and given that also printers as <a href="https://www.oreilly.com/">O’Reilly</a> already publish some of its books under permissive licenses; it might be that open book can also provide some monetary profit (I mean, somebody might buy them anyway, I did).</p>
-<p>But most of all, we, academics, want to get credit for our work, because this is generally how we get our next contract in academia (and they never last long).</p>
-<p>And writing a nice book, rich of content that introduces people to a topic that we deal with in academia, that goes into the details and that serve as a reference, might be a good thing to get credit for.</p>
-<p>Github allows to get exact credit for your work, because every contribution is tracked.</p>
-<p>Another thing is that we want is control on what we do, with Github we can control contribution, and at the same time if somebody want anyway to introduce contributions that we might reject, they can always fork our project and go on on their own path, developing their own product.</p>
-<p>In this I think that Books on Github are superior for us academics to wikibooks We can get credit for it and control the content</p>
-<p>While open books might not provide the same profit as static books published through traditional publishers, they might have much higher impact. Think about a static and expensive book, against a book that people can get for free or for low price, but moreover, that can be constantly updated and that anybody can edit.</p>
+<div id="tools-for-writing-open-books-on-github" class="section level1">
+<h1><span class="header-section-number">2</span> Tools For Writing Open Books on Github</h1>
+<p>It all revolves around two tools: <strong>Markdown</strong> and, you have guessed it, <strong>Github</strong>.</p>
+<div id="markdown" class="section level2">
+<h2><span class="header-section-number">2.1</span> Markdown</h2>
+<p><a href="https://daringfireball.net/projects/markdown/">Markdown</a> is a simple markup language. That is a language for annotating plain text; so that we know which part is the title, which part should be bold or italic, which part makes up paragraph, etc…</p>
+<p>The most widely used markup languages are HTML and LATEX. Compared to them markdown is less versatile, but incredibly simple and easy to use.</p>
+<p>For example, in markdown:</p>
+<pre><code># This is a title
+
+## This is a subtitle
+
+This is a paragraph.
+
+This text is **bold**, and this text is *italic*
+
+This is a bullet list:
+
+- item1
+- item2
+
+[This is a link](to/your/favourite/URL)</code></pre>
+<p>etc…</p>
+<p>A big chunk of the web is written in Markdown; for example, this blog and many others.</p>
+<p>Once you have written markdown text what can you do with it?</p>
+<p>Markdown is a <strong>universal source</strong> that can be easily <strong>converted</strong> into nicely formatted <strong>docx</strong> and <strong>pdf</strong>, but also into <strong>HTML</strong> and <strong>epub/mobi</strong>. So, through <strong><a href="https://pandoc.org/">pandoc</a></strong> you can convert any markdown file into any of those formats, no edits required.</p>
+<p>Since markdown is plain text, you can read it on any computer and any platform, you just need a text editor. It is not even worth mentioning that pandoc is open source.</p>
+<p>Also, since markdown is plain text, it can be tracked with <a href="https://git-scm.com/">Git</a> and hosted on <a href="https://github.com/">Github</a>. (if you already know what they are, skip the next section)</p>
 </div>
-<div id="next" class="section level2">
-<h2>next</h2>
-<p>So, looks like the perfect modern tools for text book writing are already there; right now I do not feel enough an expert in any of my area of interest to write a book on it. But it sounds like a good long term project, to identify an area in which I know enough about it and then start writing an open book. As stated above the tools are all there.</p>
+<div id="git-and-github" class="section level2">
+<h2><span class="header-section-number">2.2</span> Git and Github</h2>
+<p><a href="https://git-scm.com/">Git</a> is a version control software. It was designed for programmers that need to keep track of what they write and delete while they develop their programs; and also to collaborate while the do this. I am not the right person to provide details of what Git is. Generally Git is a tool that is somehow complementary to a backup, it keeps track of specific files on a project-wise schedule.</p>
+<p>By keeping track of modification to a file, <strong>Git assigns exact authorship to each line</strong> of such file. So Git, plus its online hub <a href="https://github.com/">Github</a> allows you to publish, update, and keep track of modification and authorship of files online and in an open way, allowing <strong>open but controlled collaboration</strong>.</p>
+<p>Since the source code of programs is indeed text, Git <strong>works perfectly also to write books</strong> (and blog, websites, manual etc…), as long as they are written in plain text formats, such as <strong>markdown</strong>.</p>
 </div>
+<div id="putting-it-together-books-authorship-and-contributions" class="section level2">
+<h2><span class="header-section-number">2.3</span> Putting it together: Books, authorship and contributions</h2>
+<p>A combination of Markdown (universal source) and Github (publish, author, track and collaborate) is good combination for publishing open source books, many academics such as <a href="http://hadley.nz/">Hadley Wickham</a> are already using it.</p>
+<div id="authorship-and-contributions" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Authorship and contributions</h3>
+<p>I would like to take <a href="http://adv-r.had.co.nz/">one of Hadley Wickham’s books</a> as example to discuss authorship and contributions, because as academics we want to get credit for our work. As you can see in the book’s <a href="https://github.com/hadley/adv-r/graphs/contributors">source Github page</a>, Github tracks authorship of every line of the book. Hadley Wickham authored most of the book itself, but many other people provided small contribution. For every contributor, you can tell exactly what they wrote or deleted in the various files that compose the source for the book. What you can’t see is that each of these contribution had to be approved from the main author.</p>
+<p>So, a combination of markdown and Github allows you to self publish your own books. This would be already powerful by itself. Moreover this system gains extra strength from Github’s authoring tools: anybody can propose changes / contributions to your book, but every contribution must be approved by you (or by any of a set of authors that you provided with such privilege).</p>
+<p><strong>be aware, since your book is now an open source project, it can be <a href="https://www.quora.com/What-does-it-mean-to-fork-on-GitHub">forked</a></strong></p>
+</div>
+</div>
+<div id="bonus-bookdown" class="section level2">
+<h2><span class="header-section-number">2.4</span> Bonus: Bookdown</h2>
+<p>An experienced user can rely on its own skills to convert all its markdown chapters files into a nicely formatted HTML book, the good news is that we don’t have to do this by ourself: <a href="https://bookdown.org/yihui/bookdown/">Bookdown</a> takes care of rendering your book, partly through Pandoc, and more.</p>
+<p><a href="https://bookdown.org/yihui/bookdown/">Bookdown’s manual</a> is written in Bookdown itself, so you can peek how the rendering looks like. <a href="https://www.rstudio.com/resources/webinars/introducing-bookdown/">Bookdown is an R package</a>. Therefore it is most widely known to the R community. Indeed <a href="https://bookdown.org/">most of the book written in Bookdown</a> are about R. But they don’t need to: Bookdown is a fantastic tool and using it requires very little to no knowledge of R.</p>
+<p>Another powerful tool is <a href="https://www.gitbook.com/">Gitbook</a>, it was used to author <a href="https://www.gitbook.com/explore">this collection of technical books</a></p>
+</div>
+</div>
+<div id="publishing" class="section level1">
+<h1><span class="header-section-number">3</span> Publishing</h1>
+<div id="own-website" class="section level2">
+<h2><span class="header-section-number">3.1</span> Own website</h2>
+<p>Markdown and Pandoc provide an HTML output, so your book can be easily integrated into any website. The book can be uploaded manually or automatically. It looks like <a href="https://travis-ci.org/">travis-ci</a> can build your book automatically from Github and push it to your website; but I have not checked the details and setting this up might not be easy.</p>
+<p>In this way, you keep the copyright and you decide how to license your book (it is reasonable to use Github together with open source or share-alike licenses).</p>
+</div>
+<div id="rstudio-connect-through-bookdown" class="section level2">
+<h2><span class="header-section-number">3.2</span> Rstudio connect, through Bookdown</h2>
+<p>Bookdown provides <a href="https://bookdown.org/yihui/bookdown/rstudio-connect.html">an integrated system publish your book</a> to through Rstudio connect to <a href="https://bookdown.org">this website</a>. This is detailed on <a href="https://bookdown.org/yihui/bookdown/publishing.html">the “Publishing” chapter of bookdown’s manual</a> together with other extensive information on publishing.</p>
+</div>
+<div id="publishers" class="section level2">
+<h2><span class="header-section-number">3.3</span> Publishers</h2>
+<p>It is also possible to sell open source books through publishers. Among those <a href="https://leanpub.com/">Leanpub</a> does a good job, I personally purchased books in there. Leanpub accepts to sell open source books written in markdown, those books can also be uploaded directly from Github. Their publishing process is fast; indeed they accept to distribute your book in real time while you write it, providing updates at anytime to the customers.</p>
+<p>Most of the books on Leanpub are about programming, but it does not have to be like this, we could publish there books on biology, or about any of your fields of interest.</p>
+<p>If your open source book is incredibly good, you can also sell printed versions through traditional channels. Indeed Hadley Wickham <a href="https://www.amazon.com/dp/1466586966/">sells his books through Chapman &amp; Hall</a>.</p>
+</div>
+</div>
+<div id="impact" class="section level1">
+<h1><span class="header-section-number">4</span> Impact</h1>
+<p>Again, a small disclaimer: I have not written nor published an open source book yet; so i put together this section from observation and experience while studying and working in academia in the last years.</p>
+<div id="paywall" class="section level2">
+<h2><span class="header-section-number">4.1</span> Paywall</h2>
+<p>We scientists often complain about how people don’t trust and don’t make use of the scientific knowledge that we produce. But how much scientific knowledge is locked behind a paywall that has questionable reasons to exist? Writing open source books, at least while we are funded with public money, could have an ethical side.</p>
+<p>What about the practical side? We academics do not earn huge amounts of money for writing books that are often sold at high prices. If we would distribute open source books instead, we would not lose much. Though we could gain impact: an open source book can be accessed worldwide, and it could be also easily translated.</p>
+<p>Beside, remember that open source books can always be sold through <a href="https://leanpub.com/">Leanpub</a>.</p>
+</div>
+<div id="updates-and-crowdsourcing" class="section level2">
+<h2><span class="header-section-number">4.2</span> Updates and crowdsourcing</h2>
+<p>Imagine the impact of a book that can be freely:</p>
+<ul>
+<li>accessed online,</li>
+<li>downloaded on a e-reader,</li>
+<li>printed,</li>
+</ul>
+<p>And that can also be updated in real time. When we specialize we sometimes feel that books gets useless because they get obsolete too quickly. Well, open source books do not.</p>
+<p>Moreover they are less of a burden on the author, because readers can contribute to the book and improve it, from fixing typos to writing whole sections.</p>
+<p>For example, the author of Bookdown, (<a href="https://yihui.name/">Yihui Xie</a>), is also <a href="https://github.com/rstudio/blogdown">writing an R package to make website</a> (that by the way, I am using to make this blog). The <a href="https://bookdown.org/yihui/blogdown/">manual for the new package</a> is being written with Bookdown and it has already <a href="https://github.com/rstudio/blogdown/commits/master/docs">many contributions on Github</a>.</p>
+<p>What better peer review than the readers themselves?</p>
+<p>Did I already mentioned that engaging in these activities might look good on your CV?</p>
+</div>
+</div>
+<div id="wrapping-it-up-and-whats-next" class="section level1">
+<h1><span class="header-section-number">5</span> Wrapping it up and what’s next</h1>
+<p>A combination of Markdown and Github is a powerful combination for publishing open source books; engaging in this activity, expecially for academics, could have great impact. Moreover, packages such as Bookdown make it easy to compile very nicely formatted HTML books with little effort.</p>
+<p>Using this system we could publish educational book or also short and very specific high level reference books on the topics / area that we are most experienced in. Aiming for example at University students and people that want to learn these topics.</p>
+<p>I don’t know if I am an expert in any of my area of interest to write a an open source book on it. But it sounds like a good long term project and I definitely look forward to do it. the tools are all there.</p>
 </div>
