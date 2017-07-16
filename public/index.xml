@@ -6,10 +6,19 @@
     <description>Recent content on Otho | Notes on stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://otho.netlify.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Back To The Books</title>
+      <link>https://otho.netlify.com/2017/07/16/back-to-the-books/</link>
+      <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://otho.netlify.com/2017/07/16/back-to-the-books/</guid>
+      <description>1 Back To The Books 2 Tools For Writing Open Books on Github 2.1 Markdown 2.2 Git and Github 2.3 Putting it together: Books, authorship and contributions 2.4 Bonus: Bookdown  3 Publishing 3.1 Own website 3.2 Rstudio connect, through Bookdown 3.3 Publishers  4 Impact 4.1 Paywall 4.2 Updates and crowdsourcing  5 Wrapping it up and what’s next   1 Back To The Books Toward the end of my PhD I was struggling to learn new skills such as data analysis and programming.</description>
+    </item>
     
     <item>
       <title>About</title>

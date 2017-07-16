@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://otho.netlify.com/2017/07/16/back-to-the-books/</loc>
+    <lastmod>2017-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://otho.netlify.com/about/</loc>
     <lastmod>2017-06-19T00:00:00+00:00</lastmod>
   </url>
@@ -28,13 +33,13 @@
   
   <url>
     <loc>https://otho.netlify.com/</loc>
-    <lastmod>2017-06-19T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://otho.netlify.com/post/</loc>
-    <lastmod>2017-05-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-07-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
