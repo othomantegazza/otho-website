@@ -23,7 +23,7 @@ By now I have found three types of open source books:
 - Books that are written through wikis, known as **wikibooks**,
 - Books that are written through **Github**.
 
-Here I will discuss the last type, because I have the impression that Github is powerful tool to write books that also fits perfectly to academics.
+Here I will discuss the last type, because I have the impression that Github is a powerful tool for writing books that also fits perfectly to academics.
 
 A disclaimer first: I come here as a beginner. My area of expertise is biology and I have never written a book about it, but I would really like to do so. Meanwhile I collected the necessary tools and some idea on why we should do it. And I would like to share them with you.
 
@@ -86,7 +86,7 @@ A combination of Markdown (universal source) and Github (publish, author, track 
 
 We academics care a great deal that our work gets accredited to us, and only because we are proud of it: this is very important for us in order to keep our job or to the next one. So, I would like to take [one of Hadley Wickham's books](http://adv-r.had.co.nz/) as example to discuss authorship and contributions.
 
-As you can see in this book is [tracked on Github](https://github.com/hadley/adv-r). Github does not only tracks and keeps records of any file that constitute the book, it also keeps records of the [authorship of every line of those files](https://github.com/hadley/adv-r/graphs/contributors). As you can see, Hadley Wickham authored most of the book himself, but many other people provided small contribution. For every contributor, you can tell exactly what they wrote or deleted in the various files that constitute the source for that book. What you can't see is that each of these contribution had to be approved from the main author.
+As you can see, this book is [tracked on Github](https://github.com/hadley/adv-r). Github does not only tracks and keeps records of any file that constitute the book, it also keeps records of the [authorship of every line of those files](https://github.com/hadley/adv-r/graphs/contributors). As you can see, Hadley Wickham authored most of the book himself, but many other people provided small contribution. For every contributor, you can tell exactly what they wrote or deleted in the various files that constitute the source for that book. What you can't see is that each of these contribution had to be approved from the main author.
 
 So, a combination of markdown and Github allows you to self publish your own books. Moreover, this system provides strong authoring tools: anybody can propose changes / contributions to your book, and every contribution must be approved by you (or by any of the authors that have such privilege).
 
@@ -97,7 +97,7 @@ So, a combination of markdown and Github allows you to self publish your own boo
 An experienced user can rely on its own skills to convert all the markdown files that constitute a book into a nicely formatted web page, the good news is that we don't have to do this by ourself: instead we can use   [Bookdown](https://bookdown.org/yihui/bookdown/)
 
 [Bookdown is an R package](https://www.rstudio.com/resources/webinars/introducing-bookdown/) that renders markdown books into HTML pages and many other formats. [Bookdown's manual](https://bookdown.org/yihui/bookdown/) is written in Bookdown itself, so you can peek how the rendering looks like.
-Since Bookdown is written in [R](https://en.wikipedia.org/wiki/R_(programming_language)), it is most widely known to the R community. Indeed [most of the book written in Bookdown](https://bookdown.org/) are about R, but they don't need to, using Bookdown requires very little to no knowledge of R.
+Since Bookdown is written in [R](https://en.wikipedia.org/wiki/R_(programming_language)), it is most widely known to the R community. Indeed [most of the book written in Bookdown](https://bookdown.org/) are about R, but they don't need to, using Bookdown requires very little knowledge of R.
 
 Another powerful tool is [Gitbook](https://www.gitbook.com/), it was used to author [this collection of technical books](https://www.gitbook.com/explore)
 
@@ -162,4 +162,4 @@ With this system we could publish beginner-level books or also short high level 
 
 If academics would engage in this activity they could have a great impact on society.
 
-I don't know if I am an expert enough to write an open source book on any of my area of interest. But it sounds like a good long term project and I look forward to do it. The tools are all there.
+I don't know if I am expert enough to write an open source book on any of my area of interest. But it sounds like a good long term project and I look forward to do it. The tools are all there.
