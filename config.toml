@@ -1,7 +1,7 @@
 baseurl = "https://otho.netlify.com/"
 relativeurls = true
 languageCode = "en-us"
-title = "Otho | Notes on stuff"
+title = "Otho | Sidenotes"
 theme = "hugo-lithium-theme"
 googleAnalytics = "UA-101634279-1"
 disqusShortname = ""
