@@ -19,8 +19,8 @@ skills such as data analysis and programming. It was at that time that I redisco
 
 By now I have found three types of open source books:
 
-- Books that are simply distributed by the author on their own website,
-- Books that are written through wikis, known as **wikibooks**,
+- Books that are simply distributed by the author on their own website.
+- Books that are written through wikis, known as **wikibooks**.
 - Books that are written through **Github**.
 
 Here I will discuss the last type, because I have the impression that Github is a powerful tool for writing books that also fits perfectly to academics.
@@ -33,7 +33,7 @@ It all revolves around two tools: Markdown and, you have guessed it, Github.
 
 ## Markdown
 
-[Markdown](https://daringfireball.net/projects/markdown/) is a simple markup language; we can use it for annotating plain text, so that we know which part is the title, which part should be bold or italic, which part makes up paragraph, etc...
+[Markdown](https://daringfireball.net/projects/markdown/) is a simple markup language; we can use it for annotating plain text, so that we know which part is the title, which part should be bold or italic, which part makes up paragraph, etc.
 
 The most widely used markup languages are HTML and LATEX.
 Compared to them markdown is less versatile, but incredibly simple and easy to use.
@@ -57,7 +57,7 @@ This is a bullet list:
 [This is a link](to/your/favourite/URL)
 ```
 
-etc...
+etc.
 
 A big chunk of the web, for example this blog and many others, is written in Markdown.
 
@@ -72,11 +72,11 @@ Also, since markdown is plain text, it can be tracked with [Git](https://git-scm
 ## Git and Github
 
 [Git](https://git-scm.com/) is a version control software. It was designed for software developers that need to keep track of what they write and delete while they develop their software; and also to collaborate while doing this.
-I am not the right person to provide a detailed introduction to Git. Generally Git is a tool that is somehow complementary to a backup, it keeps track of changes to specific files on a project-wise schedule.
+Git is a tool that is somehow complementary to a backup, it keeps track of changes to specific files on a project-wise schedule.
 
-By tracking the modifications to a file, **Git assigns exact authorship to each line** of such file. So Git, plus **its online hub [Github](https://github.com/)** allows you to publish, update and track any modification (and authorship of such) of files, online and in an open way. This features make Git a great tool for **open but controlled collaboration**.
+By tracking the modifications to a file, **Git assigns exact authorship to each line** of such file. So Git, plus **its online hub [Github](https://github.com/)** allows you to publish, update and track any modification (and authorship of those modifications) of files, online and in an open way. This features make Git a great tool for **open but controlled collaboration**.
 
-Since the source code of programs is indeed text, Git works perfectly also for writing books (and blog, websites, manual etc...), as long as they are written in plain text formats, such as markdown.
+Since the source code of programs is indeed text, Git works perfectly also for writing books (and blog, websites, manual etc.), as long as they are written in plain text formats, such as markdown.
 
 ## Putting it together: Books, authorship and contributions
 
@@ -129,7 +129,7 @@ If your open source book is incredibly good, you can also sell printed versions 
 
 # Impact
 
-A small note: I haven't written or published an open source book yet; I wrote this section starting from my personal  observations and experience while studying and working in academia in the last years.
+A small note: I haven't written or published an open source book yet; I wrote this section starting from my personal observations and experience while studying and working in academia in the last years.
 
 ## Paywall
 
@@ -143,9 +143,9 @@ Beside, remember that open source books can always be sold through [Leanpub](htt
 
 Imagine the impact of a book that can be freely:
 
-- accessed online,
-- downloaded on a e-reader,
-- printed,
+- accessed online
+- downloaded on a e-reader
+- printed
 
 And that can also be updated in real time. When we specialize we sometimes feel
 that books gets useless because they quickly become obsolete. Well, open source books do not.
