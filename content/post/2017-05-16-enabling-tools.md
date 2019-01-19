@@ -1,6 +1,7 @@
 ---
 title: "Enabling Tools"
 date: 2017-05-16
+summary: "Scientists love programming, scientists love writing"
 ---
 
 As a young scientist, I find myself facing these challenges (or, at least,

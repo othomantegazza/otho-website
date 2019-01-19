@@ -2,6 +2,7 @@
 title: "Fill the Gap"
 author: "Otho Mantegazza"
 date: 2017-05-26
+summary: "Can Open Source Hardware help fill the gap and bring technology within reach for everybody?"
 output:
   blogdown::html_page:
     fig_width: 6
