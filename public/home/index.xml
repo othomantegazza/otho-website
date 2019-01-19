@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homes on Otho | Sidenotes</title>
-    <link>https://otho.netlify.com/home/</link>
+    <link>/home/</link>
     <description>Recent content in Homes on Otho | Sidenotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
     <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0200</lastBuildDate>
     
-	<atom:link href="https://otho.netlify.com/home/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/home/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://otho.netlify.com/home/hero/</link>
+      <link>/home/hero/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://otho.netlify.com/home/hero/</guid>
+      <guid>/home/hero/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://otho.netlify.com/home/about/</link>
+      <link>/home/about/</link>
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
-      <guid>https://otho.netlify.com/home/about/</guid>
+      <guid>/home/about/</guid>
       <description>Biography Hi, I am Otho, I am a plant biologist.
 My main scientific interests are genetics, and data analysis, including data visualization and statistcs.
 Also, I am interested in methods to teach, publish and communicate science in a way that&amp;rsquo;s easier and more inclusive. Indeed I strongly support the idea that generation and communication of knowledge are not independent from one another, but one single process.
@@ -35,28 +35,28 @@ This is my website and my blog, in here you&amp;rsquo;ll find my CV, my projects
     
     <item>
       <title>Recent Posts</title>
-      <link>https://otho.netlify.com/home/posts/</link>
+      <link>/home/posts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://otho.netlify.com/home/posts/</guid>
+      <guid>/home/posts/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Work Experience</title>
-      <link>https://otho.netlify.com/home/experience/</link>
+      <link>/home/experience/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://otho.netlify.com/home/experience/</guid>
+      <guid>/home/experience/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>https://otho.netlify.com/home/contact/</link>
+      <link>/home/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://otho.netlify.com/home/contact/</guid>
+      <guid>/home/contact/</guid>
       <description></description>
     </item>
     

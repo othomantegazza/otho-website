@@ -4,7 +4,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/post/2017-07-16-back-to-the-books/</loc>
+      <loc>/post/2017-07-16-back-to-the-books/</loc>
       <lastmod>2017-07-16T00:00:00+00:00</lastmod>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/post/2017-05-26-fill-the-gap/</loc>
+      <loc>/post/2017-05-26-fill-the-gap/</loc>
       <lastmod>2017-05-26T00:00:00+00:00</lastmod>
     </url>
     
@@ -20,7 +20,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/post/2017-05-16-enabling-tools/</loc>
+      <loc>/post/2017-05-16-enabling-tools/</loc>
       <lastmod>2017-05-16T00:00:00+00:00</lastmod>
     </url>
     
@@ -28,7 +28,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/categories/</loc>
+      <loc>/categories/</loc>
       <priority>0</priority>
     </url>
     
@@ -36,7 +36,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/</loc>
+      <loc>/</loc>
       <lastmod>2016-04-20T00:00:00+02:00</lastmod>
       <priority>0</priority>
     </url>
@@ -45,7 +45,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/post/</loc>
+      <loc>/post/</loc>
       <lastmod>2017-07-16T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -54,7 +54,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/publication_types/</loc>
+      <loc>/publication_types/</loc>
       <priority>0</priority>
     </url>
     
@@ -62,7 +62,7 @@
     
     <url>
     
-      <loc>https://otho.netlify.com/tags/</loc>
+      <loc>/tags/</loc>
       <priority>0</priority>
     </url>
     
