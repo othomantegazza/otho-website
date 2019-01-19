@@ -6,6 +6,7 @@
     <description>Recent content in Posts on Otho | Sidenotes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
     <lastBuildDate>Sun, 16 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://otho.netlify.com/post/index.xml" rel="self" type="application/rss+xml" />
@@ -13,19 +14,19 @@
     
     <item>
       <title>Back To The Books</title>
-      <link>https://otho.netlify.com/2017/07/16/back-to-the-books/</link>
+      <link>https://otho.netlify.com/post/2017-07-16-back-to-the-books/</link>
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://otho.netlify.com/2017/07/16/back-to-the-books/</guid>
+      <guid>https://otho.netlify.com/post/2017-07-16-back-to-the-books/</guid>
       <description>1 Back To The Books 2 Tools For Writing Open Books on Github 2.1 Markdown 2.2 Git and Github 2.3 Putting it together: Books, authorship and contributions 2.4 Bonus: Bookdown  3 Publishing 3.1 Own website 3.2 Rstudio connect, through Bookdown 3.3 Publishers  4 Impact 4.1 Paywall 4.2 Updates and crowdsourcing  5 Wrapping it up and what’s next   1 Back To The Books Toward the end of my PhD I was struggling to learn new skills such as data analysis and programming.</description>
     </item>
     
     <item>
       <title>Fill the Gap</title>
-      <link>https://otho.netlify.com/2017/05/26/fill-the-gap/</link>
+      <link>https://otho.netlify.com/post/2017-05-26-fill-the-gap/</link>
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://otho.netlify.com/2017/05/26/fill-the-gap/</guid>
+      <guid>https://otho.netlify.com/post/2017-05-26-fill-the-gap/</guid>
       <description>Can Open Source Hardware help fill the gap and bring technology within reach for everybody?
 I am a biologist in academia. I am curious about how Open Source Hardware can improve the way we do research and the way in which we distribute our results and the technology that we produce.
 Definitions first The Open Source Hardware Association defines Open Source Hardware as:
@@ -34,10 +35,10 @@ Definitions first The Open Source Hardware Association defines Open Source Hardw
     
     <item>
       <title>Enabling Tools</title>
-      <link>https://otho.netlify.com/2017/05/16/enabling-tools/</link>
+      <link>https://otho.netlify.com/post/2017-05-16-enabling-tools/</link>
       <pubDate>Tue, 16 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://otho.netlify.com/2017/05/16/enabling-tools/</guid>
+      <guid>https://otho.netlify.com/post/2017-05-16-enabling-tools/</guid>
       <description>As a young scientist, I find myself facing these challenges (or, at least, let&amp;rsquo;s say that I am trying to improve in these areas):
  make research in an interdisciplinary and distributed context, maximize the chances that anybody can access and reproduce my results, engage with the wide public.  Learning these enabling tools are helping me dealing with this:
  A programming language, easier if it is a high level one such as R or Python.</description>
