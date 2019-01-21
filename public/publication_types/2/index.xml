@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2 on Otho | Sidenotes</title>
+    <link>/publication_types/2/</link>
+    <description>Recent content in 2 on Otho | Sidenotes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
+    <lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Homology-directed repair of a defective glabrous gene in Arabidopsis with Cas9-based gene targeting</title>
+      <link>/publication/hahn-2018-homology/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/hahn-2018-homology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>An efficient visual screen for CRISPR/Cas9 activity in Arabidopsis thaliana</title>
+      <link>/publication/hahn-2017-efficient/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/hahn-2017-efficient/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Generation of Targeted Knockout Mutants in Arabidopsis thaliana Using CRISPR/Cas9</title>
+      <link>/publication/hahn-2017-generation/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/hahn-2017-generation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surveying the oligomeric state of Arabidopsis thaliana chloroplasts</title>
+      <link>/publication/lundquist-2017-surveying/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/lundquist-2017-surveying/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Engineering C4 photosynthesis into C3 chassis in the synthetic biology age</title>
+      <link>/publication/schuler-2016-engineering/</link>
+      <pubDate>Fri, 01 Jan 2016 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/schuler-2016-engineering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Analysis of the arabidopsis REM gene family predicts functions during flower development</title>
+      <link>/publication/mantegazza-2014-analysis/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/mantegazza-2014-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gene coexpression patterns during early development of the native Arabidopsis reproductive meristem: novel candidate developmental regulators and patterns of functional redundancy</title>
+      <link>/publication/mantegazza-2014-gene/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0100</pubDate>
+      
+      <guid>/publication/mantegazza-2014-gene/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
