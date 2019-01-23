@@ -172,7 +172,7 @@ enableGitInfo = false
   # Privacy pack
   #   Show a cookie consent message to visitors
   #   Anonymize IP in Google Analytics (if enabled)
-  privacy_pack = false
+  privacy_pack = true
 
   # Link custom CSS and JS assets
   #   (relative to /static/css and /static/js respectively)
@@ -289,11 +289,17 @@ enableGitInfo = false
   name = "Posts"
   url = "#posts"
   weight = 3
+  
+
+[[menu.main]]
+  name = "Projects"
+  url = "#projects"
+  weight = 4
 
 [[menu.main]]
   name = "Publications"
   url = "/publication"
-  weight = 3
+  weight = 5
 
 [[menu.main]]
   name = "Contact"

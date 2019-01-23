@@ -26,8 +26,6 @@ date = "2016-04-20T00:00:00+02:00"
   "Open Learning"]
 +++
 
-# Biography
-
 Hi, I am Otho, I am a plant biologist.
 
 My main scientific interests are genetics, and data analysis, including data visualization and statistcs.

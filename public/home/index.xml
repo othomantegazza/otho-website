@@ -27,7 +27,7 @@
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0200</pubDate>
       
       <guid>/home/about/</guid>
-      <description>Biography Hi, I am Otho, I am a plant biologist.
+      <description>Hi, I am Otho, I am a plant biologist.
 My main scientific interests are genetics, and data analysis, including data visualization and statistcs.
 Also, I am interested in methods to teach, publish and communicate science in a way that&amp;rsquo;s easier and more inclusive. Indeed I strongly support the idea that generation and communication of knowledge are not independent from one another, but one single process.
 This is my website and my blog, in here you&amp;rsquo;ll find my CV, my projects and my posts.</description>
@@ -48,6 +48,15 @@ This is my website and my blog, in here you&amp;rsquo;ll find my CV, my projects
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/home/experience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>/home/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/home/projects/</guid>
       <description></description>
     </item>
     

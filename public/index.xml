@@ -11,11 +11,30 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>PTRAPR</title>
+      <link>/project/ptrapr/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/project/ptrapr/</guid>
+      <description>&lt;p&gt;An R package to analyze Rice panicle architecture. ppp&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Homology-directed repair of a defective glabrous gene in Arabidopsis with Cas9-based gene targeting</title>
       <link>/publication/hahn-2018-homology/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0100</pubDate>
       
       <guid>/publication/hahn-2018-homology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What does the plant do?</title>
+      <link>/project/ps-booklet/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0200</pubDate>
+      
+      <guid>/project/ps-booklet/</guid>
       <description></description>
     </item>
     

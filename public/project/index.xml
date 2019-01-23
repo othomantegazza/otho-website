@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Otho | Sidenotes</title>
+    <link>/project/</link>
+    <description>Recent content in Projects on Otho | Sidenotes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
+    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PTRAPR</title>
+      <link>/project/ptrapr/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>/project/ptrapr/</guid>
+      <description>An R package to analyze Rice panicle architecture. ppp</description>
+    </item>
+    
+    <item>
+      <title>What does the plant do?</title>
+      <link>/project/ps-booklet/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0200</pubDate>
+      
+      <guid>/project/ps-booklet/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

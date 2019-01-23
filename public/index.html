@@ -85,7 +85,7 @@
     <script>
       window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
       ga('create', 'UA-101634279-1', 'auto');
-      
+      ga('set', 'anonymizeIp', true);
       ga('require', 'eventTracker');
       ga('require', 'outboundLinkTracker');
       ga('require', 'urlChangeTracker');
@@ -131,6 +131,32 @@
   
 
   
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#3f51b5",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#3f51b5"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
 
   
 
@@ -221,6 +247,25 @@
           <a class="nav-link" href="/#posts" data-target="#posts">
             
             <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects" data-target="#projects">
+            
+            <span>Projects</span>
             
           </a>
         </li>
@@ -441,11 +486,7 @@ url('/img/headers/mil.jpg')
   </div>
   <div class="col-12 col-lg-8" itemprop="description">
 
-    
-
-<h1 id="biography">Biography</h1>
-
-<p>Hi, I am Otho, I am a plant biologist.</p>
+    <p>Hi, I am Otho, I am a plant biologist.</p>
 
 <p>My main scientific interests are genetics, and data analysis, including data visualization and statistcs.</p>
 
@@ -837,6 +878,115 @@ To do so, I have both analyzed transcriptomic data from multiple species, and de
     </div>
     
     
+  </div>
+</div>
+
+    </div>
+  </section>
+  
+
+  
+  
+  
+  <section id="projects" class="home-section">
+    <div class="container">
+      
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-4 section-heading">
+
+    <h1>Projects</h1>
+    
+
+  </div>
+  <div class="col-xs-12 col-md-8">
+
+
+
+    
+
+    
+
+    <div class="row isotope projects-container js-layout-masonry ">
+      
+        
+        
+        
+          
+          
+        
+        
+          
+
+
+
+
+
+
+
+
+<div class="col-12 col-md-6 col-lg-4 project-item isotope-item ">
+  <div class="card">
+    
+    
+    <a href="https://othomantegazza.github.io/ptrapr/" target="_blank" rel="noopener" class="card-image hover-overlay">
+      <img src="/project/ptrapr/featured_hu00310a85212a65f30f496472c6df946c_141120_550x0_resize_q90_box_2.png" alt="" class="img-responsive">
+    </a>
+    
+    <div class="card-text">
+      <h4><a href="https://othomantegazza.github.io/ptrapr/" target="_blank" rel="noopener">PTRAPR</a></h4>
+      <div class="card-desription">
+        <p>An R package to analyze Rice panicle architecture.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
+      
+        
+        
+        
+          
+          
+        
+        
+          
+
+
+
+
+
+
+
+
+<div class="col-12 col-md-6 col-lg-4 project-item isotope-item ">
+  <div class="card">
+    
+    
+    <a href="https://bookdown.org/otho/ps_booklet/" target="_blank" rel="noopener" class="card-image hover-overlay">
+      <img src="/project/ps-booklet/featured_hua3313adbf2f8254ee056d28a943f3b7a_75599_550x0_resize_q90_box.jpg" alt="" class="img-responsive">
+    </a>
+    
+    <div class="card-text">
+      <h4><a href="https://bookdown.org/otho/ps_booklet/" target="_blank" rel="noopener">What does the plant do?</a></h4>
+      <div class="card-desription">
+        <p>A booklet about photosynthesis and how we study it</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
+      
+    </div>
+
   </div>
 </div>
 

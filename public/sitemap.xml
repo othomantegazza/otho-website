@@ -4,8 +4,24 @@
     
     <url>
     
+      <loc>/project/ptrapr/</loc>
+      <lastmod>2018-12-10T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
       <loc>/publication/hahn-2018-homology/</loc>
       <lastmod>2018-01-01T00:00:00+01:00</lastmod>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/ps-booklet/</loc>
+      <lastmod>2017-08-01T00:00:00+02:00</lastmod>
     </url>
     
   
@@ -112,6 +128,15 @@
     
       <loc>/post/</loc>
       <lastmod>2017-07-16T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    <url>
+    
+      <loc>/project/</loc>
+      <lastmod>2018-12-10T00:00:00+01:00</lastmod>
       <priority>0</priority>
     </url>
     
