@@ -3,6 +3,9 @@ _site/
 .jekyll-metadata
 .Rproj.user
 
+# blogdown files
+resources/*
+
 # below, basic R gitignore
 # https://github.com/github/gitignore/
 #########################################

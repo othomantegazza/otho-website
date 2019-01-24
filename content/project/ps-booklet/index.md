@@ -6,7 +6,7 @@ title = "What does the plant do?"
 date = 2017-08-01
 
 # Project summary to display on homepage.
-summary = "A booklet about photosynthesis and how we study it"
+summary = "A booklet about photosynthesis and how we study it."
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["communication"]`

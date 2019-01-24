@@ -7,7 +7,7 @@ title = "Work Experience"
 subtitle = ""
 
 # Order that this section will appear in.
-weight = 20
+weight = 10
 
 # Date format for experience
 #   Refer to https://sourcethemes.com/academic/docs/customization/#date-format
@@ -35,6 +35,16 @@ date_format = "January 2006"
   location = "Duesseldorf, Germany"
   title = "PostDoc"
   description = "With the broad goal of improving plant photosynthetic yield I have investigated the genetic and transcriptomic differences that determine leaf anatomy in plants of C3 and C4 photosynthetic types."
+
+[[experience]]
+  company = "NCSU"
+  company_url = "https://www.ncsu.edu/"
+  title = "Visiting PhD Student"
+  description = "Under the supervision of Prof. Robert Franks, I have helped setting up an experiment of Chromatine IP."
+  date_start = "2014-08-20"
+  date_end = "2014-10-31"
+  location = "Raleigh, NC"
+  
   
 [[experience]]
   company = "Museo della Scienza e della Tecnologia Leonardo Da Vinci"
