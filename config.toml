@@ -18,12 +18,12 @@ copyright = "&copy; Otho Mantegazza 2018"
 theme = "hugo-academic"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "content/post/_data/*", "content/post/_plots/*"]
 preserveTaxonomyNames = true
 paginate = 10
 
 # Enable comments by entering your Disqus shortname
-disqusShortname = ""
+disqusShortname = "nugolo"
 
 # Enable analytics by entering your Google Analytics tracking ID
 googleAnalytics = "UA-101634279-1"

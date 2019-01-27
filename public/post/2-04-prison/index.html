@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.3.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Otho Mantegazza">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Intro This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.
+The incarceration trend dataset is kindly provided by the Vera Institute on their Github page. Analyzing this dataset aims at remembering of the social injustices still present in our world on Martin Luther King Jr.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2-04-prison/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-101634279-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2-04-prison/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@othomn">
+  <meta property="twitter:creator" content="@othomn">
+  
+  <meta property="og:site_name" content="Otho | Sidenotes">
+  <meta property="og:url" content="/post/2-04-prison/">
+  <meta property="og:title" content="An analysis of Vera institute&#39;s prison dataset | Otho | Sidenotes">
+  <meta property="og:description" content="Intro This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.
+The incarceration trend dataset is kindly provided by the Vera Institute on their Github page. Analyzing this dataset aims at remembering of the social injustices still present in our world on Martin Luther King Jr."><meta property="og:image" content="/img/portrait2.jpg">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-01-25T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-01-25T00:00:00&#43;00:00">
+  
+
+  
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#3f51b5",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#3f51b5"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
+
+  
+
+  <title>An analysis of Vera institute&#39;s prison dataset | Otho | Sidenotes</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Otho | Sidenotes</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/publication">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">An analysis of Vera institute&#39;s prison dataset</h1>
+
+  
+  <p class="page-subtitle">Tidytuesday week 4</p>
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-01-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-01-25 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Jan 25, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    10 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/2-04-prison/#disqus_thread"></a>
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=An%20analysis%20of%20Vera%20institute%27s%20prison%20dataset&amp;url=%2fpost%2f2-04-prison%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2-04-prison%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2-04-prison%2f&amp;title=An%20analysis%20of%20Vera%20institute%27s%20prison%20dataset"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2-04-prison%2f&amp;title=An%20analysis%20of%20Vera%20institute%27s%20prison%20dataset"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=An%20analysis%20of%20Vera%20institute%27s%20prison%20dataset&amp;body=%2fpost%2f2-04-prison%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<div id="intro" class="section level1">
+<h1>Intro</h1>
+<p>This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.</p>
+<p>The incarceration trend dataset is kindly provided by the <a href="https://www.vera.org/">Vera Institute</a> on their <a href="https://github.com/vera-institute/incarceration_trends">Github page</a>. Analyzing this dataset aims at remembering of the social injustices still present in our world on Martin Luther King Jr. Day.</p>
+<p>For this analysis, I want to practice modelling rather than data wrangling and tidying, so I decided to start from the file <code>prison_population.csv</code>, from <a href="https://github.com/rfordatascience/tidytuesday">Tidytuesday’s github page</a> which has already been tidied by Thomas Mock.</p>
+<pre class="r"><code># Setup -------------------------------------------------------------------
+library(tidyverse)
+theme_set(theme_bw())</code></pre>
+<pre class="r"><code># Get Data ----------------------------------------------------------------
+
+# download data directly from github and store them as Rdata locally.
+
+dat_path &lt;- &quot;_data/2-04-prison.Rdata&quot;
+dat_url &lt;- paste0(&quot;https://raw.githubusercontent.com/&quot;,
+                  &quot;rfordatascience/tidytuesday/master/data/&quot;,
+                  &quot;/2019/2019-01-22/prison_population.csv&quot;)
+
+if(!file.exists(dat_path)) {
+  
+  dat &lt;- read_csv(dat_url)
+  save(dat, file = dat_path)
+  
+} else {
+  load(dat_path)
+}</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   year = col_integer(),
+##   state = col_character(),
+##   county_name = col_character(),
+##   urbanicity = col_character(),
+##   region = col_character(),
+##   division = col_character(),
+##   pop_category = col_character(),
+##   population = col_integer(),
+##   prison_population = col_integer()
+## )</code></pre>
+</div>
+<div id="a-strategy-for-missing-values-na" class="section level1">
+<h1>A strategy for missing values [NA]</h1>
+<p>Collecting such detailed data is a massive effort, and some missing values are inevitable. For statistical modeling we must select a clear and explicit strategy to deal with measurements that are mixed with missing values.</p>
+<p>The dataset <code>prison_population.csv</code> has many missing values stored as <code>NA</code> in the column <code>prison_population</code>. That column counts incarcerated individuals, and it is our main interest together with the <code>population</code> columns that stores a full population census.</p>
+<pre class="r"><code># how many NAs in the variable prison_population?
+dat$prison_population %&gt;% is.na() %&gt;% sum()</code></pre>
+<pre><code>## [1] 751787</code></pre>
+<div id="ignore-the-nas" class="section level2">
+<h2>Ignore the NAs</h2>
+<p>A very basic strategy, could be just to ignore the NAs. We can try to plot a quick summary of prison population by state, using <code>sum(na.rm = TRUE)</code> to ignore NAs. But this strategy, introduce strange fluctuations in the measurements, because randomly occurring NAs increase or decrease the prison population counts with patterns that are not reflected in reality.</p>
+<pre class="r"><code># Try sum(na.rm = TRUE) --------------------------------------------------------
+
+# summarize the data by state and year
+dat_state &lt;- 
+  dat %&gt;% 
+  filter(pop_category == &quot;Total&quot;,
+         year &gt; 1982, 
+         year != 2016) %&gt;% 
+  group_by(year, state) %&gt;% 
+  summarise(prison_population = prison_population %&gt;% sum(na.rm = TRUE),
+            population = population %&gt;% sum(na.rm = TRUE)) 
+
+# plot them as an heatmap
+dat_state %&gt;% 
+  ggplot(aes(x = year,
+             y = state,
+             fill = prison_population)) +
+  geom_raster() +
+  scale_fill_viridis_c(trans = &quot;log10&quot;, breaks = 10^(1:5)) +
+  # Do not add padding around x limits
+  scale_x_continuous(expand = expand_scale(0))</code></pre>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="/post/2-04-prison_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>We can hypothesize that the sharp changes in the <code>prison_population</code> variable are caused by missing data, rather than by real changes in the population of prisons.</p>
+</div>
+<div id="a-more-solid-strategy" class="section level2">
+<h2>A more solid strategy</h2>
+<p>As a more solid strategy to deal with missing values, we can keep only measurements from counties in which the variable <code>prison_population</code> never has missing values.</p>
+<p>For example, if in a county we did not count the prison population for two years, and we thus have missing values, when we sum the data for those county to the others ignoring NAs, we would notice a sharp increase and decrease in prison population, that is not reflected in reality.</p>
+<p>It is better to remove measurements from that county altogether. In this way we may lose some measurements. But the time series that we retain reflects better the real trends in prison population.</p>
+<p>(If we needed to retain more measurements, we could have tried to impute missing values, but in this case we don’t need to. Because we should have already enough measurements to make insightful observations).</p>
+<p>We can use <code>dplyr</code> to create the new variable <code>has_na</code> that is <code>TRUE</code> if any measurement from that county contains missing values. And then we can use to filter out those observations.</p>
+<pre class="r"><code>dat_clean &lt;- 
+  dat %&gt;% 
+  filter(pop_category == &quot;Total&quot;,
+         # to include more counties, I have reduced the time span
+         year &gt;= 1990,
+         year != 2016) %&gt;% 
+  group_by(state, county_name) %&gt;% 
+  mutate(has_na = anyNA(prison_population)) %&gt;% 
+  filter(!has_na) %&gt;% 
+  ungroup()</code></pre>
+<p>Let’s do again the heatmap, but after we have removed counties with missing values.</p>
+<pre class="r"><code>dat_clean %&gt;% 
+  # first summarize data by state and year
+  group_by(year, state) %&gt;% 
+  summarise(prison_population = sum(prison_population),
+            population = sum(population)) %&gt;% 
+  # then plot the heatmap
+  ggplot(aes(x = year,
+             y = state,
+             fill = prison_population)) +
+  geom_raster() +
+  scale_fill_viridis_c(
+    # trans = &quot;log10&quot;, breaks = 10^(1:5)
+    ) +
+  # Do not add padding around x limits
+  scale_x_continuous(expand = expand_scale(0))</code></pre>
+<p><img src="/post/2-04-prison_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>(If you compare this heatmap with the one before, you’ll notice that here the colour scale is mapped to a linear scale, rather then a log scale, because in this case the differences are so smooth that they get imperceptible in log scale.)</p>
+<p>Now the progression through time is much smoother.</p>
+<p>As you notice, I have restricted the time span from 1990 to 2015 to retain more counties. Nevertheless, we have lost information about many states.</p>
+<pre class="r"><code># Which State is missing in the clean dataset?
+setdiff(dat$state, dat_clean$state)</code></pre>
+<pre><code>##  [1] &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; &quot;CT&quot; &quot;DE&quot; &quot;DC&quot; &quot;ID&quot; &quot;IL&quot; &quot;IN&quot; &quot;KS&quot; &quot;LA&quot; &quot;ME&quot; &quot;MA&quot; &quot;MT&quot;
+## [15] &quot;NV&quot; &quot;NM&quot; &quot;OH&quot; &quot;OK&quot; &quot;OR&quot; &quot;RI&quot; &quot;SD&quot; &quot;VT&quot; &quot;VA&quot; &quot;WA&quot; &quot;WV&quot; &quot;WI&quot; &quot;WY&quot;</code></pre>
+<p>We can anyway go on, apply this system to remove NA to the observations split by gender and ethnic categories, and test on that dataset which category is overrepresented in prison population.</p>
+</div>
+</div>
+<div id="which-category-is-overrepresented" class="section level1">
+<h1>Which Category is Overrepresented?</h1>
+<p>First, we can clean from missing values the observations that are split by categories.</p>
+<pre class="r"><code># Try with more details ---------------------------------------------------
+by_cat &lt;- 
+  dat %&gt;% 
+  filter(
+    pop_category != &quot;Other&quot;,
+    year &gt;= 1990,
+    year != 2016) %&gt;% 
+  group_by(state, county_name, pop_category) %&gt;% 
+  mutate(has_na = anyNA(prison_population)) %&gt;% 
+  filter(!has_na) %&gt;% 
+  ungroup()</code></pre>
+<div id="exploratory-plot" class="section level2">
+<h2>Exploratory plot</h2>
+<p>Then we can produce some plots to explore how the various categories behave. In this case I’ve found this boxplot most helpful.</p>
+<pre class="r"><code>by_cat %&gt;% 
+  mutate(ratio = prison_population/population) %&gt;% 
+  ggplot(aes(x = year,
+             y = ratio,
+             group = year)) +
+  geom_boxplot() +
+  scale_y_log10() +
+  facet_grid(pop_category ~ .,
+             scales = &quot;free&quot;,
+             # Wrap the text in the strip labels
+             labeller = label_wrap_gen(width = 10))</code></pre>
+<pre><code>## Warning: Transformation introduced infinite values in continuous y-axis</code></pre>
+<pre><code>## Warning: Removed 47965 rows containing non-finite values (stat_boxplot).</code></pre>
+<p><img src="/post/2-04-prison_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Above, we can observe that:</p>
+<ul>
+<li>The ratio of African american [Black] incarcerated is higher than any other category, with median around 0.02.</li>
+<li>The ratio of males incarcerated is very high, with median going from 0.01 to 0.02.</li>
+<li>The ratio of <code>Latino</code> and <code>Native American</code> incarcerated are also high.</li>
+</ul>
+<p>Just to be sure, we can also reproduce the same heatmap as above on all categories.</p>
+<pre class="r"><code>by_cat %&gt;% 
+  mutate(ratio = prison_population/population) %&gt;% 
+  ggplot(aes(x = year,
+             y = state,
+             fill = prison_population)) +
+  geom_raster() +
+  facet_grid(. ~ pop_category) +
+  scale_fill_viridis_c(trans = &quot;log10&quot;, breaks = 10^c(1:5)) +
+  # because of facetting, the x axis is very tight
+  theme(axis.text.x = element_text(angle = 90, vjust = .5))</code></pre>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="/post/2-04-prison_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<p>We can see that data are still sparse, but importantly, for each year/category we have sets of paired observation of <code>prison_population</code> and <code>population</code> without missing values.</p>
+</div>
+<div id="hypergeometric-test" class="section level2">
+<h2>Hypergeometric test</h2>
+<p>We can model this data with an <a href="https://stattrek.com/probability-distributions/hypergeometric.aspx">hypergeometric distribution</a>, and use it to test if a category of gender or ethnicity is overrepresented.</p>
+<p>First, we can (again) summarize observation by state and year (we don’t want to test over-representation for every county).</p>
+<pre class="r"><code>by_cat_sum &lt;- 
+  by_cat %&gt;% 
+  filter(pop_category != &quot;Other&quot;) %&gt;% 
+  group_by(pop_category, year) %&gt;% 
+  summarise(population = sum(population),
+            prison_population = sum(prison_population)) %&gt;% 
+  ungroup()</code></pre>
+<p>Then we have to prepare the data for the function <code>phyper()</code> that will estimate the p-value of each observation under the hypergeometric distribution.</p>
+<p>As state by its help page, the <code>phyper()</code> function requires these parameters:</p>
+<blockquote>
+<ul>
+<li>q: vector of quantiles representing the number of white balls drawn without replacement from an urn which contains both black and white balls.</li>
+<li>m: the number of white balls in the urn.</li>
+<li>n: the number of black balls in the urn.</li>
+<li>k: the number of balls drawn from the urn.</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>From the help pages of the <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/00Index.html">stats package</a></p>
+</blockquote>
+</blockquote>
+<p>We can reshape the dataset and place each of those values in a separate column. If we call each column as the appropriate parameter of the function <code>phyper()</code>, then we loop this function on each row of the dataset with <a href="https://r4ds.had.co.nz/iteration.html#mapping-over-multiple-arguments"><code>pmap()</code></a> and match all arguments automatically by name.</p>
+<pre class="r"><code># prepare a table for hyopergeometric test:
+# get category total next to each other category
+
+by_cat_tot &lt;- 
+  by_cat_sum %&gt;% 
+  filter(pop_category == &quot;Total&quot;) %&gt;% 
+  rename_all(funs(paste0(., &quot;_total&quot;)))
+
+by_cat_hyp &lt;- 
+  by_cat_sum %&gt;% 
+  left_join(by_cat_tot, by = c(&quot;year&quot; = &quot;year_total&quot;))
+
+# apply phyper() using pmap
+
+# Define phyper() wrapper that contains &quot;...&quot;
+# So that it can be used in pmap with extra variables
+# Test enrichment
+# inspired from
+# https://github.com/GuangchuangYu/DOSE/blob/master/R/enricher_internal.R
+
+phyper2 &lt;- function(q, m, n, k, ...) {
+  phyper(q, m, n, k, log.p = TRUE, lower.tail = FALSE)
+  }
+
+by_cat_hyp &lt;- 
+  by_cat_hyp %&gt;% 
+  # rename arguments for dhyper
+  transmute(year = year,
+            pop_category = pop_category,
+            q = prison_population, # white balls drawn
+            # x = prison_population, # white balls drawn
+            m = population, # white balls in the urn
+            n = population_total - population, # black balls in the urn
+            k = prison_population_total) # balls drawn from the urn</code></pre>
+<p>This approach was inspired by the field of genomics and transcriptomics, in which the hypergeometric test is often used to test the if structural or functional categories of genes are enriched in a given set. Some code here is inspired by <a href="https://github.com/GuangchuangYu/DOSE/blob/master/R/enricher_internal.R">this bioconductor package</a></p>
+<p>Then we can use <a href="https://r4ds.had.co.nz/iteration.html#mapping-over-multiple-arguments">pmap()</a> to run an hypergeometric test on each row.</p>
+<pre class="r"><code># apply dhyper() to every row
+by_cat_hyp &lt;- 
+  by_cat_hyp %&gt;% 
+  mutate(log_p = pmap(., .f = phyper2) %&gt;% purrr::flatten_dbl())</code></pre>
+<p>And eventually we can plot the log p-values with inverse sign, to make the plot more intuitive.</p>
+<pre class="r"><code>p &lt;- 
+  by_cat_hyp %&gt;% 
+  # I could have filtered out this earlier,
+  # but it served as practical control
+  filter(pop_category != &quot;Total&quot;) %&gt;% 
+  # filter categories not overepresented
+  filter(log_p &lt; -100) %&gt;% 
+  ggplot(aes(x = year,
+             y = -log_p)) +
+  geom_bar(stat = &quot;identity&quot;,
+           fill = &quot;orange&quot;,
+           colour = &quot;black&quot;) +
+  facet_grid(pop_category ~ .) 
+
+p %&gt;% print()</code></pre>
+<p><img src="/post/2-04-prison_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>We can see that the categories “Black” and “Male” are far from what we would expect by chance, and, thus, members of that categories are overrepresented.</p>
+</div>
+</div>
+<div id="adjust-plot-for-publication" class="section level1">
+<h1>Adjust plot for publication</h1>
+<p>We can adjust the plot labels for publication. Adding clearer labels, a title, and making small adjustments to the layout.</p>
+<pre class="r"><code>p2 &lt;- 
+  p +
+  labs(title = &quot;Categories that are Overrepresented in US Prisons&quot;,
+       subtitle = str_wrap(&quot;A quick exploratory analysis of 
+                           the VERA dataset, using a hypergeometric
+                           test to estimate which category is more 
+                           represented than expected&quot;), width = 27,
+       y = &quot;-log(p-value)&quot;,
+       x = &quot;Year&quot;,
+       caption = &quot;Source: www.vera.org | Plot by @othomn&quot;) +
+  theme(text = element_text(family = &quot;Arial Narrow&quot;,
+                            colour = &quot;grey40&quot;,
+                            size = 11),
+        axis.title = element_text(size = 14),
+        strip.text = element_text(colour = &quot;grey20&quot;,
+                                  size = 14),
+        plot.title = element_text(colour = &quot;grey20&quot;,
+                                  face = &quot;bold&quot;,
+                                  size = 18),
+        plot.subtitle = element_text(face = &quot;bold&quot;,
+                                     size = 12),
+        aspect.ratio = .2,   
+        plot.margin = margin(t = 10, r = 10, b = 0, l = 3,
+                             unit = &quot;mm&quot;))
+
+p2 %&gt;% print()</code></pre>
+<p><img src="/post/2-04-prison_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="interpretation-and-closing-remarks" class="section level1">
+<h1>Interpretation and closing remarks</h1>
+<p>This is a quick analysis and my take on <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-22">Tidytuesday week 4 dataset</a>.</p>
+<p>My analysis shows an issue that is widely known, that African American are overrepresented in US prisons. But this just a statistical analysis, which could be helpful or misleading if not contextualized. If you have any suggestion on how to improve my analysis, please contact me.</p>
+<p>Unfortunately, in here I don’t contextualize and I don’t discuss this results. If you are interested in this topic, if you feel engaged by these results, and you want to know more. If you want to interpret this data, you’ll have to contextualize this results. To do so, you’ll have to read about history and societal issues! And if you are interested and you want to form an opinion, please, please, please, do read, explore and contextualize.</p>
+<p>Many thanks to Thomas Mock for bringing the work of the Vera institute to our attention on Martin Luther King Jr. Day.</p>
+</div>
+
+    </div>
+
+    
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait2.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Otho Mantegazza</a></h5>
+    <h6 class="card-subtitle">Biologist, Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:othomanteotho@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/othomn" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/othomantegazza" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "nugolo" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Otho Mantegazza 2018 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//nugolo.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.07fbebbbf71b021c8836e1d7ecffa489.js"></script>
+
+    
+
+  </body>
+</html>
+

@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
-    <lastBuildDate>Sun, 16 Jul 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>An analysis of Vera institute&#39;s prison dataset</title>
+      <link>/post/2-04-prison/</link>
+      <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2-04-prison/</guid>
+      <description>Intro This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.
+The incarceration trend dataset is kindly provided by the Vera Institute on their Github page. Analyzing this dataset aims at remembering of the social injustices still present in our world on Martin Luther King Jr.</description>
+    </item>
     
     <item>
       <title>Back To The Books</title>
