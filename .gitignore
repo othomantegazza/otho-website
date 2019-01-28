@@ -6,6 +6,11 @@ _site/
 # blogdown files
 resources/*
 
+# intermediate data and images
+# for tidytuesday
+content/post/_data/*
+content/post/_plots/*
+
 # below, basic R gitignore
 # https://github.com/github/gitignore/
 #########################################

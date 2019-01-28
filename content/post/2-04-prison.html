@@ -2,15 +2,36 @@
 title: "An analysis of Vera institute's prison dataset"
 subtitle: "Tidytuesday week 4"
 author: "Otho Mantegazza"
+summary: "How to deal with missing values, exploratory plots and heatmaps, and the hypergeometric test in R."
 date: 2019-01-25
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+    number_sections: true
 editor_options: 
   chunk_output_type: console
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#intro"><span class="toc-section-number">1</span> Intro</a></li>
+<li><a href="#a-strategy-for-missing-values-na"><span class="toc-section-number">2</span> A strategy for missing values [NA]</a><ul>
+<li><a href="#ignore-the-nas"><span class="toc-section-number">2.1</span> Ignore the NAs</a></li>
+<li><a href="#a-more-solid-strategy"><span class="toc-section-number">2.2</span> A more solid strategy</a></li>
+</ul></li>
+<li><a href="#which-category-is-overrepresented"><span class="toc-section-number">3</span> Which Category is Overrepresented?</a><ul>
+<li><a href="#exploratory-plot"><span class="toc-section-number">3.1</span> Exploratory plot</a></li>
+<li><a href="#hypergeometric-test"><span class="toc-section-number">3.2</span> Hypergeometric test</a></li>
+</ul></li>
+<li><a href="#adjust-plot-for-publication"><span class="toc-section-number">4</span> Adjust plot for publication</a></li>
+<li><a href="#interpretation-and-closing-remarks"><span class="toc-section-number">5</span> Interpretation and closing remarks</a></li>
+</ul>
+</div>
 
 <div id="intro" class="section level1">
-<h1>Intro</h1>
+<h1><span class="header-section-number">1</span> Intro</h1>
 <p>This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.</p>
 <p>The incarceration trend dataset is kindly provided by the <a href="https://www.vera.org/">Vera Institute</a> on their <a href="https://github.com/vera-institute/incarceration_trends">Github page</a>. Analyzing this dataset aims at remembering of the social injustices still present in our world on Martin Luther King Jr. Day.</p>
 <p>For this analysis, I want to practice modelling rather than data wrangling and tidying, so I decided to start from the file <code>prison_population.csv</code>, from <a href="https://github.com/rfordatascience/tidytuesday">Tidytuesday’s github page</a> which has already been tidied by Thomas Mock.</p>
@@ -34,28 +55,16 @@ if(!file.exists(dat_path)) {
 } else {
   load(dat_path)
 }</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   year = col_integer(),
-##   state = col_character(),
-##   county_name = col_character(),
-##   urbanicity = col_character(),
-##   region = col_character(),
-##   division = col_character(),
-##   pop_category = col_character(),
-##   population = col_integer(),
-##   prison_population = col_integer()
-## )</code></pre>
 </div>
 <div id="a-strategy-for-missing-values-na" class="section level1">
-<h1>A strategy for missing values [NA]</h1>
+<h1><span class="header-section-number">2</span> A strategy for missing values [NA]</h1>
 <p>Collecting such detailed data is a massive effort, and some missing values are inevitable. For statistical modeling we must select a clear and explicit strategy to deal with measurements that are mixed with missing values.</p>
 <p>The dataset <code>prison_population.csv</code> has many missing values stored as <code>NA</code> in the column <code>prison_population</code>. That column counts incarcerated individuals, and it is our main interest together with the <code>population</code> columns that stores a full population census.</p>
 <pre class="r"><code># how many NAs in the variable prison_population?
 dat$prison_population %&gt;% is.na() %&gt;% sum()</code></pre>
 <pre><code>## [1] 751787</code></pre>
 <div id="ignore-the-nas" class="section level2">
-<h2>Ignore the NAs</h2>
+<h2><span class="header-section-number">2.1</span> Ignore the NAs</h2>
 <p>A very basic strategy, could be just to ignore the NAs. We can try to plot a quick summary of prison population by state, using <code>sum(na.rm = TRUE)</code> to ignore NAs. But this strategy, introduce strange fluctuations in the measurements, because randomly occurring NAs increase or decrease the prison population counts with patterns that are not reflected in reality.</p>
 <pre class="r"><code># Try sum(na.rm = TRUE) --------------------------------------------------------
 
@@ -83,7 +92,7 @@ dat_state %&gt;%
 <p>We can hypothesize that the sharp changes in the <code>prison_population</code> variable are caused by missing data, rather than by real changes in the population of prisons.</p>
 </div>
 <div id="a-more-solid-strategy" class="section level2">
-<h2>A more solid strategy</h2>
+<h2><span class="header-section-number">2.2</span> A more solid strategy</h2>
 <p>As a more solid strategy to deal with missing values, we can keep only measurements from counties in which the variable <code>prison_population</code> never has missing values.</p>
 <p>For example, if in a county we did not count the prison population for two years, and we thus have missing values, when we sum the data for those county to the others ignoring NAs, we would notice a sharp increase and decrease in prison population, that is not reflected in reality.</p>
 <p>It is better to remove measurements from that county altogether. In this way we may lose some measurements. But the time series that we retain reflects better the real trends in prison population.</p>
@@ -127,7 +136,7 @@ setdiff(dat$state, dat_clean$state)</code></pre>
 </div>
 </div>
 <div id="which-category-is-overrepresented" class="section level1">
-<h1>Which Category is Overrepresented?</h1>
+<h1><span class="header-section-number">3</span> Which Category is Overrepresented?</h1>
 <p>First, we can clean from missing values the observations that are split by categories.</p>
 <pre class="r"><code># Try with more details ---------------------------------------------------
 by_cat &lt;- 
@@ -141,7 +150,7 @@ by_cat &lt;-
   filter(!has_na) %&gt;% 
   ungroup()</code></pre>
 <div id="exploratory-plot" class="section level2">
-<h2>Exploratory plot</h2>
+<h2><span class="header-section-number">3.1</span> Exploratory plot</h2>
 <p>Then we can produce some plots to explore how the various categories behave. In this case I’ve found this boxplot most helpful.</p>
 <pre class="r"><code>by_cat %&gt;% 
   mutate(ratio = prison_population/population) %&gt;% 
@@ -179,7 +188,7 @@ by_cat &lt;-
 <p>We can see that data are still sparse, but importantly, for each year/category we have sets of paired observation of <code>prison_population</code> and <code>population</code> without missing values.</p>
 </div>
 <div id="hypergeometric-test" class="section level2">
-<h2>Hypergeometric test</h2>
+<h2><span class="header-section-number">3.2</span> Hypergeometric test</h2>
 <p>We can model this data with an <a href="https://stattrek.com/probability-distributions/hypergeometric.aspx">hypergeometric distribution</a>, and use it to test if a category of gender or ethnicity is overrepresented.</p>
 <p>First, we can (again) summarize observation by state and year (we don’t want to test over-representation for every county).</p>
 <pre class="r"><code>by_cat_sum &lt;- 
@@ -266,7 +275,7 @@ p %&gt;% print()</code></pre>
 </div>
 </div>
 <div id="adjust-plot-for-publication" class="section level1">
-<h1>Adjust plot for publication</h1>
+<h1><span class="header-section-number">4</span> Adjust plot for publication</h1>
 <p>We can adjust the plot labels for publication. Adding clearer labels, a title, and making small adjustments to the layout.</p>
 <pre class="r"><code>p2 &lt;- 
   p +
@@ -297,9 +306,9 @@ p2 %&gt;% print()</code></pre>
 <p><img src="/post/2-04-prison_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 <div id="interpretation-and-closing-remarks" class="section level1">
-<h1>Interpretation and closing remarks</h1>
+<h1><span class="header-section-number">5</span> Interpretation and closing remarks</h1>
 <p>This is a quick analysis and my take on <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-22">Tidytuesday week 4 dataset</a>.</p>
 <p>My analysis shows an issue that is widely known, that African American are overrepresented in US prisons. But this just a statistical analysis, which could be helpful or misleading if not contextualized. If you have any suggestion on how to improve my analysis, please contact me.</p>
-<p>Unfortunately, in here I don’t contextualize and I don’t discuss this results. If you are interested in this topic, if you feel engaged by these results, and you want to know more. If you want to interpret this data, you’ll have to contextualize this results. To do so, you’ll have to read about history and societal issues! And if you are interested and you want to form an opinion, please, please, please, do read, explore and contextualize.</p>
+<p>Unfortunately, in here I don’t contextualize and I don’t discuss this results. If you are interested in this topic, if you feel engaged by these results, and you want to know more. If you want to interpret this data, you’ll have to contextualize this results. To do so, you’ll have to read about history and social issues! And if you are interested and you want to form an opinion, please, please, please, do read, explore and contextualize.</p>
 <p>Many thanks to Thomas Mock for bringing the work of the Vera institute to our attention on Martin Luther King Jr. Day.</p>
 </div>

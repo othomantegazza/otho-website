@@ -18,8 +18,7 @@
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2-04-prison/</guid>
-      <description>Intro This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.
-The incarceration trend dataset is kindly provided by the Vera Institute on their Github page. Analyzing this dataset aims at remembering of the social injustices still present in our world on Martin Luther King Jr.</description>
+      <description>1 Intro 2 A strategy for missing values [NA] 2.1 Ignore the NAs 2.2 A more solid strategy  3 Which Category is Overrepresented? 3.1 Exploratory plot 3.2 Hypergeometric test  4 Adjust plot for publication 5 Interpretation and closing remarks   1 Intro This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.</description>
     </item>
     
     <item>

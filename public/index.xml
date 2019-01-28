@@ -18,9 +18,24 @@
       <guid>/post/2-04-prison/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#intro&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;1&lt;/span&gt; Intro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#a-strategy-for-missing-values-na&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2&lt;/span&gt; A strategy for missing values [NA]&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#ignore-the-nas&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.1&lt;/span&gt; Ignore the NAs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#a-more-solid-strategy&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2&lt;/span&gt; A more solid strategy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#which-category-is-overrepresented&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3&lt;/span&gt; Which Category is Overrepresented?&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#exploratory-plot&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3.1&lt;/span&gt; Exploratory plot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#hypergeometric-test&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3.2&lt;/span&gt; Hypergeometric test&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#adjust-plot-for-publication&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;4&lt;/span&gt; Adjust plot for publication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#interpretation-and-closing-remarks&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5&lt;/span&gt; Interpretation and closing remarks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;div id=&#34;intro&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Intro&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;1&lt;/span&gt; Intro&lt;/h1&gt;
 &lt;p&gt;This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.&lt;/p&gt;
 &lt;p&gt;The incarceration trend dataset is kindly provided by the &lt;a href=&#34;https://www.vera.org/&#34;&gt;Vera Institute&lt;/a&gt; on their &lt;a href=&#34;https://github.com/vera-institute/incarceration_trends&#34;&gt;Github page&lt;/a&gt;. Analyzing this dataset aims at remembering of the social injustices still present in our world on Martin Luther King Jr. Day.&lt;/p&gt;
 &lt;p&gt;For this analysis, I want to practice modelling rather than data wrangling and tidying, so I decided to start from the file &lt;code&gt;prison_population.csv&lt;/code&gt;, from &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34;&gt;Tidytuesday’s github page&lt;/a&gt; which has already been tidied by Thomas Mock.&lt;/p&gt;
@@ -44,28 +59,16 @@ if(!file.exists(dat_path)) {
 } else {
   load(dat_path)
 }&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
-## cols(
-##   year = col_integer(),
-##   state = col_character(),
-##   county_name = col_character(),
-##   urbanicity = col_character(),
-##   region = col_character(),
-##   division = col_character(),
-##   pop_category = col_character(),
-##   population = col_integer(),
-##   prison_population = col_integer()
-## )&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;a-strategy-for-missing-values-na&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;A strategy for missing values [NA]&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;2&lt;/span&gt; A strategy for missing values [NA]&lt;/h1&gt;
 &lt;p&gt;Collecting such detailed data is a massive effort, and some missing values are inevitable. For statistical modeling we must select a clear and explicit strategy to deal with measurements that are mixed with missing values.&lt;/p&gt;
 &lt;p&gt;The dataset &lt;code&gt;prison_population.csv&lt;/code&gt; has many missing values stored as &lt;code&gt;NA&lt;/code&gt; in the column &lt;code&gt;prison_population&lt;/code&gt;. That column counts incarcerated individuals, and it is our main interest together with the &lt;code&gt;population&lt;/code&gt; columns that stores a full population census.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# how many NAs in the variable prison_population?
 dat$prison_population %&amp;gt;% is.na() %&amp;gt;% sum()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 751787&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;ignore-the-nas&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Ignore the NAs&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.1&lt;/span&gt; Ignore the NAs&lt;/h2&gt;
 &lt;p&gt;A very basic strategy, could be just to ignore the NAs. We can try to plot a quick summary of prison population by state, using &lt;code&gt;sum(na.rm = TRUE)&lt;/code&gt; to ignore NAs. But this strategy, introduce strange fluctuations in the measurements, because randomly occurring NAs increase or decrease the prison population counts with patterns that are not reflected in reality.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Try sum(na.rm = TRUE) --------------------------------------------------------
 
@@ -93,7 +96,7 @@ dat_state %&amp;gt;%
 &lt;p&gt;We can hypothesize that the sharp changes in the &lt;code&gt;prison_population&lt;/code&gt; variable are caused by missing data, rather than by real changes in the population of prisons.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;a-more-solid-strategy&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;A more solid strategy&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2&lt;/span&gt; A more solid strategy&lt;/h2&gt;
 &lt;p&gt;As a more solid strategy to deal with missing values, we can keep only measurements from counties in which the variable &lt;code&gt;prison_population&lt;/code&gt; never has missing values.&lt;/p&gt;
 &lt;p&gt;For example, if in a county we did not count the prison population for two years, and we thus have missing values, when we sum the data for those county to the others ignoring NAs, we would notice a sharp increase and decrease in prison population, that is not reflected in reality.&lt;/p&gt;
 &lt;p&gt;It is better to remove measurements from that county altogether. In this way we may lose some measurements. But the time series that we retain reflects better the real trends in prison population.&lt;/p&gt;
@@ -137,7 +140,7 @@ setdiff(dat$state, dat_clean$state)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;which-category-is-overrepresented&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Which Category is Overrepresented?&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;3&lt;/span&gt; Which Category is Overrepresented?&lt;/h1&gt;
 &lt;p&gt;First, we can clean from missing values the observations that are split by categories.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Try with more details ---------------------------------------------------
 by_cat &amp;lt;- 
@@ -151,7 +154,7 @@ by_cat &amp;lt;-
   filter(!has_na) %&amp;gt;% 
   ungroup()&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;exploratory-plot&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Exploratory plot&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;3.1&lt;/span&gt; Exploratory plot&lt;/h2&gt;
 &lt;p&gt;Then we can produce some plots to explore how the various categories behave. In this case I’ve found this boxplot most helpful.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;by_cat %&amp;gt;% 
   mutate(ratio = prison_population/population) %&amp;gt;% 
@@ -189,7 +192,7 @@ by_cat &amp;lt;-
 &lt;p&gt;We can see that data are still sparse, but importantly, for each year/category we have sets of paired observation of &lt;code&gt;prison_population&lt;/code&gt; and &lt;code&gt;population&lt;/code&gt; without missing values.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;hypergeometric-test&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Hypergeometric test&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;3.2&lt;/span&gt; Hypergeometric test&lt;/h2&gt;
 &lt;p&gt;We can model this data with an &lt;a href=&#34;https://stattrek.com/probability-distributions/hypergeometric.aspx&#34;&gt;hypergeometric distribution&lt;/a&gt;, and use it to test if a category of gender or ethnicity is overrepresented.&lt;/p&gt;
 &lt;p&gt;First, we can (again) summarize observation by state and year (we don’t want to test over-representation for every county).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;by_cat_sum &amp;lt;- 
@@ -276,7 +279,7 @@ p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;adjust-plot-for-publication&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Adjust plot for publication&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;4&lt;/span&gt; Adjust plot for publication&lt;/h1&gt;
 &lt;p&gt;We can adjust the plot labels for publication. Adding clearer labels, a title, and making small adjustments to the layout.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p2 &amp;lt;- 
   p +
@@ -307,10 +310,10 @@ p2 %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2-04-prison_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;interpretation-and-closing-remarks&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Interpretation and closing remarks&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;5&lt;/span&gt; Interpretation and closing remarks&lt;/h1&gt;
 &lt;p&gt;This is a quick analysis and my take on &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-22&#34;&gt;Tidytuesday week 4 dataset&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;My analysis shows an issue that is widely known, that African American are overrepresented in US prisons. But this just a statistical analysis, which could be helpful or misleading if not contextualized. If you have any suggestion on how to improve my analysis, please contact me.&lt;/p&gt;
-&lt;p&gt;Unfortunately, in here I don’t contextualize and I don’t discuss this results. If you are interested in this topic, if you feel engaged by these results, and you want to know more. If you want to interpret this data, you’ll have to contextualize this results. To do so, you’ll have to read about history and societal issues! And if you are interested and you want to form an opinion, please, please, please, do read, explore and contextualize.&lt;/p&gt;
+&lt;p&gt;Unfortunately, in here I don’t contextualize and I don’t discuss this results. If you are interested in this topic, if you feel engaged by these results, and you want to know more. If you want to interpret this data, you’ll have to contextualize this results. To do so, you’ll have to read about history and social issues! And if you are interested and you want to form an opinion, please, please, please, do read, explore and contextualize.&lt;/p&gt;
 &lt;p&gt;Many thanks to Thomas Mock for bringing the work of the Vera institute to our attention on Martin Luther King Jr. Day.&lt;/p&gt;
 &lt;/div&gt;
 </description>

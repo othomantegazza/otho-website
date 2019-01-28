@@ -2,7 +2,13 @@
 title: "An analysis of Vera institute's prison dataset"
 subtitle: "Tidytuesday week 4"
 author: "Otho Mantegazza"
+summary: "How to deal with missing values, exploratory plots and heatmaps, and the hypergeometric test in R."
 date: 2019-01-25
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+    number_sections: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -348,6 +354,7 @@ This is a quick analysis and my take on [Tidytuesday week 4 dataset](https://git
 
 My analysis shows an issue that is widely known, that African American are overrepresented in US prisons. But this just a statistical analysis, which could be helpful or misleading if not contextualized. If you have any suggestion on how to improve my analysis, please contact me.
 
-Unfortunately, in here I don't contextualize and I don't discuss this results. If you are interested in this topic, if you feel engaged by these results, and you want to know more. If you want to interpret this data, you'll have to contextualize this results. To do so, you'll have to read about history and societal issues! And if you are interested and you want to form an opinion, please, please, please, do read, explore and contextualize.
+Unfortunately, in here I don't contextualize and I don't discuss this results. If you are interested in this topic, if you feel engaged by these results, and you want to know more. If you want to interpret this data, you'll have to contextualize this results. To do so, you'll have to read about history and social issues! And if you are interested and you want to form an opinion, please, please, please, do read, explore and contextualize.
 
 Many thanks to Thomas Mock for bringing the work of the Vera institute to our attention on Martin Luther King Jr. Day.
+
