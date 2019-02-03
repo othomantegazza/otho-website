@@ -487,6 +487,7 @@
 <li><a href="#colors-colors-colors"><span class="toc-section-number">5.4</span> Colors colors colors</a></li>
 <li><a href="#title-axis-and-caption"><span class="toc-section-number">5.5</span> Title axis and caption</a></li>
 </ul></li>
+<li><a href="#this-post-will-be-updated"><span class="toc-section-number">6</span> This Post will be updated</a></li>
 </ul>
 </div>
 
@@ -554,7 +555,7 @@ if(!file.exists(dat_path)) {
 <div id="wrangle-and-estimate-percentage-changes" class="section level1">
 <h1><span class="header-section-number">3</span> Wrangle and Estimate Percentage Changes</h1>
 <p>We need just 2 variables (<code>year</code> and <code>butter</code>) and we can easily extract them with <code>dplyr::select</code>.</p>
-<p>A bit more complex: we need to estimate percentage changes from the day before. This is swiflty done with rollify. We can use this <a href="https://adv-r.hadley.nz/function-factories.html">function factory</a> to build the function <code>roll_percent()</code>, which calculates percentage change over a column of a dataframe.</p>
+<p>A bit more complex: we need to estimate percentage changes from the day before. This is swiftly done with rollify. We can use this <a href="https://adv-r.hadley.nz/function-factories.html">function factory</a> to build the function <code>roll_percent()</code>, which calculates percentage change over a column of a data frame.</p>
 <pre class="r"><code># Percent ---------------------------------------------------------
 
 # roll percent over a dataframe
@@ -566,7 +567,7 @@ dat &lt;-
   # apply on this dataframe, on the column butter
   mutate(percent = roll_percent(butter)) %&gt;% 
   filter(complete.cases(.))</code></pre>
-<p>So, this is the clean dataframe that we use for plotting:</p>
+<p>So, this is the clean data frame that we use for plotting:</p>
 <pre class="r"><code>dat %&gt;% print()</code></pre>
 <pre><code>## # A tibble: 42 x 3
 ##     year butter percent
@@ -659,7 +660,7 @@ p %&gt;% print()</code></pre>
 <h2><span class="header-section-number">5.3</span> Specify percent changes explicitly</h2>
 <p>We can specify percent changes explicitly with numbers, in this way, readers can learn the specific size of the effect easily.</p>
 <p>I’ll do it with <code>geom_text()</code>.</p>
-<p>The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negaitve. We achive this using <code>case_when()</code>: a vectorized ifelse statement. I use <code>case_when()</code> directly in the call to the aesthetic mapping.</p>
+<p>The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negative. We achieve this using <code>case_when()</code>: a vectorized ifelse statement. I use <code>case_when()</code> directly in the call to the aesthetic mapping.</p>
 <pre class="r"><code>p &lt;- 
   p +
   geom_text(aes(y = case_when(percent &gt; 0 ~ yend + .12,
@@ -731,6 +732,10 @@ dev.off() </code></pre>
 <pre><code>## png 
 ##   2</code></pre>
 </div>
+</div>
+<div id="this-post-will-be-updated" class="section level1">
+<h1><span class="header-section-number">6</span> This Post will be updated</h1>
+<p><strong><em>I would like to show this visualization on other variables of this datasets, and, as suggested by <a href="https://twitter.com/EvaMaeRey">Gina Reynolds</a> compare it with waterfall plots.</em></strong></p>
 </div>
 
     </div>

@@ -31,6 +31,7 @@
 &lt;li&gt;&lt;a href=&#34;#colors-colors-colors&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.4&lt;/span&gt; Colors colors colors&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#title-axis-and-caption&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.5&lt;/span&gt; Title axis and caption&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#this-post-will-be-updated&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;6&lt;/span&gt; This Post will be updated&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -98,7 +99,7 @@ if(!file.exists(dat_path)) {
 &lt;div id=&#34;wrangle-and-estimate-percentage-changes&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;3&lt;/span&gt; Wrangle and Estimate Percentage Changes&lt;/h1&gt;
 &lt;p&gt;We need just 2 variables (&lt;code&gt;year&lt;/code&gt; and &lt;code&gt;butter&lt;/code&gt;) and we can easily extract them with &lt;code&gt;dplyr::select&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;A bit more complex: we need to estimate percentage changes from the day before. This is swiflty done with rollify. We can use this &lt;a href=&#34;https://adv-r.hadley.nz/function-factories.html&#34;&gt;function factory&lt;/a&gt; to build the function &lt;code&gt;roll_percent()&lt;/code&gt;, which calculates percentage change over a column of a dataframe.&lt;/p&gt;
+&lt;p&gt;A bit more complex: we need to estimate percentage changes from the day before. This is swiftly done with rollify. We can use this &lt;a href=&#34;https://adv-r.hadley.nz/function-factories.html&#34;&gt;function factory&lt;/a&gt; to build the function &lt;code&gt;roll_percent()&lt;/code&gt;, which calculates percentage change over a column of a data frame.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Percent ---------------------------------------------------------
 
 # roll percent over a dataframe
@@ -110,7 +111,7 @@ dat &amp;lt;-
   # apply on this dataframe, on the column butter
   mutate(percent = roll_percent(butter)) %&amp;gt;% 
   filter(complete.cases(.))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;So, this is the clean dataframe that we use for plotting:&lt;/p&gt;
+&lt;p&gt;So, this is the clean data frame that we use for plotting:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 42 x 3
 ##     year butter percent
@@ -203,7 +204,7 @@ p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.3&lt;/span&gt; Specify percent changes explicitly&lt;/h2&gt;
 &lt;p&gt;We can specify percent changes explicitly with numbers, in this way, readers can learn the specific size of the effect easily.&lt;/p&gt;
 &lt;p&gt;I’ll do it with &lt;code&gt;geom_text()&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negaitve. We achive this using &lt;code&gt;case_when()&lt;/code&gt;: a vectorized ifelse statement. I use &lt;code&gt;case_when()&lt;/code&gt; directly in the call to the aesthetic mapping.&lt;/p&gt;
+&lt;p&gt;The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negative. We achieve this using &lt;code&gt;case_when()&lt;/code&gt;: a vectorized ifelse statement. I use &lt;code&gt;case_when()&lt;/code&gt; directly in the call to the aesthetic mapping.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
   p +
   geom_text(aes(y = case_when(percent &amp;gt; 0 ~ yend + .12,
@@ -275,6 +276,10 @@ dev.off() &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## png 
 ##   2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;this-post-will-be-updated&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;6&lt;/span&gt; This Post will be updated&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;I would like to show this visualization on other variables of this datasets, and, as suggested by &lt;a href=&#34;https://twitter.com/EvaMaeRey&#34;&gt;Gina Reynolds&lt;/a&gt; compare it with waterfall plots.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

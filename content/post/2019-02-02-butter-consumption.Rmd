@@ -76,7 +76,7 @@ dat_milkprods %>% print()
 
 We need just 2 variables (`year` and `butter`) and we can easily extract them with `dplyr::select`. 
 
-A bit more complex: we need to estimate percentage changes from the day before. This is swiflty done with rollify. We can use this [function factory](https://adv-r.hadley.nz/function-factories.html) to build the function `roll_percent()`, which calculates percentage change over a column of a dataframe.
+A bit more complex: we need to estimate percentage changes from the day before. This is swiftly done with rollify. We can use this [function factory](https://adv-r.hadley.nz/function-factories.html) to build the function `roll_percent()`, which calculates percentage change over a column of a data frame.
 
 ```{r}
 # Percent ---------------------------------------------------------
@@ -92,7 +92,7 @@ dat <-
   filter(complete.cases(.))
 ```
 
-So, this is the clean dataframe that we use for plotting:
+So, this is the clean data frame that we use for plotting:
 
 ```{r}
 dat %>% print()
@@ -194,7 +194,7 @@ We can specify percent changes explicitly with numbers, in this way, readers can
 
 I'll do it with `geom_text()`.
 
-The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negaitve. We achive this using `case_when()`: a vectorized ifelse statement. I use `case_when()` directly in the call to the aesthetic mapping.
+The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negative. We achieve this using `case_when()`: a vectorized ifelse statement. I use `case_when()` directly in the call to the aesthetic mapping.
 
 ```{r}
 p <- 
@@ -282,5 +282,5 @@ dev.off()
 
 # This Post will be updated
 
-***I would like to use this visualization on other variables of this datasets, and to comopare it with waterfall plots.***
+***I would like to show this visualization on other variables of this datasets, and, as suggested by [Gina Reynolds](https://twitter.com/EvaMaeRey) compare it with waterfall plots.***
 
