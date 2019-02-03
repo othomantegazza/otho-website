@@ -11,6 +11,526 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Show Absolute and Percent Change in a Time Series</title>
+      <link>/post/2019-02-02-butter-consumption/</link>
+      <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-02-02-butter-consumption/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#load-packages&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;1&lt;/span&gt; Load Packages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#get-the-data&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2&lt;/span&gt; Get the data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#wrangle-and-estimate-percentage-changes&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3&lt;/span&gt; Wrangle and Estimate Percentage Changes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#a-bit-of-style&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;4&lt;/span&gt; A bit of style&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#plotting-aka-the-fun-part&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5&lt;/span&gt; Plotting (aka the fun part ;) )&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#set-the-basic-aesthetic-mapping&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.1&lt;/span&gt; Set the basic aesthetic mapping&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#add-the-first-geometric-objects&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.2&lt;/span&gt; Add the first geometric objects&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#specify-percent-changes-explicitly&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.3&lt;/span&gt; Specify percent changes explicitly&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#colors-colors-colors&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.4&lt;/span&gt; Colors colors colors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#title-axis-and-caption&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.5&lt;/span&gt; Title axis and caption&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Here I’ll show, you step by step, how to produce the plot in the tweet below. You can use it to show explicitly (and redundantly, but this is not always bad) absolute and relative changes among points in a time series.&lt;/p&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Late &lt;a href=&#34;https://twitter.com/hashtag/TidyTuesday?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#TidyTuesday&lt;/a&gt; , &lt;a href=&#34;https://twitter.com/hashtag/dataviz?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#dataviz&lt;/a&gt;&lt;br&gt;&lt;br&gt;Visualization practice, I&#39;m showing consumption of butter and its percent change compared to the previous year.&lt;br&gt;&lt;br&gt;I did this plot on “butter” just because its consumption changes.&lt;br&gt;&lt;br&gt;Source: &lt;a href=&#34;https://t.co/yNp2qkOVO5&#34;&gt;https://t.co/yNp2qkOVO5&lt;/a&gt;&lt;br&gt;Code: &lt;a href=&#34;https://t.co/flNedKO1kh&#34;&gt;https://t.co/flNedKO1kh&lt;/a&gt; &lt;a href=&#34;https://t.co/yoTHspwBxZ&#34;&gt;pic.twitter.com/yoTHspwBxZ&lt;/a&gt;
+&lt;/p&gt;
+— Otho (&lt;span class=&#34;citation&#34;&gt;@othomn&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/othomn/status/1091413719320547328?ref_src=twsrc%5Etfw&#34;&gt;February 1, 2019&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;p&gt;To produce this plot, you just need to mix components from &lt;code&gt;ggplot2&lt;/code&gt;, and the wonderful &lt;code&gt;scico&lt;/code&gt; colour palette.&lt;/p&gt;
+&lt;div id=&#34;load-packages&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;1&lt;/span&gt; Load Packages&lt;/h1&gt;
+&lt;p&gt;First you need to load the required R packages.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(tibbletime)
+library(scico)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;tidyverse&lt;/code&gt; is a collection of packages for data analysis, that contains the functions that we will use to load, manipulate and plot the data.&lt;/p&gt;
+&lt;p&gt;The package &lt;code&gt;tibbletime&lt;/code&gt; stores the function &lt;code&gt;rollify&lt;/code&gt;. This function allows you to apply another function, such as &lt;code&gt;mean&lt;/code&gt; or &lt;code&gt;sum&lt;/code&gt; over windows of time, or, as the name says, to “roll”&amp;quot; it.&lt;/p&gt;
+&lt;p&gt;The package scico stores wonderful color palettes, but more about that later.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;2&lt;/span&gt; Get the data&lt;/h1&gt;
+&lt;p&gt;I use this snippet of code to download data automatically and only once.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Get data Milk products ---------------------------------------------------
+
+dat_path &amp;lt;- &amp;quot;_data/2-05-milk-product-facts.Rdata&amp;quot;
+dat_url &amp;lt;- paste0(&amp;quot;https://raw.githubusercontent.com/&amp;quot;,
+                  &amp;quot;rfordatascience/tidytuesday/master/data/&amp;quot;,
+                  &amp;quot;2019/2019-01-29/milk_products_facts.csv&amp;quot;)
+
+if(!file.exists(dat_path)) {
+  dat_milkprods &amp;lt;- 
+    read_csv(dat_url)
+  
+  save(dat_milkprods, file = dat_path)
+  
+} else {
+  load(dat_path)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The original data come from USDA, but this version has been already tidied by Thomas Mock as part of the of the &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34;&gt;TidyTuesday&lt;/a&gt;, a weekly social data project that he organizes. So we have little data manipulation left to do.&lt;/p&gt;
+&lt;p&gt;The milkprods dataset is already tidy, but it stores many columns that we don’t need.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat_milkprods %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 43 x 18
+##     year fluid_milk fluid_yogurt butter cheese_american cheese_other
+##    &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;
+##  1  1975        247         1.97   4.73            8.15         6.13
+##  2  1976        247         2.13   4.31            8.88         6.63
+##  3  1977        244         2.34   4.29            9.21         6.78
+##  4  1978        241         2.45   4.35            9.53         7.31
+##  5  1979        238         2.44   4.49            9.60         7.57
+##  6  1980        234         2.50   4.47            9.62         7.90
+##  7  1981        230         2.44   4.24           10.2          8.03
+##  8  1982        224         2.58   4.35           11.3          8.60
+##  9  1983        223         3.16   4.91           11.6          8.96
+## 10  1984        224         3.55   4.98           11.9          9.62
+## # ... with 33 more rows, and 12 more variables: cheese_cottage &amp;lt;dbl&amp;gt;,
+## #   evap_cnd_canned_whole_milk &amp;lt;dbl&amp;gt;, evap_cnd_bulk_whole_milk &amp;lt;dbl&amp;gt;,
+## #   evap_cnd_bulk_and_can_skim_milk &amp;lt;dbl&amp;gt;, frozen_ice_cream_regular &amp;lt;dbl&amp;gt;,
+## #   frozen_ice_cream_reduced_fat &amp;lt;dbl&amp;gt;, frozen_sherbet &amp;lt;dbl&amp;gt;,
+## #   frozen_other &amp;lt;dbl&amp;gt;, dry_whole_milk &amp;lt;dbl&amp;gt;, dry_nonfat_milk &amp;lt;dbl&amp;gt;,
+## #   dry_buttermilk &amp;lt;dbl&amp;gt;, dry_whey &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wrangle-and-estimate-percentage-changes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;3&lt;/span&gt; Wrangle and Estimate Percentage Changes&lt;/h1&gt;
+&lt;p&gt;We need just 2 variables (&lt;code&gt;year&lt;/code&gt; and &lt;code&gt;butter&lt;/code&gt;) and we can easily extract them with &lt;code&gt;dplyr::select&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A bit more complex: we need to estimate percentage changes from the day before. This is swiflty done with rollify. We can use this &lt;a href=&#34;https://adv-r.hadley.nz/function-factories.html&#34;&gt;function factory&lt;/a&gt; to build the function &lt;code&gt;roll_percent()&lt;/code&gt;, which calculates percentage change over a column of a dataframe.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Percent ---------------------------------------------------------
+
+# roll percent over a dataframe
+roll_percent &amp;lt;- rollify(.f = function(n) (n[2] - n[1])*100/n[1], 2)
+
+dat &amp;lt;- 
+  dat_milkprods %&amp;gt;%
+  select(year, butter) %&amp;gt;% 
+  # apply on this dataframe, on the column butter
+  mutate(percent = roll_percent(butter)) %&amp;gt;% 
+  filter(complete.cases(.))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, this is the clean dataframe that we use for plotting:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 42 x 3
+##     year butter percent
+##    &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
+##  1  1976   4.31  -8.78 
+##  2  1977   4.29  -0.441
+##  3  1978   4.35   1.41 
+##  4  1979   4.49   3.14 
+##  5  1980   4.47  -0.528
+##  6  1981   4.24  -5.13 
+##  7  1982   4.35   2.67 
+##  8  1983   4.91  12.8  
+##  9  1984   4.98   1.42 
+## 10  1985   4.87  -2.09 
+## # ... with 32 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;a-bit-of-style&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;4&lt;/span&gt; A bit of style&lt;/h1&gt;
+&lt;p&gt;You can set the plot styles at any time, let’s do it now.&lt;/p&gt;
+&lt;p&gt;Below I modify the &lt;code&gt;theme_minimal&lt;/code&gt; from &lt;code&gt;ggplot2&lt;/code&gt; with some fonts and colours that I like. I devised and and modified this from what &lt;a href=&#34;https://kieranhealy.org/&#34;&gt;Kieran Healy&lt;/a&gt; does.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;theme_set(
+  theme_minimal() +
+    theme(text = element_text(family = &amp;quot;Arial Narrow&amp;quot;,
+                              colour = &amp;quot;grey40&amp;quot;,
+                              size = 11),
+          axis.title = element_text(size = 14),
+          plot.title = element_text(colour = &amp;quot;grey20&amp;quot;,
+                                    face = &amp;quot;bold&amp;quot;,
+                                    size = 18),
+          plot.subtitle = element_text(face = &amp;quot;bold&amp;quot;,
+                                       size = 12),
+          aspect.ratio = .6,   
+          plot.margin = margin(t = 10, r = 15, b = 0, l = 10,
+                               unit = &amp;quot;mm&amp;quot;))
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can see setting a theme with &lt;code&gt;theme_set()&lt;/code&gt; in ggplot2 as if you where applying a CSS file to your website. All plots below will be produced according to this theme.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plotting-aka-the-fun-part&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;5&lt;/span&gt; Plotting (aka the fun part ;) )&lt;/h1&gt;
+&lt;p&gt;Obviously, we will produce this plot with &lt;code&gt;ggplot2&lt;/code&gt;.&lt;/p&gt;
+&lt;div id=&#34;set-the-basic-aesthetic-mapping&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.1&lt;/span&gt; Set the basic aesthetic mapping&lt;/h2&gt;
+&lt;p&gt;First you can set the basic aesthetic mapping. All elements of the plot will have the variable &lt;code&gt;year&lt;/code&gt; mapped to the x axis and &lt;code&gt;butter&lt;/code&gt; mapped to the y axis.&lt;/p&gt;
+&lt;p&gt;Below, I also use a small dplyr trick to setting the &lt;code&gt;yend&lt;/code&gt; variable, just before plotting. This variable doesn’t add anything to the dataset and I just need it when I plot the percentage changes, to make them look nice and clear.&lt;/p&gt;
+&lt;p&gt;With the &lt;code&gt;tidyverse&lt;/code&gt; and &lt;code&gt;ggplot2&lt;/code&gt; you have at least two choices for setting variables on the fly:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Right before plotting, in a pipe, as I’m doing here.&lt;/li&gt;
+&lt;li&gt;Directly within &lt;code&gt;ggplot2&lt;/code&gt; when you define the aesthetic mapping, as I will do later.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
+  dat %&amp;gt;% 
+  mutate(yend = butter + (percent/10)) %&amp;gt;% 
+  ggplot(aes(x = year,
+             y = butter))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At this point I’ve mapped basic aesthetic to the plot, but I did not specify any geometric object: this the plot is empty.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;add-the-first-geometric-objects&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.2&lt;/span&gt; Add the first geometric objects&lt;/h2&gt;
+&lt;p&gt;I’ll start with the grey annotation square, and the text, just because I want them to appear below any other object of the plot.&lt;/p&gt;
+&lt;p&gt;Then I add the key geometric elements, &lt;strong&gt;the points&lt;/strong&gt;, that are mapped to the absolute value of the butter sold in the US (lbs per person) and &lt;strong&gt;the arrows&lt;/strong&gt; that are mapped to the percentage changes.&lt;/p&gt;
+&lt;p&gt;Note: you can call &lt;code&gt;aes()&lt;/code&gt; inside a call for a geometric object, as I do for &lt;code&gt;geom_point()&lt;/code&gt;. In this way you can map a variable to an aesthetic parameter exclusively for that geometric object.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
+  p +
+  # First the annotations
+  annotate(geom = &amp;quot;rect&amp;quot;,
+           xmin = 2008, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = &amp;quot;grey80&amp;quot;, alpha = .5) +
+  annotate(geom = &amp;quot;text&amp;quot;,
+           x = 2009, y = 4,
+           label = &amp;quot;2008\nEconomic Crisis?&amp;quot;,
+           family = &amp;quot;Arial Narrow&amp;quot;,
+           colour = &amp;quot;grey40&amp;quot;,
+           size = 3, fontface = &amp;quot;bold&amp;quot;) +
+  # and then the basic geometric objects
+  geom_segment(aes(yend = yend,
+                   xend = ..x..,
+                   colour = percent),
+               size = 2,
+               arrow = arrow(length = unit(1.2, &amp;quot;mm&amp;quot;),
+                             type = &amp;quot;closed&amp;quot;)) +
+  geom_point(colour = &amp;quot;grey40&amp;quot;, size = 2)
+
+p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;specify-percent-changes-explicitly&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.3&lt;/span&gt; Specify percent changes explicitly&lt;/h2&gt;
+&lt;p&gt;We can specify percent changes explicitly with numbers, in this way, readers can learn the specific size of the effect easily.&lt;/p&gt;
+&lt;p&gt;I’ll do it with &lt;code&gt;geom_text()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negaitve. We achive this using &lt;code&gt;case_when()&lt;/code&gt;: a vectorized ifelse statement. I use &lt;code&gt;case_when()&lt;/code&gt; directly in the call to the aesthetic mapping.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
+  p +
+  geom_text(aes(y = case_when(percent &amp;gt; 0 ~ yend + .12,
+                              TRUE ~ yend - .12),
+                label = percent %&amp;gt;% 
+                  round() %&amp;gt;% paste0(&amp;quot;%&amp;quot;),
+                colour = percent),
+            size = 2.7)
+
+p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;colors-colors-colors&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.4&lt;/span&gt; Colors colors colors&lt;/h2&gt;
+&lt;p&gt;Colors: are they necessary? Are they to be avoided? The debate on what is the best way to use colors in a graph is wide and, well, colorful (forgive me ;) ). Well, colors, they make your plot look good, and for sure they can be helpful. How can we get the most out of them.&lt;/p&gt;
+&lt;p&gt;Beside looking good, a colour palette today must have two properties:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Be colour blind friendly (no need to explain this),&lt;/li&gt;
+&lt;li&gt;Be perceptively uniform, or at least perceptively reasonable (i.e. it should not let you guess pattern that are not in the data).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The concept of perceptively uniform is explained clearly in the &lt;a href=&#34;https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html&#34;&gt;vignette of the viridis package&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Beside the beautiful viridis palette, I also love those in the &lt;a href=&#34;https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/&#34;&gt;package scico&lt;/a&gt;. This package was developed by &lt;a href=&#34;https://www.data-imaginist.com/&#34;&gt;Thomas Lin Pedersen&lt;/a&gt; and it ports into R the color palettes developed by &lt;a href=&#34;http://www.fabiocrameri.ch/colourmaps.php&#34;&gt;Fabio Crameri&lt;/a&gt;. I use the &lt;code&gt;roma&lt;/code&gt; scale, which is divergent and colorful, and map percent change to it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# the roma palette
+scico::scico_palette_show(palettes = &amp;quot;roma&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I want the light and clear center of the divergent palette to be mapped to the 0% changes, so that the negative changes are red and the positive ones are blue. But percentage changes are not equally distributed around zero (since they are hopefully not random) so we can do it manually by setting artificial upper and lower limits to the colour mapping that are equally distant from zero.&lt;/p&gt;
+&lt;p&gt;After doing that we can set the new color palette to the plot with the &lt;code&gt;scale_colour_scico()&lt;/code&gt; function. Note that I have removed the lateral color guide with &lt;code&gt;guide = FALSE&lt;/code&gt;, because it is not needed. In this way I free some space on the plot canvas.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# a limit that centers the divergent palette
+
+lim &amp;lt;- 
+  dat$percent %&amp;gt;% 
+  range() %&amp;gt;% 
+  abs() %&amp;gt;% 
+  max()
+
+p &amp;lt;- 
+  p  +
+  scale_colour_scico(palette = &amp;quot;roma&amp;quot;,
+                     direction = 1,
+                     limits = c(-lim, lim),
+                     guide = FALSE)
+
+p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;title-axis-and-caption&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.5&lt;/span&gt; Title axis and caption&lt;/h2&gt;
+&lt;p&gt;After that it’s just a matter of adding a title, a description, a caption and better labels for the axes.&lt;/p&gt;
+&lt;p&gt;Note, in the original tweet I got the y axis label wrong. It should say “lbs per person”.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
+  p +
+  labs(title = &amp;quot;Fluctuations in Butter Consumptions&amp;quot;,
+       subtitle = str_wrap(&amp;quot;In the US between 1975 - 2017,
+                           with weight of sold butter in lbs 
+                           and its percent change compared to
+                           the previous year.&amp;quot;),
+       y = &amp;quot;Sold Butter in lbs per person&amp;quot;,
+       x = &amp;quot;Year&amp;quot;,
+       caption = &amp;quot;Data: USDA | Plot by @othomn&amp;quot;) 
+p %&amp;gt;% print&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Save -----------------------------------------------------------------
+  
+png(filename = &amp;quot;_plots/2-05-milk.png&amp;quot;,
+    height = 1600, width = 2100,
+    res = 300)
+p %&amp;gt;% print()
+dev.off() &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## png 
+##   2&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Show Absolute and Percent Change in a Time Series</title>
+      <link>/post/2019-02-02-butter.consumption/</link>
+      <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-02-02-butter.consumption/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#load-packages&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;1&lt;/span&gt; Load Packages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#get-the-data&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2&lt;/span&gt; Get the data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#wrangle-and-estimate-percentage-changes&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3&lt;/span&gt; Wrangle and Estimate Percentage Changes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#a-bit-of-style&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;4&lt;/span&gt; A bit of style&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#plotting-aka-the-fun-part&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5&lt;/span&gt; Plotting (aka the fun part ;) )&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#set-the-basic-aesthetic-mapping&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.1&lt;/span&gt; Set the basic aesthetic mapping&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#add-the-first-geometric-objects&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.2&lt;/span&gt; Add the first geometric objects&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#specify-percent-changes-explicitly&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.3&lt;/span&gt; Specify percent changes explicitly&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#colors-colors-colors&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.4&lt;/span&gt; Colors colors colors&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Here I’ll show you step by step the plot in the tweet below. In this plot you can show explicitly (and redundantly, but this is not always bad) absolute and relative changes among points in a time series.&lt;/p&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Late &lt;a href=&#34;https://twitter.com/hashtag/TidyTuesday?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#TidyTuesday&lt;/a&gt; , &lt;a href=&#34;https://twitter.com/hashtag/dataviz?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#dataviz&lt;/a&gt;&lt;br&gt;&lt;br&gt;Visualization practice, I&#39;m showing consumption of butter and its percent change compared to the previous year.&lt;br&gt;&lt;br&gt;I did this plot on “butter” just because its consumption changes.&lt;br&gt;&lt;br&gt;Source: &lt;a href=&#34;https://t.co/yNp2qkOVO5&#34;&gt;https://t.co/yNp2qkOVO5&lt;/a&gt;&lt;br&gt;Code: &lt;a href=&#34;https://t.co/flNedKO1kh&#34;&gt;https://t.co/flNedKO1kh&lt;/a&gt; &lt;a href=&#34;https://t.co/yoTHspwBxZ&#34;&gt;pic.twitter.com/yoTHspwBxZ&lt;/a&gt;
+&lt;/p&gt;
+— Otho (&lt;span class=&#34;citation&#34;&gt;@othomn&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/othomn/status/1091413719320547328?ref_src=twsrc%5Etfw&#34;&gt;February 1, 2019&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;p&gt;To produce this plot, you just need to mix components from &lt;code&gt;ggplot2&lt;/code&gt;, and the wonderful &lt;code&gt;scico&lt;/code&gt; colour palette.&lt;/p&gt;
+&lt;div id=&#34;load-packages&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;1&lt;/span&gt; Load Packages&lt;/h1&gt;
+&lt;p&gt;First you need to load the required packages.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(tibbletime)
+library(scico)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;tidyverse&lt;/code&gt; is a collection of packages for data analysis, that contains the functions that we will use to load, manipulate and plot the data.&lt;/p&gt;
+&lt;p&gt;The package &lt;code&gt;tibbletime&lt;/code&gt; stores the function &lt;code&gt;rollify&lt;/code&gt;. This function allows you to apply another function, such as &lt;code&gt;mean&lt;/code&gt; or &lt;code&gt;sum&lt;/code&gt; over windows of time, or, as the name says, to “roll”&amp;quot; it.&lt;/p&gt;
+&lt;p&gt;The package scico stores wonderful color palettes, but more about that later.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;2&lt;/span&gt; Get the data&lt;/h1&gt;
+&lt;p&gt;I use this snippet of code to download data automatically and only once.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Get data Milk products ---------------------------------------------------
+
+dat_path &amp;lt;- &amp;quot;_data/2-05-milk-product-facts.Rdata&amp;quot;
+dat_url &amp;lt;- paste0(&amp;quot;https://raw.githubusercontent.com/&amp;quot;,
+                  &amp;quot;rfordatascience/tidytuesday/master/data/&amp;quot;,
+                  &amp;quot;2019/2019-01-29/milk_products_facts.csv&amp;quot;)
+
+if(!file.exists(dat_path)) {
+  dat_milkprods &amp;lt;- 
+    read_csv(dat_url)
+  
+  save(dat_milkprods, file = dat_path)
+  
+} else {
+  load(dat_path)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The original data come from USDA, but this version has been already tidied by Thomas Mock as part of the of the &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34;&gt;TidyTuesday&lt;/a&gt; weekly social data project. So we have little data manipulation left to do.&lt;/p&gt;
+&lt;p&gt;The milkprods dataset is already tidy, but it stores many columns that we don’t need.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat_milkprods %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 43 x 18
+##     year fluid_milk fluid_yogurt butter cheese_american cheese_other
+##    &amp;lt;int&amp;gt;      &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;
+##  1  1975        247         1.97   4.73            8.15         6.13
+##  2  1976        247         2.13   4.31            8.88         6.63
+##  3  1977        244         2.34   4.29            9.21         6.78
+##  4  1978        241         2.45   4.35            9.53         7.31
+##  5  1979        238         2.44   4.49            9.60         7.57
+##  6  1980        234         2.50   4.47            9.62         7.90
+##  7  1981        230         2.44   4.24           10.2          8.03
+##  8  1982        224         2.58   4.35           11.3          8.60
+##  9  1983        223         3.16   4.91           11.6          8.96
+## 10  1984        224         3.55   4.98           11.9          9.62
+## # ... with 33 more rows, and 12 more variables: cheese_cottage &amp;lt;dbl&amp;gt;,
+## #   evap_cnd_canned_whole_milk &amp;lt;dbl&amp;gt;, evap_cnd_bulk_whole_milk &amp;lt;dbl&amp;gt;,
+## #   evap_cnd_bulk_and_can_skim_milk &amp;lt;dbl&amp;gt;, frozen_ice_cream_regular &amp;lt;dbl&amp;gt;,
+## #   frozen_ice_cream_reduced_fat &amp;lt;dbl&amp;gt;, frozen_sherbet &amp;lt;dbl&amp;gt;,
+## #   frozen_other &amp;lt;dbl&amp;gt;, dry_whole_milk &amp;lt;dbl&amp;gt;, dry_nonfat_milk &amp;lt;dbl&amp;gt;,
+## #   dry_buttermilk &amp;lt;dbl&amp;gt;, dry_whey &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wrangle-and-estimate-percentage-changes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;3&lt;/span&gt; Wrangle and Estimate Percentage Changes&lt;/h1&gt;
+&lt;p&gt;We need just 2 variables and we can easily extract them with &lt;code&gt;dplyr::select&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A bit more complex: we need to estimate percentage changes from the day before. This is swiflty done with rollify. We can use this &lt;a href=&#34;https://adv-r.hadley.nz/function-factories.html&#34;&gt;function factory&lt;/a&gt; to build the function &lt;code&gt;roll_percent()&lt;/code&gt; calculates percentage change over a column of a dataframe.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Percent ---------------------------------------------------------
+
+# roll percent over a dataframe
+roll_percent &amp;lt;- rollify(.f = function(n) (n[2] - n[1])*100/n[1], 2)
+
+dat &amp;lt;- 
+  dat_milkprods %&amp;gt;%
+  select(year, butter) %&amp;gt;% 
+  # apply on this dataframe, on the column butter
+  mutate(percent = roll_percent(butter)) %&amp;gt;% 
+  filter(complete.cases(.))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So, this is the clean dataframe that we use for plotting:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 42 x 3
+##     year butter percent
+##    &amp;lt;int&amp;gt;  &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;
+##  1  1976   4.31  -8.78 
+##  2  1977   4.29  -0.441
+##  3  1978   4.35   1.41 
+##  4  1979   4.49   3.14 
+##  5  1980   4.47  -0.528
+##  6  1981   4.24  -5.13 
+##  7  1982   4.35   2.67 
+##  8  1983   4.91  12.8  
+##  9  1984   4.98   1.42 
+## 10  1985   4.87  -2.09 
+## # ... with 32 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;a-bit-of-style&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;4&lt;/span&gt; A bit of style&lt;/h1&gt;
+&lt;p&gt;You can set the plot styles at any time, let’s do it now.&lt;/p&gt;
+&lt;p&gt;Below I modify the &lt;code&gt;theme_minimal&lt;/code&gt; from &lt;code&gt;ggplot2&lt;/code&gt; with some fonts and colours that I like. I devised this setting and modified them from what &lt;a href=&#34;https://kieranhealy.org/&#34;&gt;Kieran Healy&lt;/a&gt; does.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;theme_set(
+  theme_minimal() +
+    theme(text = element_text(family = &amp;quot;Arial Narrow&amp;quot;,
+                              colour = &amp;quot;grey40&amp;quot;,
+                              size = 11),
+          axis.title = element_text(size = 14),
+          plot.title = element_text(colour = &amp;quot;grey20&amp;quot;,
+                                    face = &amp;quot;bold&amp;quot;,
+                                    size = 18),
+          plot.subtitle = element_text(face = &amp;quot;bold&amp;quot;,
+                                       size = 12),
+          aspect.ratio = .6,   
+          plot.margin = margin(t = 10, r = 15, b = 0, l = 10,
+                               unit = &amp;quot;mm&amp;quot;))
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See setting the theme with &lt;code&gt;theme_set()&lt;/code&gt; in ggplot2 as if you where applying a CSS file to your website. All plots below will be produced according to this theme.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plotting-aka-the-fun-part&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;5&lt;/span&gt; Plotting (aka the fun part ;) )&lt;/h1&gt;
+&lt;p&gt;First you can set the basic aesthetic mapping. All elements of the plot will have the variable &lt;code&gt;year&lt;/code&gt; mapped to the x axis and &lt;code&gt;butter&lt;/code&gt; mapped to the y axis.&lt;/p&gt;
+&lt;div id=&#34;set-the-basic-aesthetic-mapping&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.1&lt;/span&gt; Set the basic aesthetic mapping&lt;/h2&gt;
+&lt;p&gt;Below, I also use a small dplyr trick, setting the &lt;code&gt;yend&lt;/code&gt; variable, just before plotting. This variable doesn’t add anything to the dataset, but I just need it when I plot the percentage changes, to make the look good.&lt;/p&gt;
+&lt;p&gt;With the &lt;code&gt;tidyverse&lt;/code&gt; and &lt;code&gt;ggplot2&lt;/code&gt; you have at least two choices for setting variables on the fly:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Right before plotting, in a pipe, as I’m doing here,&lt;/li&gt;
+&lt;li&gt;Directly within &lt;code&gt;ggplot2&lt;/code&gt; when you define the aesthetic mapping, as I will do later.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
+  dat %&amp;gt;% 
+  mutate(yend = butter + (percent/10)) %&amp;gt;% 
+  ggplot(aes(x = year,
+             y = butter))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At this point I’ve mapped basic aesthetic to the plot, but I did not specify any geometric object to appear, this the plot is empty.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter.consumption_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;add-the-first-geometric-objects&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.2&lt;/span&gt; Add the first geometric objects&lt;/h2&gt;
+&lt;p&gt;I’ll start with the grey annotation square, and the text, just because I want them below any other object of the plot.&lt;/p&gt;
+&lt;p&gt;Then I add the key geometric elements, &lt;strong&gt;the dots&lt;/strong&gt;, that are mapped to the absolute value of the butter sold in the US (lbs per person) and &lt;strong&gt;the arrows&lt;/strong&gt; that are mapped to the percentage changes.&lt;/p&gt;
+&lt;p&gt;Note that you can call &lt;code&gt;aes()&lt;/code&gt; inside a the call for a geometric object, such as &lt;code&gt;geom_point()&lt;/code&gt;. In this way you can map a variable to an aesthetic exclusively in that geometric object.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
+  p +
+  # First the annotations
+  annotate(geom = &amp;quot;rect&amp;quot;,
+           xmin = 2008, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = &amp;quot;grey80&amp;quot;, alpha = .5) +
+  annotate(geom = &amp;quot;text&amp;quot;,
+           x = 2009, y = 4,
+           label = &amp;quot;2008\nEconomic Crisis?&amp;quot;,
+           family = &amp;quot;Arial Narrow&amp;quot;,
+           colour = &amp;quot;grey40&amp;quot;,
+           size = 3, fontface = &amp;quot;bold&amp;quot;) +
+  # and then the basic geometric objects
+  geom_segment(aes(yend = yend,
+                   xend = ..x..,
+                   colour = percent),
+               size = 2,
+               arrow = arrow(length = unit(1.2, &amp;quot;mm&amp;quot;),
+                             type = &amp;quot;closed&amp;quot;)) +
+  geom_point(colour = &amp;quot;grey40&amp;quot;, size = 2)
+
+p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter.consumption_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;specify-percent-changes-explicitly&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.3&lt;/span&gt; Specify percent changes explicitly&lt;/h2&gt;
+&lt;p&gt;We can specify percent changes explicitly with numbers, making it easier for readers to learn the specific size of the effect.&lt;/p&gt;
+&lt;p&gt;I’ll do it with &lt;code&gt;geom_text()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The numbers must appear above the arrow, if the percentage change is positive, and below if it is negaitve. We can specify this using &lt;code&gt;case_when()&lt;/code&gt; a vectorized ifelse statement.I specify it directly in the call to the aesthetic mapping.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- 
+  p +
+  geom_text(aes(y = case_when(percent &amp;gt; 0 ~ yend + .12,
+                              TRUE ~ yend - .12),
+                label = percent %&amp;gt;% 
+                  round() %&amp;gt;% paste0(&amp;quot;%&amp;quot;),
+                colour = percent),
+            size = 2.7)
+
+p %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter.consumption_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;colors-colors-colors&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;5.4&lt;/span&gt; Colors colors colors&lt;/h2&gt;
+&lt;p&gt;Colors: are they necessary? Are they to be avoided? Well, they make your plot look good, and for sure they are helpful. How can we get the most out of them.&lt;/p&gt;
+&lt;p&gt;Beside looking good, a colour palette today must have two properties:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Be colour blind friendly (no need to explain this),&lt;/li&gt;
+&lt;li&gt;Be perceptively uniform, or at least perceptively reasonable (i.e. it should not let you guess pattern that are not there in the data).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The concept of perceptively uniform is explained clearly in the &lt;a href=&#34;https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html&#34;&gt;vignette of the viridis package&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Beside the beautiful viridis palette, I also love those in the &lt;a href=&#34;https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/&#34;&gt;package scico&lt;/a&gt;. This package was developed by &lt;a href=&#34;https://www.data-imaginist.com/&#34;&gt;Thomas Lin Pedersen&lt;/a&gt; and it ports into R the color palettes developed by &lt;a href=&#34;http://www.fabiocrameri.ch/colourmaps.php&#34;&gt;Fabio Crameri&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I use the &lt;code&gt;roma&lt;/code&gt; scale, which is divergent and colorful, and map percent change to it.&lt;/p&gt;
+&lt;p&gt;I want the desaturated center of the divergent palette to be mapped to the 0% changes, but percentage data are not equally distributed around zero, so we can do it manually by setting artificial limits to the colot mapping.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# needed to center divergent palette
+lim &amp;lt;- 
+  dat$percent %&amp;gt;% 
+  range() %&amp;gt;% 
+  abs() %&amp;gt;% 
+  max()
+
+
+p  +
+  scale_colour_scico(palette = &amp;quot;roma&amp;quot;,
+                   direction = 1,
+                   limits = c(-lim, lim),
+                   guide = FALSE) +
+  guides(colour = element_blank()) +
+  labs(title = &amp;quot;Fluctuations in Butter Consumptions&amp;quot;,
+       subtitle = str_wrap(&amp;quot;In the US between 1975 - 2017,
+                           with weight of sold butter in lbs 
+                           and its percent change compared to
+                           the previous year.&amp;quot;),
+       y = &amp;quot;Sold Butter in lbs&amp;quot;,
+       x = &amp;quot;Year&amp;quot;,
+       caption = &amp;quot;Data: USDA | Plot by @othomn&amp;quot;) 
+p
+# Save --------------------------------------------------------------------
+
+png(filename = &amp;quot;plots/2-05-milk.png&amp;quot;,
+    height = 1600, width = 2100,
+    res = 300)
+p %&amp;gt;% print()
+dev.off() &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>An analysis of Vera institute&#39;s prison dataset</title>
       <link>/post/2-04-prison/</link>
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>

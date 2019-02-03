@@ -1,0 +1,286 @@
+---
+title: "Show Absolute and Percent Change in a Time Series"
+subtitle: "Tidytuesday week 5 - USDA milk dataset"
+author: "Otho Mantegazza"
+summary: "Dataviz: some ggplot2 triks and the wonderful scico color palette"
+date: 2019-02-02
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(fig.width=7) 
+```
+
+
+Here I'll show, you step by step, how to produce the plot in the tweet below. You can use it to show explicitly (and redundantly, but this is not always bad) absolute and relative changes among points in a time series.
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Late <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> , <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a><br><br>Visualization practice, I&#39;m showing consumption of butter and its percent change compared to the previous year.<br><br>I did this plot on &quot;butter&quot; just because its consumption changes.<br><br>Source: <a href="https://t.co/yNp2qkOVO5">https://t.co/yNp2qkOVO5</a><br>Code: <a href="https://t.co/flNedKO1kh">https://t.co/flNedKO1kh</a> <a href="https://t.co/yoTHspwBxZ">pic.twitter.com/yoTHspwBxZ</a></p>&mdash; Otho (@othomn) <a href="https://twitter.com/othomn/status/1091413719320547328?ref_src=twsrc%5Etfw">February 1, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+To produce this plot, you just need to mix components from `ggplot2`, and the wonderful `scico` colour palette.
+
+# Load Packages
+
+First you need to load the required R packages.
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(tibbletime)
+library(scico)
+```
+
+The `tidyverse` is a collection of packages for data analysis, that contains the functions that we will use to load, manipulate and plot the data. 
+
+The package `tibbletime` stores the function `rollify`. This function allows you to apply another function, such as `mean` or `sum` over windows of time, or, as the name says, to "roll"" it.
+
+The package scico stores wonderful color palettes, but more about that later.
+
+# Get the data
+
+I use this snippet of code to download data automatically and only once.
+
+```{r}
+# Get data Milk products ---------------------------------------------------
+
+dat_path <- "_data/2-05-milk-product-facts.Rdata"
+dat_url <- paste0("https://raw.githubusercontent.com/",
+                  "rfordatascience/tidytuesday/master/data/",
+                  "2019/2019-01-29/milk_products_facts.csv")
+
+if(!file.exists(dat_path)) {
+  dat_milkprods <- 
+    read_csv(dat_url)
+  
+  save(dat_milkprods, file = dat_path)
+  
+} else {
+  load(dat_path)
+}
+```
+
+The original data come from USDA, but this version has been already tidied by Thomas Mock as part of the of the [TidyTuesday](https://github.com/rfordatascience/tidytuesday), a weekly social data project that he organizes. So we have little data manipulation left to do.
+
+The milkprods dataset is already tidy, but it stores many columns that we don't need.
+
+```{r}
+dat_milkprods %>% print()
+```
+
+# Wrangle and Estimate Percentage Changes
+
+We need just 2 variables (`year` and `butter`) and we can easily extract them with `dplyr::select`. 
+
+A bit more complex: we need to estimate percentage changes from the day before. This is swiflty done with rollify. We can use this [function factory](https://adv-r.hadley.nz/function-factories.html) to build the function `roll_percent()`, which calculates percentage change over a column of a dataframe.
+
+```{r}
+# Percent ---------------------------------------------------------
+
+# roll percent over a dataframe
+roll_percent <- rollify(.f = function(n) (n[2] - n[1])*100/n[1], 2)
+
+dat <- 
+  dat_milkprods %>%
+  select(year, butter) %>% 
+  # apply on this dataframe, on the column butter
+  mutate(percent = roll_percent(butter)) %>% 
+  filter(complete.cases(.))
+```
+
+So, this is the clean dataframe that we use for plotting:
+
+```{r}
+dat %>% print()
+```
+
+
+# A bit of style
+
+You can set the plot styles at any time, let's do it now.
+
+Below I modify the `theme_minimal` from `ggplot2` with some fonts and colours that I like. I devised and and modified this from what [Kieran Healy](https://kieranhealy.org/) does. 
+
+```{r}
+theme_set(
+  theme_minimal() +
+    theme(text = element_text(family = "Arial Narrow",
+                              colour = "grey40",
+                              size = 11),
+          axis.title = element_text(size = 14),
+          plot.title = element_text(colour = "grey20",
+                                    face = "bold",
+                                    size = 18),
+          plot.subtitle = element_text(face = "bold",
+                                       size = 12),
+          aspect.ratio = .6,   
+          plot.margin = margin(t = 10, r = 15, b = 0, l = 10,
+                               unit = "mm"))
+)
+```
+
+You can see setting a theme with `theme_set()` in ggplot2 as if you where applying a CSS file to your website. All plots below will be produced according to this theme.
+
+# Plotting (aka the fun part ;) )
+
+Obviously, we will produce this plot with `ggplot2`.
+
+## Set the basic aesthetic mapping
+
+First you can set the basic aesthetic mapping. All elements of the plot will have the variable `year` mapped to the x axis and `butter` mapped to the y axis. 
+
+Below, I also use a small dplyr trick to setting the `yend` variable, just before plotting. This variable doesn't add anything to the dataset and I just need it when I plot the percentage changes, to make them look nice and clear.
+
+With the `tidyverse` and `ggplot2` you have at least two choices for setting variables on the fly: 
+
+- Right before plotting, in a pipe, as I'm doing here.
+- Directly within `ggplot2` when you define the aesthetic mapping, as I will do later.
+
+```{r}
+p <- 
+  dat %>% 
+  mutate(yend = butter + (percent/10)) %>% 
+  ggplot(aes(x = year,
+             y = butter))
+```
+
+At this point I've mapped basic aesthetic to the plot, but I did not specify any geometric object: this the plot is empty.
+
+```{r}
+p %>% print()
+```
+
+## Add the first geometric objects
+
+I'll start with the grey annotation square, and the text, just because I want them to appear below any other object of the plot.
+
+Then I add the key geometric elements, **the points**, that are mapped to the absolute value of the butter sold in the US (lbs per person) and **the arrows** that are mapped to the percentage changes.
+
+Note: you can call `aes()` inside a call for a geometric object, as I do for `geom_point()`. In this way you can map a variable to an aesthetic parameter exclusively for that geometric object.
+
+```{r}
+p <- 
+  p +
+  # First the annotations
+  annotate(geom = "rect",
+           xmin = 2008, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey80", alpha = .5) +
+  annotate(geom = "text",
+           x = 2009, y = 4,
+           label = "2008\nEconomic Crisis?",
+           family = "Arial Narrow",
+           colour = "grey40",
+           size = 3, fontface = "bold") +
+  # and then the basic geometric objects
+  geom_segment(aes(yend = yend,
+                   xend = ..x..,
+                   colour = percent),
+               size = 2,
+               arrow = arrow(length = unit(1.2, "mm"),
+                             type = "closed")) +
+  geom_point(colour = "grey40", size = 2)
+
+p %>% print()
+```
+
+## Specify percent changes explicitly
+
+We can specify percent changes explicitly with numbers, in this way, readers can learn the specific size of the effect easily.
+
+I'll do it with `geom_text()`.
+
+The numbers must appear above the arrow if the percentage change is positive, and, below, if it is negaitve. We achive this using `case_when()`: a vectorized ifelse statement. I use `case_when()` directly in the call to the aesthetic mapping.
+
+```{r}
+p <- 
+  p +
+  geom_text(aes(y = case_when(percent > 0 ~ yend + .12,
+                              TRUE ~ yend - .12),
+                label = percent %>% 
+                  round() %>% paste0("%"),
+                colour = percent),
+            size = 2.7)
+
+p %>% print()
+```
+
+## Colors colors colors
+
+Colors: are they necessary? Are they to be avoided? The debate on what is the best way to use colors in a graph is wide and, well, colorful (forgive me ;) ).  Well, colors, they make your plot look good, and for sure they can be helpful. How can we get the most out of them.
+
+Beside looking good, a colour palette today must have two properties:
+
+- Be colour blind friendly (no need to explain this),
+- Be perceptively uniform, or at least perceptively reasonable (i.e. it should not let you guess pattern that are not in the data). 
+
+The concept of perceptively uniform is explained clearly in the [vignette of the viridis package](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html).
+
+Beside the beautiful viridis palette, I also love those in the [package scico](https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/). This package was developed by [Thomas Lin Pedersen](https://www.data-imaginist.com/) and it ports into R the color palettes developed by [Fabio Crameri](http://www.fabiocrameri.ch/colourmaps.php). I use the `roma` scale, which is divergent and colorful, and map percent change to it. 
+
+```{r, fig.height = 1}
+# the roma palette
+scico::scico_palette_show(palettes = "roma")
+```
+
+I want the light and clear center of the divergent palette to be mapped to the 0% changes, so that the negative changes are red and the positive ones are blue. But percentage changes are not equally distributed around zero (since they are hopefully not random) so we can do it manually by setting artificial upper and lower limits to the colour mapping that are equally distant from zero.
+
+After doing that we can set the new color palette to the plot with the `scale_colour_scico()` function. Note that I have removed the lateral color guide with `guide = FALSE`, because it is not needed. In this way I free some space on the plot canvas.
+
+```{r}
+# a limit that centers the divergent palette
+
+lim <- 
+  dat$percent %>% 
+  range() %>% 
+  abs() %>% 
+  max()
+
+p <- 
+  p  +
+  scale_colour_scico(palette = "roma",
+                     direction = 1,
+                     limits = c(-lim, lim),
+                     guide = FALSE)
+
+p %>% print()
+```
+
+## Title axis and caption
+
+After that it's just a matter of adding a title, a description, a caption and better labels for the axes.
+
+Note, in the original tweet I got the y axis label wrong. It should say "lbs per person".
+
+```{r}
+p <- 
+  p +
+  labs(title = "Fluctuations in Butter Consumptions",
+       subtitle = str_wrap("In the US between 1975 - 2017,
+                           with weight of sold butter in lbs 
+                           and its percent change compared to
+                           the previous year."),
+       y = "Sold Butter in lbs per person",
+       x = "Year",
+       caption = "Data: USDA | Plot by @othomn") 
+p %>% print
+```
+
+```{r}
+# Save -----------------------------------------------------------------
+  
+png(filename = "_plots/2-05-milk.png",
+    height = 1600, width = 2100,
+    res = 300)
+p %>% print()
+dev.off() 
+```
+
+# This Post will be updated
+
+***I would like to use this visualization on other variables of this datasets, and to comopare it with waterfall plots.***
+

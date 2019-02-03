@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.3.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Otho Mantegazza">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Dataviz: some ggplot2 triks and the wonderful scico color palette">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/2019-02-02-butter.consumption/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-101634279-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/2019-02-02-butter.consumption/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@othomn">
+  <meta property="twitter:creator" content="@othomn">
+  
+  <meta property="og:site_name" content="Otho | Sidenotes">
+  <meta property="og:url" content="/post/2019-02-02-butter.consumption/">
+  <meta property="og:title" content="Show Absolute and Percent Change in a Time Series | Otho | Sidenotes">
+  <meta property="og:description" content="Dataviz: some ggplot2 triks and the wonderful scico color palette"><meta property="og:image" content="/img/portrait2.jpg">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-02-02T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-02-02T00:00:00&#43;00:00">
+  
+
+  
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#3f51b5",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#3f51b5"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
+
+  
+
+  <title>Show Absolute and Percent Change in a Time Series | Otho | Sidenotes</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Otho | Sidenotes</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/publication">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Show Absolute and Percent Change in a Time Series</h1>
+
+  
+  <p class="page-subtitle">Tidytuesday week 5 - USDA milk dataset</p>
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-02-02 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-02-02 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Feb 2, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    8 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/2019-02-02-butter.consumption/#disqus_thread"></a>
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Show%20Absolute%20and%20Percent%20Change%20in%20a%20Time%20Series&amp;url=%2fpost%2f2019-02-02-butter.consumption%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2019-02-02-butter.consumption%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2019-02-02-butter.consumption%2f&amp;title=Show%20Absolute%20and%20Percent%20Change%20in%20a%20Time%20Series"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2019-02-02-butter.consumption%2f&amp;title=Show%20Absolute%20and%20Percent%20Change%20in%20a%20Time%20Series"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Show%20Absolute%20and%20Percent%20Change%20in%20a%20Time%20Series&amp;body=%2fpost%2f2019-02-02-butter.consumption%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<div id="TOC">
+<ul>
+<li><a href="#load-packages"><span class="toc-section-number">1</span> Load Packages</a></li>
+<li><a href="#get-the-data"><span class="toc-section-number">2</span> Get the data</a></li>
+<li><a href="#wrangle-and-estimate-percentage-changes"><span class="toc-section-number">3</span> Wrangle and Estimate Percentage Changes</a></li>
+<li><a href="#a-bit-of-style"><span class="toc-section-number">4</span> A bit of style</a></li>
+<li><a href="#plotting-aka-the-fun-part"><span class="toc-section-number">5</span> Plotting (aka the fun part ;) )</a><ul>
+<li><a href="#set-the-basic-aesthetic-mapping"><span class="toc-section-number">5.1</span> Set the basic aesthetic mapping</a></li>
+<li><a href="#add-the-first-geometric-objects"><span class="toc-section-number">5.2</span> Add the first geometric objects</a></li>
+<li><a href="#specify-percent-changes-explicitly"><span class="toc-section-number">5.3</span> Specify percent changes explicitly</a></li>
+<li><a href="#colors-colors-colors"><span class="toc-section-number">5.4</span> Colors colors colors</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Here I’ll show you step by step the plot in the tweet below. In this plot you can show explicitly (and redundantly, but this is not always bad) absolute and relative changes among points in a time series.</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Late <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> , <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a><br><br>Visualization practice, I'm showing consumption of butter and its percent change compared to the previous year.<br><br>I did this plot on “butter” just because its consumption changes.<br><br>Source: <a href="https://t.co/yNp2qkOVO5">https://t.co/yNp2qkOVO5</a><br>Code: <a href="https://t.co/flNedKO1kh">https://t.co/flNedKO1kh</a> <a href="https://t.co/yoTHspwBxZ">pic.twitter.com/yoTHspwBxZ</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1091413719320547328?ref_src=twsrc%5Etfw">February 1, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>To produce this plot, you just need to mix components from <code>ggplot2</code>, and the wonderful <code>scico</code> colour palette.</p>
+<div id="load-packages" class="section level1">
+<h1><span class="header-section-number">1</span> Load Packages</h1>
+<p>First you need to load the required packages.</p>
+<pre class="r"><code>library(tidyverse)
+library(tibbletime)
+library(scico)</code></pre>
+<p>The <code>tidyverse</code> is a collection of packages for data analysis, that contains the functions that we will use to load, manipulate and plot the data.</p>
+<p>The package <code>tibbletime</code> stores the function <code>rollify</code>. This function allows you to apply another function, such as <code>mean</code> or <code>sum</code> over windows of time, or, as the name says, to “roll”&quot; it.</p>
+<p>The package scico stores wonderful color palettes, but more about that later.</p>
+</div>
+<div id="get-the-data" class="section level1">
+<h1><span class="header-section-number">2</span> Get the data</h1>
+<p>I use this snippet of code to download data automatically and only once.</p>
+<pre class="r"><code># Get data Milk products ---------------------------------------------------
+
+dat_path &lt;- &quot;_data/2-05-milk-product-facts.Rdata&quot;
+dat_url &lt;- paste0(&quot;https://raw.githubusercontent.com/&quot;,
+                  &quot;rfordatascience/tidytuesday/master/data/&quot;,
+                  &quot;2019/2019-01-29/milk_products_facts.csv&quot;)
+
+if(!file.exists(dat_path)) {
+  dat_milkprods &lt;- 
+    read_csv(dat_url)
+  
+  save(dat_milkprods, file = dat_path)
+  
+} else {
+  load(dat_path)
+}</code></pre>
+<p>The original data come from USDA, but this version has been already tidied by Thomas Mock as part of the of the <a href="https://github.com/rfordatascience/tidytuesday">TidyTuesday</a> weekly social data project. So we have little data manipulation left to do.</p>
+<p>The milkprods dataset is already tidy, but it stores many columns that we don’t need.</p>
+<pre class="r"><code>dat_milkprods %&gt;% print()</code></pre>
+<pre><code>## # A tibble: 43 x 18
+##     year fluid_milk fluid_yogurt butter cheese_american cheese_other
+##    &lt;int&gt;      &lt;int&gt;        &lt;dbl&gt;  &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+##  1  1975        247         1.97   4.73            8.15         6.13
+##  2  1976        247         2.13   4.31            8.88         6.63
+##  3  1977        244         2.34   4.29            9.21         6.78
+##  4  1978        241         2.45   4.35            9.53         7.31
+##  5  1979        238         2.44   4.49            9.60         7.57
+##  6  1980        234         2.50   4.47            9.62         7.90
+##  7  1981        230         2.44   4.24           10.2          8.03
+##  8  1982        224         2.58   4.35           11.3          8.60
+##  9  1983        223         3.16   4.91           11.6          8.96
+## 10  1984        224         3.55   4.98           11.9          9.62
+## # ... with 33 more rows, and 12 more variables: cheese_cottage &lt;dbl&gt;,
+## #   evap_cnd_canned_whole_milk &lt;dbl&gt;, evap_cnd_bulk_whole_milk &lt;dbl&gt;,
+## #   evap_cnd_bulk_and_can_skim_milk &lt;dbl&gt;, frozen_ice_cream_regular &lt;dbl&gt;,
+## #   frozen_ice_cream_reduced_fat &lt;dbl&gt;, frozen_sherbet &lt;dbl&gt;,
+## #   frozen_other &lt;dbl&gt;, dry_whole_milk &lt;dbl&gt;, dry_nonfat_milk &lt;dbl&gt;,
+## #   dry_buttermilk &lt;dbl&gt;, dry_whey &lt;dbl&gt;</code></pre>
+</div>
+<div id="wrangle-and-estimate-percentage-changes" class="section level1">
+<h1><span class="header-section-number">3</span> Wrangle and Estimate Percentage Changes</h1>
+<p>We need just 2 variables and we can easily extract them with <code>dplyr::select</code>.</p>
+<p>A bit more complex: we need to estimate percentage changes from the day before. This is swiflty done with rollify. We can use this <a href="https://adv-r.hadley.nz/function-factories.html">function factory</a> to build the function <code>roll_percent()</code> calculates percentage change over a column of a dataframe.</p>
+<pre class="r"><code># Percent ---------------------------------------------------------
+
+# roll percent over a dataframe
+roll_percent &lt;- rollify(.f = function(n) (n[2] - n[1])*100/n[1], 2)
+
+dat &lt;- 
+  dat_milkprods %&gt;%
+  select(year, butter) %&gt;% 
+  # apply on this dataframe, on the column butter
+  mutate(percent = roll_percent(butter)) %&gt;% 
+  filter(complete.cases(.))</code></pre>
+<p>So, this is the clean dataframe that we use for plotting:</p>
+<pre class="r"><code>dat %&gt;% print()</code></pre>
+<pre><code>## # A tibble: 42 x 3
+##     year butter percent
+##    &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1  1976   4.31  -8.78 
+##  2  1977   4.29  -0.441
+##  3  1978   4.35   1.41 
+##  4  1979   4.49   3.14 
+##  5  1980   4.47  -0.528
+##  6  1981   4.24  -5.13 
+##  7  1982   4.35   2.67 
+##  8  1983   4.91  12.8  
+##  9  1984   4.98   1.42 
+## 10  1985   4.87  -2.09 
+## # ... with 32 more rows</code></pre>
+</div>
+<div id="a-bit-of-style" class="section level1">
+<h1><span class="header-section-number">4</span> A bit of style</h1>
+<p>You can set the plot styles at any time, let’s do it now.</p>
+<p>Below I modify the <code>theme_minimal</code> from <code>ggplot2</code> with some fonts and colours that I like. I devised this setting and modified them from what <a href="https://kieranhealy.org/">Kieran Healy</a> does.</p>
+<pre class="r"><code>theme_set(
+  theme_minimal() +
+    theme(text = element_text(family = &quot;Arial Narrow&quot;,
+                              colour = &quot;grey40&quot;,
+                              size = 11),
+          axis.title = element_text(size = 14),
+          plot.title = element_text(colour = &quot;grey20&quot;,
+                                    face = &quot;bold&quot;,
+                                    size = 18),
+          plot.subtitle = element_text(face = &quot;bold&quot;,
+                                       size = 12),
+          aspect.ratio = .6,   
+          plot.margin = margin(t = 10, r = 15, b = 0, l = 10,
+                               unit = &quot;mm&quot;))
+)</code></pre>
+<p>See setting the theme with <code>theme_set()</code> in ggplot2 as if you where applying a CSS file to your website. All plots below will be produced according to this theme.</p>
+</div>
+<div id="plotting-aka-the-fun-part" class="section level1">
+<h1><span class="header-section-number">5</span> Plotting (aka the fun part ;) )</h1>
+<p>First you can set the basic aesthetic mapping. All elements of the plot will have the variable <code>year</code> mapped to the x axis and <code>butter</code> mapped to the y axis.</p>
+<div id="set-the-basic-aesthetic-mapping" class="section level2">
+<h2><span class="header-section-number">5.1</span> Set the basic aesthetic mapping</h2>
+<p>Below, I also use a small dplyr trick, setting the <code>yend</code> variable, just before plotting. This variable doesn’t add anything to the dataset, but I just need it when I plot the percentage changes, to make the look good.</p>
+<p>With the <code>tidyverse</code> and <code>ggplot2</code> you have at least two choices for setting variables on the fly:</p>
+<ul>
+<li>Right before plotting, in a pipe, as I’m doing here,</li>
+<li>Directly within <code>ggplot2</code> when you define the aesthetic mapping, as I will do later.</li>
+</ul>
+<pre class="r"><code>p &lt;- 
+  dat %&gt;% 
+  mutate(yend = butter + (percent/10)) %&gt;% 
+  ggplot(aes(x = year,
+             y = butter))</code></pre>
+<p>At this point I’ve mapped basic aesthetic to the plot, but I did not specify any geometric object to appear, this the plot is empty.</p>
+<pre class="r"><code>p %&gt;% print()</code></pre>
+<p><img src="/post/2019-02-02-butter.consumption_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="add-the-first-geometric-objects" class="section level2">
+<h2><span class="header-section-number">5.2</span> Add the first geometric objects</h2>
+<p>I’ll start with the grey annotation square, and the text, just because I want them below any other object of the plot.</p>
+<p>Then I add the key geometric elements, <strong>the dots</strong>, that are mapped to the absolute value of the butter sold in the US (lbs per person) and <strong>the arrows</strong> that are mapped to the percentage changes.</p>
+<p>Note that you can call <code>aes()</code> inside a the call for a geometric object, such as <code>geom_point()</code>. In this way you can map a variable to an aesthetic exclusively in that geometric object.</p>
+<pre class="r"><code>p &lt;- 
+  p +
+  # First the annotations
+  annotate(geom = &quot;rect&quot;,
+           xmin = 2008, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = &quot;grey80&quot;, alpha = .5) +
+  annotate(geom = &quot;text&quot;,
+           x = 2009, y = 4,
+           label = &quot;2008\nEconomic Crisis?&quot;,
+           family = &quot;Arial Narrow&quot;,
+           colour = &quot;grey40&quot;,
+           size = 3, fontface = &quot;bold&quot;) +
+  # and then the basic geometric objects
+  geom_segment(aes(yend = yend,
+                   xend = ..x..,
+                   colour = percent),
+               size = 2,
+               arrow = arrow(length = unit(1.2, &quot;mm&quot;),
+                             type = &quot;closed&quot;)) +
+  geom_point(colour = &quot;grey40&quot;, size = 2)
+
+p %&gt;% print()</code></pre>
+<p><img src="/post/2019-02-02-butter.consumption_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="specify-percent-changes-explicitly" class="section level2">
+<h2><span class="header-section-number">5.3</span> Specify percent changes explicitly</h2>
+<p>We can specify percent changes explicitly with numbers, making it easier for readers to learn the specific size of the effect.</p>
+<p>I’ll do it with <code>geom_text()</code>.</p>
+<p>The numbers must appear above the arrow, if the percentage change is positive, and below if it is negaitve. We can specify this using <code>case_when()</code> a vectorized ifelse statement.I specify it directly in the call to the aesthetic mapping.</p>
+<pre class="r"><code>p &lt;- 
+  p +
+  geom_text(aes(y = case_when(percent &gt; 0 ~ yend + .12,
+                              TRUE ~ yend - .12),
+                label = percent %&gt;% 
+                  round() %&gt;% paste0(&quot;%&quot;),
+                colour = percent),
+            size = 2.7)
+
+p %&gt;% print()</code></pre>
+<p><img src="/post/2019-02-02-butter.consumption_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="colors-colors-colors" class="section level2">
+<h2><span class="header-section-number">5.4</span> Colors colors colors</h2>
+<p>Colors: are they necessary? Are they to be avoided? Well, they make your plot look good, and for sure they are helpful. How can we get the most out of them.</p>
+<p>Beside looking good, a colour palette today must have two properties:</p>
+<ul>
+<li>Be colour blind friendly (no need to explain this),</li>
+<li>Be perceptively uniform, or at least perceptively reasonable (i.e. it should not let you guess pattern that are not there in the data).</li>
+</ul>
+<p>The concept of perceptively uniform is explained clearly in the <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">vignette of the viridis package</a>.</p>
+<p>Beside the beautiful viridis palette, I also love those in the <a href="https://www.data-imaginist.com/2018/scico-and-the-colour-conundrum/">package scico</a>. This package was developed by <a href="https://www.data-imaginist.com/">Thomas Lin Pedersen</a> and it ports into R the color palettes developed by <a href="http://www.fabiocrameri.ch/colourmaps.php">Fabio Crameri</a>.</p>
+<p>I use the <code>roma</code> scale, which is divergent and colorful, and map percent change to it.</p>
+<p>I want the desaturated center of the divergent palette to be mapped to the 0% changes, but percentage data are not equally distributed around zero, so we can do it manually by setting artificial limits to the colot mapping.</p>
+<pre class="r"><code># needed to center divergent palette
+lim &lt;- 
+  dat$percent %&gt;% 
+  range() %&gt;% 
+  abs() %&gt;% 
+  max()
+
+
+p  +
+  scale_colour_scico(palette = &quot;roma&quot;,
+                   direction = 1,
+                   limits = c(-lim, lim),
+                   guide = FALSE) +
+  guides(colour = element_blank()) +
+  labs(title = &quot;Fluctuations in Butter Consumptions&quot;,
+       subtitle = str_wrap(&quot;In the US between 1975 - 2017,
+                           with weight of sold butter in lbs 
+                           and its percent change compared to
+                           the previous year.&quot;),
+       y = &quot;Sold Butter in lbs&quot;,
+       x = &quot;Year&quot;,
+       caption = &quot;Data: USDA | Plot by @othomn&quot;) 
+p
+# Save --------------------------------------------------------------------
+
+png(filename = &quot;plots/2-05-milk.png&quot;,
+    height = 1600, width = 2100,
+    res = 300)
+p %&gt;% print()
+dev.off() </code></pre>
+</div>
+</div>
+
+    </div>
+
+    
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait2.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Otho Mantegazza</a></h5>
+    <h6 class="card-subtitle">Biologist, Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:othomanteotho@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/othomn" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/othomantegazza" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "otho-netlify-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Otho Mantegazza 2018 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//otho-netlify-com.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.07fbebbbf71b021c8836e1d7ecffa489.js"></script>
+
+    
+
+  </body>
+</html>
+
