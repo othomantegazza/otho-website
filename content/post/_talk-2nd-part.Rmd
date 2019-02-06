@@ -1,0 +1,62 @@
+---
+title: "Communicating Openly in Academia, What Could we Gain and What Stops Us"
+subtitle: "My thoughts on communication, a still missing piece to cultural progress?"
+author: "Otho Mantegazza"
+summary: "What does open culture mean? Is it a set of rule set for transparency or is an encouraging mindset that fosters communication and collaboration, two pillars of scientific research?"
+date: 2019-02-05
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+editor_options:
+  chunk_output_type: console
+---
+
+THIS IS A DRAFT, FEEL FREE TO READ AND COMMENT AT YOUR OWN RISK.
+
+Guide:
+
+- If you are a scientists, best thing is when you use your own skills to improve human knowledge.
+- Where did I get my own skills the last year? Open access open source?
+- Is it enough, it's a matter of open culture.
+- Could we gain? Yes technically, but also spiritually, knowledge, and freedom eventually is motivating.
+- What could we learn as scientists about teaching and communication?
+- Research depends on communication, why do we put so many limits on it, are we limiting our research and our progress in this way?
+- balancing freedom and justice.
+
+# Knowledge Motivates You
+
+When you are a scientist, your task is to bring forward our scientific understanding of what surrounds us, and you feel most rewarded if you do it thanks to your own knowledge and skills. Your contribution might be small and of various type, it often is, it might be that you discover something new natural phenomena, that you explain better some that it is already known, that you help a friend making a discovery, or that you help somebody understanding something better and just making a small step toward an hypothetical discovery. But eventually it all boils down to this: You know something, you have some skills and that something is helpful to somebody (or to all of us) to progress toward a goal of scientific knowledge and understanding.
+
+If I think, where did I get most of my new skills and knowledge in the last years, they come from the world of open source, and especially from the R community. The world of open source, that advocates for sharing computer source codes openly, has always been somehow by definition for providing skills and knowledge for everybody openly. But I have the impression that those concepts where perfected by the R community. R is an open source programming language that is dedicated to statistics and the field of data analysis, and it has an fast growing community of people that use it for their own scientific research, develop it for others or learn how to use it. And in those area, the R community achieved something beautiful.
+
+When I at the skills that allowed my scientific achievements (not many achievements, science is a long and complicated process), I realize that, most of those skills, I've gained them not through conventional academic channels such as books and publication in peer reviewed journals, but by reading blogs, suggestions on twitter, by reading R vignettes and by reading open access books written collaboratively online.
+
+In the last year I have worked on rice and I have analyzed data: exploring the structure of the panicle of many different varieties of rice and looking for peculiar shape. Also crunching gene expression data, searching for genes that might control and determine thosee peculiar shapes. Rice is a beautiful, and delicious crop. It is strongly radicated in human history, thus it exists in thousands of different varieties, each variety has been cultivated and domesticated for ages by different population. Each variety produce different panicles. The panicle is the part of the rice that supports the grains that we eat. Different panicle structures, with different number of branches in different position. Different panicle structures can load different number of grains. I searched for methods to describe those structures and the number of grains that they load, also I searched how the different structures are controlled genetically.
+
+To do that, the skills that I needed was statistics - to help me make sense and to give me perspective when analyzing big datasets - and programming - to explain to the computer what I wanted to do and how I wanted to analyze those data. If I look at the resources that I have used in the last years to learn those skills, those resources have two things in common:
+
+1. they are openly available for everybody online.
+2. They have been written collaboratively by those who are teaching and those that are learning those tools.
+3. They have been written with clarity and simplicity, adopting a beginner mindset, which indeed allows a beginner to approach them, instead of excluding him from the learning process.
+
+If you put yourself in my situation, you might understand why I was so happy to discover those resources and the culture that underlies them. A few years ago, I was finishing my PhD in molecular biology. I was at the University of Milan, which is a very good university, but not the among the highest rated in the world. I was working in a good research group, but not funded enough to shield me from the high pressure, high competition environment that was to come. Facing an uncertain future, it was clear to me and to everybody that biology was becoming a data intensive discipline. I You needed to be able to extract a meaning from data to make sense of that and you needed be able to make sense of data to be able to keep a job in it.
+
+I was searching for a way to learn how to deal with data. Books were often too expensive on a PhD student salary, courses were often outdated. You feel left behind. When you are not in a top notch university and you are competing with people that are, it is easy to get desperate, because you are force to compete with people that have access to means and knowledge that you can only dream of.
+
+Then I found out about Massive Online Open Courses (MOOC). Those courses, hosted on websites such as Coursera and EDX are often highly advanced, and their available to anyone that has access to the internet and time to take them (both of which, many people don't, but still, a step in the right direction). I started taking courses on those resources, about the basics of statitics, the basis of programming in R, and then more and more advanced statistics, how to deal with huge datasets, how to make my way through massive genomic data. And navigating from tool  to tool, I discovered a fascinating world.
+
+Moving from tool to tool, I quickly left behind MOOC, and found out about how helpful blogs, package documentation and expecially collaborative open access books are.
+
+I also discovered the R community. R is an open source program and programming language dedicated to statistics and data analysis. It existed for about 20 years and it is widely used in academia and companies. It has grown incredibly in the last years and can count on one big point that it has done right. It's community, users and developers, is inclusive, enabling and encouraging.
+
+Inclusive, enabling and encouraging are big words, that are better defined, and illustrated with examples.
+
+For inclusive I intend that this community have put active effort in welcoming everybody, minorities and people with different backgrounds and different cultures. And not only to make feel everybody welcome, but to making them feel as they belong there and they are welcome to take control of the tools and to participate not only as users but in the development.
+
+For enabling I intend that this community has not only put effort in making everybody feel welcome, but it has put active effort in giving them technical and practical skill to be able to use any tool and contribute to them, writing and sharing excellent documentation, written in away that can carry anybody from beginner level to the highest possible level of technical skill.
+
+For encouraging I intend that this community has focused on positive feedback and instead on judgementalism, exclusivism and paternalism. Because only feeling free to take risks and to sometimes be wrong is the only way to learn and to get things right.
+
+I better support these statements with examples. This examples have all to do with R. Because it is easier for me to draw examples directly from R related material. But, please, at this moment do not focus on the techical R part, focus on how the knowledge about it is being created and distributed  
