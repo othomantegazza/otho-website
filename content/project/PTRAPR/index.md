@@ -27,4 +27,4 @@ external_link = "https://othomantegazza.github.io/ptrapr/"
   focal_point = "Center"
 +++
 
-An R package to analyze Rice panicle architecture. ppp
+An R package to analyze Rice panicle architecture. 
