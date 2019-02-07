@@ -422,4 +422,3 @@ p
 I think that the waterfall chart indeed solves this issue, but that the version with the uses the area in the canvas differently and stresses relative changes more.
 
 So you can choose which chart to use depending on your needs. What do you think?
-
