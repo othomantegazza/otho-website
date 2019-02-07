@@ -31,7 +31,9 @@
 &lt;li&gt;&lt;a href=&#34;#colors-colors-colors&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.4&lt;/span&gt; Colors colors colors&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#title-axis-and-caption&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;5.5&lt;/span&gt; Title axis and caption&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#this-post-will-be-updated&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;6&lt;/span&gt; This Post will be updated&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#automate-with-a-function&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;6&lt;/span&gt; Automate With a Function&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#waterfall-charts&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;7&lt;/span&gt; Waterfall charts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#this-post-will-be-updated&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;8&lt;/span&gt; This Post will be updated&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -277,8 +279,146 @@ dev.off() &lt;/code&gt;&lt;/pre&gt;
 ##   2&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div id=&#34;automate-with-a-function&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;6&lt;/span&gt; Automate With a Function&lt;/h1&gt;
+&lt;p&gt;We can produce this plot from the original dataset with just one line of code if we place all steps in a function. I just leave out the title and subtitle that are different for each plot&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_arrows &amp;lt;- function(measure = butter) {
+  # quote input
+  measure &amp;lt;- enquo(measure)
+  
+  
+  dat &amp;lt;- 
+    dat_milkprods %&amp;gt;%
+    select(year, !!measure) %&amp;gt;% 
+    # apply on this dataframe, on the column butter
+    mutate(percent = roll_percent(!!measure)) %&amp;gt;% 
+    filter(complete.cases(.))
+  
+  # parameters to center the color palette
+  lim &amp;lt;- 
+  dat$percent %&amp;gt;% 
+  range() %&amp;gt;% 
+  abs() %&amp;gt;% 
+  max()
+  
+  p &amp;lt;- 
+    dat %&amp;gt;% 
+    # Scale the arrow to the intensity of the measurement
+    # In this way the arrow looks nice and clear in the plot
+    # This step must be improved
+    mutate(yend = !!measure + (percent)*(max(!!measure)/20)) %&amp;gt;% 
+    ggplot(aes(x = year,
+               y = !!measure)) +
+    # and then the basic geometric objects
+    geom_segment(aes(yend = yend,
+                     xend = ..x..,
+                     colour = percent),
+                 size = 2,
+                 arrow = arrow(length = unit(1.2, &amp;quot;mm&amp;quot;),
+                               type = &amp;quot;closed&amp;quot;)) +
+    geom_point(colour = &amp;quot;grey40&amp;quot;, size = 2) +
+    geom_text(aes(y = case_when(percent &amp;gt; 0 ~ yend * 1.02,
+                                TRUE ~ yend * 0.97),
+                  label = percent %&amp;gt;% 
+                    round() %&amp;gt;% paste0(&amp;quot;%&amp;quot;),
+                  colour = percent),
+              size = 2.7) +
+    scale_colour_scico(palette = &amp;quot;roma&amp;quot;,
+                       direction = 1,
+                       limits = c(-lim, lim),
+                       guide = FALSE)
+  
+  p
+}
+
+plot_arrows(fluid_milk)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_arrows(cheese_other)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-16-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;waterfall-charts&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;7&lt;/span&gt; Waterfall charts&lt;/h1&gt;
+&lt;p&gt;Last but not least, &lt;a href=&#34;https://twitter.com/EvaMaeRey&#34;&gt;Gina Reynolds&lt;/a&gt; suggested that one could misintepret the plots above, and understand that the mesurements points are at the top of the arrows instead than at the bottom.&lt;/p&gt;
+&lt;p&gt;She suggested that a waterfall chart could fix this issue and provide a more direct visualization, indeed a waterfall chart does its job.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;roll_prev &amp;lt;- rollify(.f = function(n) n[1], 2)
+
+dat &amp;lt;- 
+  dat %&amp;gt;% 
+  mutate(prev_year = roll_prev(butter)) %&amp;gt;% 
+  filter(complete.cases(.))
+
+half_rect &amp;lt;- .3
+
+p &amp;lt;- 
+  dat %&amp;gt;% 
+  mutate(yend = butter + (percent/10)) %&amp;gt;%
+  ggplot(aes(x = year,
+             y = butter)) +
+  annotate(geom = &amp;quot;rect&amp;quot;,
+           xmin = 2008, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = &amp;quot;grey80&amp;quot;, alpha = .5) +
+  annotate(geom = &amp;quot;text&amp;quot;,
+           x = 2009, y = 4.2,
+           label = &amp;quot;2008\nEconomic Crisis?&amp;quot;,
+           family = &amp;quot;Arial Narrow&amp;quot;,
+           colour = &amp;quot;grey40&amp;quot;,
+           size = 3, fontface = &amp;quot;bold&amp;quot;) +
+  # geom_line(color = &amp;quot;grey80&amp;quot;) +
+  geom_rect(aes(xmin = year - half_rect,
+                xmax = year + half_rect,
+                ymin = prev_year,
+                ymax = butter,
+                colour = percent,
+                fill = percent), size = 0) +
+  geom_segment(aes(x = year - half_rect,
+                   xend = ..x.. + 1 + half_rect*2,
+                   yend = ..y..),
+               colour = &amp;quot;grey40&amp;quot;, size = 1) +
+  geom_text(aes(y = case_when(percent &amp;gt; 0 ~ butter + .05,
+                              TRUE ~ butter - .05),
+                label = percent %&amp;gt;%
+                  round() %&amp;gt;% paste0(&amp;quot;%&amp;quot;),
+                colour = percent),
+            size = 2.7) +
+  scale_colour_scico(palette = &amp;quot;roma&amp;quot;,
+                     direction = 1,
+                     limits = c(-lim, lim),
+                     guide = FALSE) +
+  scale_fill_scico(palette = &amp;quot;roma&amp;quot;,
+                     direction = 1,
+                     limits = c(-lim, lim),
+                     guide = FALSE) +
+  guides(colour = element_blank()) +
+  labs(title = &amp;quot;Fluctuations in Butter Consumptions&amp;quot;,
+       subtitle = str_wrap(&amp;quot;In the US between 1975 - 2017,
+                           with weight of sold butter in lbs
+                           and its percent change compared to
+                           the previous year.&amp;quot;),
+       y = &amp;quot;Sold Butter in lbs per person&amp;quot;,
+       x = &amp;quot;Year&amp;quot;,
+       caption = &amp;quot;Data: USDA | Plot by @othomn&amp;quot;) +
+  theme_minimal() +
+  theme(text = element_text(family = &amp;quot;Arial Narrow&amp;quot;,
+                            colour = &amp;quot;grey40&amp;quot;,
+                            size = 11),
+        axis.title = element_text(size = 14),
+        plot.title = element_text(colour = &amp;quot;grey20&amp;quot;,
+                                  face = &amp;quot;bold&amp;quot;,
+                                  size = 18),
+        plot.subtitle = element_text(face = &amp;quot;bold&amp;quot;,
+                                     size = 12),
+        aspect.ratio = .6,   
+        plot.margin = margin(t = 10, r = 15, b = 0, l = 10,
+unit = &amp;quot;mm&amp;quot;))
+
+p&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-17-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I think that the waterfall chart indeed solves this issue, but that the version with the uses the area in the canvas differently and stresses relative changes more.&lt;/p&gt;
+&lt;p&gt;So you can choose which chart to use depending on your needs. What do you think?&lt;/p&gt;
+&lt;/div&gt;
 &lt;div id=&#34;this-post-will-be-updated&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;6&lt;/span&gt; This Post will be updated&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;8&lt;/span&gt; This Post will be updated&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;I would like to show this visualization on other variables of this datasets, and, as suggested by &lt;a href=&#34;https://twitter.com/EvaMaeRey&#34;&gt;Gina Reynolds&lt;/a&gt; compare it with waterfall plots.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -850,7 +990,7 @@ p2 %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>/project/ptrapr/</guid>
-      <description>&lt;p&gt;An R package to analyze Rice panicle architecture. ppp&lt;/p&gt;
+      <description>&lt;p&gt;An R package to analyze Rice panicle architecture.&lt;/p&gt;
 </description>
     </item>
     

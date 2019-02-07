@@ -9,8 +9,6 @@ output:
     toc: true
     toc_depth: 2
     number_sections: true
-editor_options: 
-  chunk_output_type: console
 ---
 
 
@@ -27,7 +25,9 @@ editor_options:
 <li><a href="#colors-colors-colors"><span class="toc-section-number">5.4</span> Colors colors colors</a></li>
 <li><a href="#title-axis-and-caption"><span class="toc-section-number">5.5</span> Title axis and caption</a></li>
 </ul></li>
-<li><a href="#this-post-will-be-updated"><span class="toc-section-number">6</span> This Post will be updated</a></li>
+<li><a href="#automate-with-a-function"><span class="toc-section-number">6</span> Automate With a Function</a></li>
+<li><a href="#waterfall-charts"><span class="toc-section-number">7</span> Waterfall charts</a></li>
+<li><a href="#this-post-will-be-updated"><span class="toc-section-number">8</span> This Post will be updated</a></li>
 </ul>
 </div>
 
@@ -273,7 +273,145 @@ dev.off() </code></pre>
 ##   2</code></pre>
 </div>
 </div>
+<div id="automate-with-a-function" class="section level1">
+<h1><span class="header-section-number">6</span> Automate With a Function</h1>
+<p>We can produce this plot from the original dataset with just one line of code if we place all steps in a function. I just leave out the title and subtitle that are different for each plot</p>
+<pre class="r"><code>plot_arrows &lt;- function(measure = butter) {
+  # quote input
+  measure &lt;- enquo(measure)
+  
+  
+  dat &lt;- 
+    dat_milkprods %&gt;%
+    select(year, !!measure) %&gt;% 
+    # apply on this dataframe, on the column butter
+    mutate(percent = roll_percent(!!measure)) %&gt;% 
+    filter(complete.cases(.))
+  
+  # parameters to center the color palette
+  lim &lt;- 
+  dat$percent %&gt;% 
+  range() %&gt;% 
+  abs() %&gt;% 
+  max()
+  
+  p &lt;- 
+    dat %&gt;% 
+    # Scale the arrow to the intensity of the measurement
+    # In this way the arrow looks nice and clear in the plot
+    # This step must be improved
+    mutate(yend = !!measure + (percent)*(max(!!measure)/20)) %&gt;% 
+    ggplot(aes(x = year,
+               y = !!measure)) +
+    # and then the basic geometric objects
+    geom_segment(aes(yend = yend,
+                     xend = ..x..,
+                     colour = percent),
+                 size = 2,
+                 arrow = arrow(length = unit(1.2, &quot;mm&quot;),
+                               type = &quot;closed&quot;)) +
+    geom_point(colour = &quot;grey40&quot;, size = 2) +
+    geom_text(aes(y = case_when(percent &gt; 0 ~ yend * 1.02,
+                                TRUE ~ yend * 0.97),
+                  label = percent %&gt;% 
+                    round() %&gt;% paste0(&quot;%&quot;),
+                  colour = percent),
+              size = 2.7) +
+    scale_colour_scico(palette = &quot;roma&quot;,
+                       direction = 1,
+                       limits = c(-lim, lim),
+                       guide = FALSE)
+  
+  p
+}
+
+plot_arrows(fluid_milk)</code></pre>
+<p><img src="/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>plot_arrows(cheese_other)</code></pre>
+<p><img src="/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+</div>
+<div id="waterfall-charts" class="section level1">
+<h1><span class="header-section-number">7</span> Waterfall charts</h1>
+<p>Last but not least, <a href="https://twitter.com/EvaMaeRey">Gina Reynolds</a> suggested that one could misintepret the plots above, and understand that the mesurements points are at the top of the arrows instead than at the bottom.</p>
+<p>She suggested that a waterfall chart could fix this issue and provide a more direct visualization, indeed a waterfall chart does its job.</p>
+<pre class="r"><code>roll_prev &lt;- rollify(.f = function(n) n[1], 2)
+
+dat &lt;- 
+  dat %&gt;% 
+  mutate(prev_year = roll_prev(butter)) %&gt;% 
+  filter(complete.cases(.))
+
+half_rect &lt;- .3
+
+p &lt;- 
+  dat %&gt;% 
+  mutate(yend = butter + (percent/10)) %&gt;%
+  ggplot(aes(x = year,
+             y = butter)) +
+  annotate(geom = &quot;rect&quot;,
+           xmin = 2008, xmax = 2010,
+           ymin = -Inf, ymax = Inf,
+           fill = &quot;grey80&quot;, alpha = .5) +
+  annotate(geom = &quot;text&quot;,
+           x = 2009, y = 4.2,
+           label = &quot;2008\nEconomic Crisis?&quot;,
+           family = &quot;Arial Narrow&quot;,
+           colour = &quot;grey40&quot;,
+           size = 3, fontface = &quot;bold&quot;) +
+  # geom_line(color = &quot;grey80&quot;) +
+  geom_rect(aes(xmin = year - half_rect,
+                xmax = year + half_rect,
+                ymin = prev_year,
+                ymax = butter,
+                colour = percent,
+                fill = percent), size = 0) +
+  geom_segment(aes(x = year - half_rect,
+                   xend = ..x.. + 1 + half_rect*2,
+                   yend = ..y..),
+               colour = &quot;grey40&quot;, size = 1) +
+  geom_text(aes(y = case_when(percent &gt; 0 ~ butter + .05,
+                              TRUE ~ butter - .05),
+                label = percent %&gt;%
+                  round() %&gt;% paste0(&quot;%&quot;),
+                colour = percent),
+            size = 2.7) +
+  scale_colour_scico(palette = &quot;roma&quot;,
+                     direction = 1,
+                     limits = c(-lim, lim),
+                     guide = FALSE) +
+  scale_fill_scico(palette = &quot;roma&quot;,
+                     direction = 1,
+                     limits = c(-lim, lim),
+                     guide = FALSE) +
+  guides(colour = element_blank()) +
+  labs(title = &quot;Fluctuations in Butter Consumptions&quot;,
+       subtitle = str_wrap(&quot;In the US between 1975 - 2017,
+                           with weight of sold butter in lbs
+                           and its percent change compared to
+                           the previous year.&quot;),
+       y = &quot;Sold Butter in lbs per person&quot;,
+       x = &quot;Year&quot;,
+       caption = &quot;Data: USDA | Plot by @othomn&quot;) +
+  theme_minimal() +
+  theme(text = element_text(family = &quot;Arial Narrow&quot;,
+                            colour = &quot;grey40&quot;,
+                            size = 11),
+        axis.title = element_text(size = 14),
+        plot.title = element_text(colour = &quot;grey20&quot;,
+                                  face = &quot;bold&quot;,
+                                  size = 18),
+        plot.subtitle = element_text(face = &quot;bold&quot;,
+                                     size = 12),
+        aspect.ratio = .6,   
+        plot.margin = margin(t = 10, r = 15, b = 0, l = 10,
+unit = &quot;mm&quot;))
+
+p</code></pre>
+<p><img src="/post/2019-02-02-butter-consumption_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>I think that the waterfall chart indeed solves this issue, but that the version with the uses the area in the canvas differently and stresses relative changes more.</p>
+<p>So you can choose which chart to use depending on your needs. What do you think?</p>
+</div>
 <div id="this-post-will-be-updated" class="section level1">
-<h1><span class="header-section-number">6</span> This Post will be updated</h1>
+<h1><span class="header-section-number">8</span> This Post will be updated</h1>
 <p><strong><em>I would like to show this visualization on other variables of this datasets, and, as suggested by <a href="https://twitter.com/EvaMaeRey">Gina Reynolds</a> compare it with waterfall plots.</em></strong></p>
 </div>

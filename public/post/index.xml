@@ -18,7 +18,7 @@
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019-02-02-butter-consumption/</guid>
-      <description>1 Load Packages 2 Get the data 3 Wrangle and Estimate Percentage Changes 4 A bit of style 5 Plotting (aka the fun part ;) ) 5.1 Set the basic aesthetic mapping 5.2 Add the first geometric objects 5.3 Specify percent changes explicitly 5.4 Colors colors colors 5.5 Title axis and caption  6 This Post will be updated   Here I’ll show, you step by step, how to produce the plot in the tweet below.</description>
+      <description>1 Load Packages 2 Get the data 3 Wrangle and Estimate Percentage Changes 4 A bit of style 5 Plotting (aka the fun part ;) ) 5.1 Set the basic aesthetic mapping 5.2 Add the first geometric objects 5.3 Specify percent changes explicitly 5.4 Colors colors colors 5.5 Title axis and caption  6 Automate With a Function 7 Waterfall charts 8 This Post will be updated   Here I’ll show, you step by step, how to produce the plot in the tweet below.</description>
     </item>
     
     <item>
