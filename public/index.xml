@@ -999,6 +999,56 @@ p2 %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
+      <title>Postcards</title>
+      <link>/project/postcards/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0200</pubDate>
+      
+      <guid>/project/postcards/</guid>
+      <description>
+
+&lt;p&gt;During the year I turned some plot that I like into postcards. If you like them, feel free to print them and give them as a gift.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/othomantegazza/christmas-cards&#34; target=&#34;_blank&#34;&gt;source code is here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;tartan&#34;&gt;Tartan&lt;/h1&gt;
+
+&lt;p&gt;AKA: R packages downloaded from CRAN.&lt;/p&gt;
+
+&lt;p&gt;In green:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And in red:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;pack-heat-single-inf.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;galaxy&#34;&gt;Galaxy&lt;/h1&gt;
+
+&lt;p&gt;AKA: Gene Expression Correlation.&lt;/p&gt;
+
+&lt;p&gt;In white:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;galaxy-single-white.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And in blue:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;galaxy-single.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;christmas-tree&#34;&gt;Christmas Tree&lt;/h1&gt;
+
+&lt;p&gt;AKA: A rice panicle.&lt;/p&gt;
+
+&lt;p&gt;In blue:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;panicle-single-blue.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And in red:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;panicle-single.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>What does the plant do?</title>
       <link>/project/ps-booklet/</link>
       <pubDate>Tue, 01 Aug 2017 00:00:00 +0200</pubDate>
@@ -1306,15 +1356,6 @@ the advent of &amp;ldquo;big data&amp;rdquo;. They might have an impact again at
       <pubDate>Wed, 01 Jan 2014 00:00:00 +0100</pubDate>
       
       <guid>/publication/mantegazza-2014-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gene coexpression patterns during early development of the native Arabidopsis reproductive meristem: novel candidate developmental regulators and patterns of functional redundancy</title>
-      <link>/publication/mantegazza-2014-gene/</link>
-      <pubDate>Wed, 01 Jan 2014 00:00:00 +0100</pubDate>
-      
-      <guid>/publication/mantegazza-2014-gene/</guid>
       <description></description>
     </item>
     

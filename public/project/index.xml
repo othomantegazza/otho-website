@@ -22,6 +22,25 @@
     </item>
     
     <item>
+      <title>Postcards</title>
+      <link>/project/postcards/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0200</pubDate>
+      
+      <guid>/project/postcards/</guid>
+      <description>During the year I turned some plot that I like into postcards. If you like them, feel free to print them and give them as a gift.
+The source code is here.
+Tartan AKA: R packages downloaded from CRAN.
+In green:
+And in red:
+Galaxy AKA: Gene Expression Correlation.
+In white:
+And in blue:
+Christmas Tree AKA: A rice panicle.
+In blue:
+And in red:</description>
+    </item>
+    
+    <item>
       <title>What does the plant do?</title>
       <link>/project/ps-booklet/</link>
       <pubDate>Tue, 01 Aug 2017 00:00:00 +0200</pubDate>
