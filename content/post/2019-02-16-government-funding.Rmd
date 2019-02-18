@@ -23,11 +23,11 @@ editor_options:
 
 Recently the [TidyTuesday social project proposed a dataset documenting R&D spending of the US government](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12). This dataset was originally collected by the [American Association for the Advancement of Science](https://www.aaas.org/).
 
-A tidy dataset storing spending from 1976 to 2016 is devided by agency is available [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12).
+This tidy dataset stores R&D spending by the US government from 1976 to 2016, devided by agency. It's available [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12).
 
 # Load Packages and Download Files
 
-Let's analyse this dataset. 
+Let's explore this dataset. 
 
 First we load the packages that we need.
 
@@ -38,6 +38,7 @@ library(tibbletime)
 
 And then the data.
 
+<button class="collapsible">Show code</button>
 ```{r}
 # Get data ---------------------------------------------------
 
@@ -296,23 +297,6 @@ svg.selectAll('rect')
 ```
 
 <button class="collapsible">Open Section 1</button>
-<div class="content" style="display: none">
+<div class="content">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </div>
-
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-} 
-</script>

@@ -1,0 +1,44 @@
+---
+title: test-fold-code
+author: ~
+date: '2019-02-18'
+slug: test-fold-code
+categories: []
+tags: []
+image:
+  caption: ''
+  focal_point: ''
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    dev: svglite
+    css: ../fold-code.css
+---
+
+
+<button class="collapsible">Show code</button>
+
+```{r}
+library(tidyverse)
+library(tibbletime)
+```
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
