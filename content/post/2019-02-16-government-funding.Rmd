@@ -21,6 +21,11 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+
 Recently the [TidyTuesday social project proposed a dataset documenting R&D spending of the US government](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12). This dataset was originally collected by the [American Association for the Advancement of Science](https://www.aaas.org/).
 
 This tidy dataset stores R&D spending by the US government from 1976 to 2016, devided by agency. It's available [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12).
@@ -33,12 +38,11 @@ First we load the packages that we need.
 
 ```{r}
 library(tidyverse)
-library(tibbletime)
+library(scico)
 ```
 
 And then the data.
 
-<button class="collapsible">Show code</button>
 ```{r}
 # Get data ---------------------------------------------------
 
@@ -64,18 +68,21 @@ The `rd` dataset has this aspect.
 rd %>% print()
 ```
 
-# Explore - Do Funding Patterns Hint to Policies?
+We are interested in the spending, which, as stated in the [data dictionary](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12#total-federal-rd-spending-by-agencydeparment) are stored in the variable **rd_budget**.
+Their unit is **inflation adjusted dollars**.
 
-Yes, they do. But to go more in detail: Which agencies get similar fundings? Do funding to certain groups of research agencies correlate? And what could we learn from that?
+# Explore - Which Agencies Get Similar Funding?
+
+Which agencies get similar fundings? Do funding to certain groups of research agencies correlate? And what could we learn from that, could we guess policies?
 
 ## Correlation between funding pattern
 
-The was one of the first things that I explored, and I got lucky. It seems that there are two groups of correlation. 
+This was one of the first things that I explored, and I got lucky. It seems that there are two groups of correlation. 
 
-First we must switch to the wide data format, because it is easier to test correlation if we have each variable in its own column.
+To test correlation, we must switch to the wide data format, because the `cor()` function requires that each variable is in its own column.
 
 ```{r}
-# Long format
+# Wide format
 rd_wide <- 
   rd %>% 
   select(department, year, rd_budget) %>% 
@@ -84,34 +91,49 @@ rd_wide <-
 
 # correlation of everything against everything
 rd_wide %>%
-  column_to_rownames("year") %>% 
-  GGally::ggcorr() 
+  column_to_rownames("year") %>%
+  # Test correlation
+  cor() %>% 
+  # visualize
+  as_tibble(rownames = "agency") %>% 
+  gather(DHS:VA, key = "agency_2", value = "corr") %>% 
+  ggplot(aes(x = agency,
+             y = agency_2,
+             fill = corr)) +
+  geom_tile() + 
+  scale_fill_viridis_c() +
+  theme(aspect.ratio = 1,
+        axis.text.x = element_text(angle = 90, hjust = .5))
 ```
 
-This is very lucky, it looks like there are two defined groups of correlation. Could we capture this behaviour in clusters?
+Lucky, it looks there are two defined groups of correlation. Could we capture this behaviour in clusters?
 
 ## Clusters of funding patterns?
 
-When clustering, we generally want to capture pattern of behaviour of our variables. Meaning that we want to capture how one variable behaves compared to another, when one variable increases in value, doed the other do the same? 
+With clusters, we want to capture the behaviour of our variables. Meaning that we want to capture how one variable behaves compared to another: when one variable increases in value, does the other do the same? 
 
-So, to make our variables comparable, we must scale them. 
+So, to make variables comparable, we must scale them. 
 
-Probably, the most common scaling is by z-scores. But this introduce negative numbers. Since we are talking about fundings, negative fundings could be a bit unusual. 
+Probably, the most common scaling is by z-scores. But, because z-scores are centered at 0. This introduces **negative numbers**, but spendings for R&D agencies are (hopefully ;) ) never negative.
 
-Thus I decided to scale fundings for each agency between 0 and 1, in this way we can make them comparable and present them in a more intuitive way.
+Thus, I decided to rescale spendings for each agency **between 0 and 1**, in this way we can make them comparable and present them in a more intuitive way. Moreover, this kind of scaling **preserves 0 as anchored point**.
 
 ```{r}
 # scale each variable between 0 and 1
 rd_wide_01 <- 
   rd_wide %>%
-  mutate_at(vars(-contains("year")), ~scales::rescale(., to = c(0,1)))
+  mutate_at(vars(-contains("year")),
+            ~scales::rescale(., to = c(0,1),
+                             from = c(0, max(.))))
 
 
 # this is how it looks after scaling
 rd_wide_01 %>% print()
 ```
 
-After scaling, we can try hierachical clustering first.
+After scaling, I tried **hierachical clustering**. But, clustering functions such as `hclust()` or `kmeans()`, by default, cluster the rows of a dataset: we must to modify the format of the data again. 
+
+This time we transpose the data with `t()`, to exchange rows and columns.
 
 ```{r}
 # For clustering
@@ -128,175 +150,117 @@ rd_hclust <-
   hclust() 
 ```
 
-And check that two groups of agencies with different funding patterns.
+The results of hierarchical clustering are a bit more complex:
+
+- The **DHS** stays by itself, since it was established late, in the '00s.
+- **VA, HHS, NIH** and **HHS** group together, since lately, they have seen an increase in fundings,
+- **EPA** is also pretty much by itself, since it's fundings kept decreasing.
 
 ```{r}
 rd_hclust %>% plot()
 ```
 
-Does the k-means algorithm provide similar results?
+## Visualize the clusters with heatmaps
+
+In biology, small numbers of clustered observation are often visualized with a combination of heatmaps and dendrograms.
+
+You can plot those together with the packages [superheat](https://rlbarter.github.io/superheat/clustering.html#dendrogram)
 
 ```{r}
-# ordered factor
-
-# kmeans
-k_clust <- 
-  rd_for_clust %>%
-  # Try to replicate 2 clusters
-  kmeans(centers = 2)
-
-# Some tidying to check the clusters
-clust_df <- 
-  k_clust$cluster %>% 
-  {tibble(department = names(.),
-          cluster = .)}
+rd_for_clust %>% 
+  superheat::superheat(row.dendrogram = TRUE,
+                       left.label.text.size = 3,
+                       bottom.label.text.angle = 90,
+                       bottom.label.text.size = 3,
+                       grid.hline.col = "grey40",
+                       grid.vline.col = "grey40")
 ```
 
-Ok, this is what we expect from previous results, but how do we visualize the clusters? This is a visualization that is used often in biology:
+# Other visualizations.
+
+Heatmaps are great for the tight space that scientific journals reserve to figures. 
+
+But, here, because I don't have limitations and for fun, I wanted to try other visualization.
+
+The one below has more white space, but might be more pleasurable to the eye than an highly compressed heatmap, and it conveys additional information, such as maximum absolute spending for each department
 
 ```{r}
-
-# First we can provide descriptive department name
-depts <- c(
-  DOD = "Deparment of Defense",
-  NASA = "National Aeronautics and Space Administration",
-  DOE = "Department of Energy",
-  HHS = "Department of Health and Human Services",
-  NIH = "National Institute of Health",
-  NSF = "National Science Foundation",
-  USDA = "US Department of Agriculture",
-  Interior = "Department of Interior",
-  DOT = "Deparment of Transportation",
-  EPA = "Environmental Protection Agency",
-  DOC = "Department of Corrections",
-  DHS = "Department of Homeland Security",
-  VA = "Department of Veterands Affairs",
-  Other = "other R&D spending")
-
-# cl_depts <- 
-#   clust_tidy %>% 
-#   mutate(full_name = depts[agency %>% as.character()] %>% unname()) %>%
-#   {split(.$full_name, .$cluster)} %>%
-#   map(unique) %>% 
-#   map_chr(~paste(., collapse = "\n"))
-# 
-#   
-# # plot
-# p <- 
-#   clust_tidy %>%
-#   ggplot(aes(x = year %>% as.numeric(),
-#              y = scaled_funding,
-#              colour = cluster)) +
-#   geom_line(aes(group = agency),
-#             alpha = .5) +
-#   stat_summary(aes(group = cluster),
-#                geom = "line",
-#                fun.y = median,
-#                size = 2) +
-#   facet_grid(cluster ~ .,
-#              labeller = labeller(cluster = cl_depts)) +
-#   scale_color_viridis_d(begin = .3, end = .8,
-#                         option = "B", guide = FALSE) 
-#   
+# I restarted from the original data,
+# to have both scaled and absolute measurements
+#  in the same dataset
+rd_to_plot <- 
+  rd %>% 
+  select(department, year, rd_budget) %>% 
+  # rescale 0 to 1
+  group_by(department) %>% 
+  mutate(budget_01 = rd_budget %>% 
+           {scales::rescale(., to = c(0, 1),
+                            from = c(0, max(.)))}) %>% 
+  ungroup() 
 ```
 
+I would like to prepare a faceted plot, in which facets are ordered based on a dendrogram, and with the dendrogram itself on the side.
 
-```{r}
-# Tidy clusters
-clust_tidy <- 
-  k_clust %>%
-  broom::augment(data = rd_for_clust)  %>% 
-  rename_all(~str_sub(., 2, -1)) %>% 
-  gather(`1976`:`2017`,
-         key = "year",
-         value = "scaled_funding") %>% 
-  rename(agency = "rownames") %>% 
-  mutate(cluster = cluster %>%
-           as.character()) %>% 
-  mutate(agency = agency %>% 
+I can order the facets with the dendrogram from hierarchical clustering using a factor. (But I have no idea how to show the dendrogram itself.)
+
+```{r} 
+rd_to_plot <- 
+  rd_to_plot %>% 
+  mutate(department = department %>% 
            factor(levels = rd_hclust$labels[rd_hclust$order]))
-
-# plot --------------------------------------------------------------------
-
-pwidth <- 5
-lwidth <- .5
-scfill <- 
-  scale_fill_viridis_c(
-    option = "D",
-    breaks = c(0, .2, .4, .6, .8, 1),
-    guide = guide_legend(
-      label.position = "top", 
-      keyheight = unit(2, units = "mm"),
-      keywidth=unit(15, units = "mm"), 
-      nrow = 1,
-      title.vjust = 0, 
-      title.theme = element_text(family = "sans",
-                                 colour = "grey40",
-                                 size = 12.5,
-                                 face = "bold"))
-  ) 
-
-
-p <- 
-  clust_tidy %>% 
-  ggplot(aes(x = year,
-             y = scaled_funding,
-             fill = scaled_funding)) +
-  geom_bar(stat = "identity", width = .3) +
-  geom_hline(yintercept = 0, colour = "grey80") +
-  geom_hline(yintercept = .2, colour = "white", size = lwidth) +
-  geom_hline(yintercept = .4, colour = "white", size = lwidth) +
-  geom_hline(yintercept = .6, colour = "white", size = lwidth) +
-  geom_hline(yintercept = .8, colour = "white", size = lwidth) +
-  facet_grid(agency ~ .) +
-  theme_minimal() + 
-  scale_fill_viridis_c(
-    option = "D",
-    breaks = c(0, .2, .4, .6, .8, 1),
-    guide = guide_legend(
-      label.position = "top", 
-      keyheight = unit(2, units = "mm"),
-      keywidth=unit(8, units = "mm"), 
-      nrow = 1,
-      title.vjust = 0, 
-      title.theme = element_text(family = "sans",
-                                 colour = "grey40",
-                                 size = 12.5,
-                                 face = "bold"))
-  ) + 
-  theme(text = element_text(family = "sans"),
-        axis.text.y = element_blank(),
-        panel.grid = element_blank(),
-        legend.position = "top",
-        strip.text = element_text(family = "sans"))
-
-
 ```
 
 ```{r, fig.height=10}
-p %>% print
+line_col <- "grey70"
+text_col <- "grey40"
+line_size <- .2
+label_spacer <- .4
+
+p <- 
+  rd_to_plot %>% 
+  ggplot(aes(x = year,
+             y = budget_01,
+             colour = budget_01)) +
+  geom_line(colour = line_col,
+            size = line_size) +
+  geom_segment(data = . %>% 
+              group_by(department) %>% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01,
+                yend = budget_01 -label_spacer,
+                xend = year),
+            size = line_size, colour = line_col) +
+  geom_point(aes(size = rd_budget)) +
+  geom_text(data = . %>% 
+              group_by(department) %>% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01 - label_spacer - .1,
+                label = rd_budget %>% scales::scientific(digits = 0)),
+            size = 4) +
+  facet_grid(department ~ .) +
+  theme_minimal() + 
+  scale_color_scico(palette = "devon",
+    guide = FALSE, 
+    direction = -1,
+    begin = .2) +
+  lims(y = c(0, 1.1)) +
+  labs(y = "Government R&D Spending") +
+  scale_size(range = c(.1, 3), guide = FALSE) +
+  theme(text = element_text(family = "sans",
+                            colour = text_col),
+        axis.text.y = element_blank(),
+        panel.grid = element_blank(),
+        panel.grid.major.x = element_line(colour = line_col,
+                                          size = line_size/2),
+        legend.position = "top",
+        strip.text.y = element_text(family = "sans",
+                                    angle = 0,
+                                    colour = text_col))
+
+
+p %>% print()
 ```
 
-```{r}
-nasa <- 
-  clust_tidy %>% 
-  filter(agency == "NASA") %>% 
-  pull(scaled_funding)
-```
+What do you think?
 
 
-```{d3, eval = FALSE, data = nasa}
-svg.selectAll('rect')
-  .data(data)
-  .enter()
-    .append('rect')
-      .attr('width', function(d) { return d * 10; })
-      .attr('height', '20px')
-      .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', options.color);
-```
-
-<button class="collapsible">Open Section 1</button>
-<div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
