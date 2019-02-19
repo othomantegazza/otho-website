@@ -26,10 +26,12 @@ editor_options:
 <div id="TOC">
 <ul>
 <li><a href="#load-packages-and-download-files"><span class="toc-section-number">1</span> Load Packages and Download Files</a></li>
-<li><a href="#explore---do-funding-patterns-hint-to-policies"><span class="toc-section-number">2</span> Explore - Do Funding Patterns Hint to Policies?</a><ul>
+<li><a href="#explore---which-agencies-get-similar-funding"><span class="toc-section-number">2</span> Explore - Which Agencies Get Similar Funding?</a><ul>
 <li><a href="#correlation-between-funding-pattern"><span class="toc-section-number">2.1</span> Correlation between funding pattern</a></li>
 <li><a href="#clusters-of-funding-patterns"><span class="toc-section-number">2.2</span> Clusters of funding patterns?</a></li>
+<li><a href="#visualize-the-clusters-with-heatmaps"><span class="toc-section-number">2.3</span> Visualize the clusters with heatmaps</a></li>
 </ul></li>
+<li><a href="#other-visualizations."><span class="toc-section-number">3</span> Other visualizations.</a></li>
 </ul>
 </div>
 
@@ -39,25 +41,9 @@ editor_options:
 <h1><span class="header-section-number">1</span> Load Packages and Download Files</h1>
 <p>Let’s explore this dataset.</p>
 <p>First we load the packages that we need.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.1.0     ✔ purrr   0.2.5
-## ✔ tibble  1.4.2     ✔ dplyr   0.7.7
-## ✔ tidyr   0.8.2     ✔ stringr 1.3.1
-## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(tibbletime)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;tibbletime&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:stats&#39;:
-## 
-##     filter</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(scico)</code></pre>
 <p>And then the data.</p>
-<button class="collapsible">
-Show code
-</button>
 <pre class="r"><code># Get data ---------------------------------------------------
 
 rd_path &lt;- &quot;_data/2-07-funding.Rdata&quot;
@@ -90,15 +76,16 @@ if(!file.exists(rd_path)) {
 ##  9 DOT         1976    1.14e 9  371800000000        175600000000   1.79e12
 ## 10 EPA         1976    9.68e 8  371800000000        175600000000   1.79e12
 ## # ... with 578 more rows</code></pre>
+<p>We are interested in the spending, which, as stated in the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12#total-federal-rd-spending-by-agencydeparment">data dictionary</a> are stored in the variable <strong>rd_budget</strong>. Their unit is <strong>inflation adjusted dollars</strong>.</p>
 </div>
-<div id="explore---do-funding-patterns-hint-to-policies" class="section level1">
-<h1><span class="header-section-number">2</span> Explore - Do Funding Patterns Hint to Policies?</h1>
-<p>Yes, they do. But to go more in detail: Which agencies get similar fundings? Do funding to certain groups of research agencies correlate? And what could we learn from that?</p>
+<div id="explore---which-agencies-get-similar-funding" class="section level1">
+<h1><span class="header-section-number">2</span> Explore - Which Agencies Get Similar Funding?</h1>
+<p>Which agencies get similar fundings? Do funding to certain groups of research agencies correlate? And what could we learn from that, could we guess policies?</p>
 <div id="correlation-between-funding-pattern" class="section level2">
 <h2><span class="header-section-number">2.1</span> Correlation between funding pattern</h2>
-<p>The was one of the first things that I explored, and I got lucky. It seems that there are two groups of correlation.</p>
-<p>First we must switch to the wide data format, because it is easier to test correlation if we have each variable in its own column.</p>
-<pre class="r"><code># Long format
+<p>This was one of the first things that I explored, and I got lucky. It seems that there are two groups of correlation.</p>
+<p>To test correlation, we must switch to the wide data format, because the <code>cor()</code> function requires that each variable is in its own column.</p>
+<pre class="r"><code># Wide format
 rd_wide &lt;- 
   rd %&gt;% 
   select(department, year, rd_budget) %&gt;% 
@@ -107,218 +94,161 @@ rd_wide &lt;-
 
 # correlation of everything against everything
 rd_wide %&gt;%
-  column_to_rownames(&quot;year&quot;) %&gt;% 
-  GGally::ggcorr() </code></pre>
-<pre><code>## Warning: Setting row names on a tibble is deprecated.</code></pre>
-<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-4-1.svg" width="672" /></p>
-<p>This is very lucky, it looks like there are two defined groups of correlation. Could we capture this behaviour in clusters?</p>
+  column_to_rownames(&quot;year&quot;) %&gt;%
+  # Test correlation
+  cor() %&gt;% 
+  # visualize
+  as_tibble(rownames = &quot;agency&quot;) %&gt;% 
+  gather(DHS:VA, key = &quot;agency_2&quot;, value = &quot;corr&quot;) %&gt;% 
+  ggplot(aes(x = agency,
+             y = agency_2,
+             fill = corr)) +
+  geom_tile() + 
+  scale_fill_viridis_c() +
+  theme(aspect.ratio = 1,
+        axis.text.x = element_text(angle = 90, hjust = .5))</code></pre>
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-5-1.svg" width="672" /></p>
+<p>Lucky, it looks there are two defined groups of correlation. Could we capture this behaviour in clusters?</p>
 </div>
 <div id="clusters-of-funding-patterns" class="section level2">
 <h2><span class="header-section-number">2.2</span> Clusters of funding patterns?</h2>
-<p>When clustering, we generally want to capture pattern of behaviour of our variables. Meaning that we want to capture how one variable behaves compared to another, when one variable increases in value, doed the other do the same?</p>
-<p>So, to make our variables comparable, we must scale them.</p>
-<p>Probably, the most common scaling is by z-scores. But this introduce negative numbers. Since we are talking about fundings, negative fundings could be a bit unusual.</p>
-<p>Thus I decided to scale fundings for each agency between 0 and 1, in this way we can make them comparable and present them in a more intuitive way.</p>
+<p>With clusters, we want to capture the behaviour of our variables. Meaning that we want to capture how one variable behaves compared to another: when one variable increases in value, does the other do the same?</p>
+<p>So, to make variables comparable, we must scale them.</p>
+<p>Probably, the most common scaling is by z-scores. But, because z-scores are centered at 0. This introduces <strong>negative numbers</strong>, but spendings for R&amp;D agencies are (hopefully ;) ) never negative.</p>
+<p>Thus, I decided to rescale spendings for each agency <strong>between 0 and 1</strong>, in this way we can make them comparable and present them in a more intuitive way. Moreover, this kind of scaling <strong>preserves 0 as anchored point</strong>.</p>
 <pre class="r"><code># scale each variable between 0 and 1
 rd_wide_01 &lt;- 
   rd_wide %&gt;%
-  mutate_at(vars(-contains(&quot;year&quot;)), ~scales::rescale(., to = c(0,1)))
+  mutate_at(vars(-contains(&quot;year&quot;)),
+            ~scales::rescale(., to = c(0,1),
+                             from = c(0, max(.))))
 
 
 # this is how it looks after scaling
 rd_wide_01 %&gt;% print()</code></pre>
 <pre><code>## # A tibble: 42 x 15
-##     year   DHS     DOC    DOD   DOE   DOT    EPA    HHS Interior   NASA
-##    &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
-##  1  1976     0 0.111   0      0.264 0.876 0.693  0.0130   0.948  0.753 
-##  2  1977     0 0.127   0.0387 0.704 0.802 0.690  0.0230   0.795  0.758 
-##  3  1978     0 0.157   0.0226 1     0.898 1      0.0595   0.889  0.754 
-##  4  1979     0 0.229   0.0252 0.992 0.658 0.892  0.0451   1      0.818 
-##  5  1980     0 0.223   0.0223 0.933 0.728 0.596  0.0421   0.795  0.904 
-##  6  1981     0 0.120   0.103  0.867 0.617 0.593  0.0279   0.594  0.840 
-##  7  1982     0 0       0.191  0.461 0.183 0.208  0        0.323  0.504 
-##  8  1983     0 0.00619 0.261  0.302 0.337 0      0.0198   0.255  0     
-##  9  1984     0 0.0548  0.383  0.395 0.680 0.0252 0.0457   0.0852 0.0385
-## 10  1985     0 0.0849  0.490  0.443 0.471 0.169  0.0791   0.142  0.146 
-## # ... with 32 more rows, and 5 more variables: NIH &lt;dbl&gt;, NSF &lt;dbl&gt;,
-## #   Other &lt;dbl&gt;, USDA &lt;dbl&gt;, VA &lt;dbl&gt;</code></pre>
-<p>After scaling, we can try hierachical clustering first.</p>
+##     year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH
+##    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  1976     0 0.449 0.378 0.695 0.935 0.824 0.250    0.980 0.852 0.227
+##  2  1977     0 0.459 0.403 0.877 0.897 0.822 0.257    0.920 0.855 0.233
+##  3  1978     0 0.478 0.392 1     0.947 1     0.285    0.957 0.853 0.249
+##  4  1979     0 0.522 0.394 0.997 0.822 0.938 0.274    1     0.891 0.262
+##  5  1980     0 0.518 0.392 0.972 0.858 0.769 0.272    0.920 0.943 0.257
+##  6  1981     0 0.454 0.442 0.945 0.801 0.767 0.261    0.842 0.904 0.243
+##  7  1982     0 0.380 0.497 0.776 0.575 0.546 0.240    0.736 0.703 0.235
+##  8  1983     0 0.384 0.541 0.711 0.655 0.426 0.255    0.710 0.401 0.247
+##  9  1984     0 0.414 0.616 0.749 0.834 0.441 0.274    0.644 0.424 0.272
+## 10  1985     0 0.433 0.683 0.769 0.725 0.523 0.300    0.666 0.489 0.300
+## # ... with 32 more rows, and 4 more variables: NSF &lt;dbl&gt;, Other &lt;dbl&gt;,
+## #   USDA &lt;dbl&gt;, VA &lt;dbl&gt;</code></pre>
+<p>After scaling, I tried <strong>hierachical clustering</strong>. But, clustering functions such as <code>hclust()</code> or <code>kmeans()</code>, by default, cluster the rows of a dataset: we must to modify the format of the data again.</p>
+<p>This time we transpose the data with <code>t()</code>, to exchange rows and columns.</p>
 <pre class="r"><code># For clustering
 # we need to transpose the data
 # because dist() %&gt;% clusters the columns
 rd_for_clust &lt;-   
   rd_wide_01 %&gt;%
   column_to_rownames(&quot;year&quot;) %&gt;%
-  t() </code></pre>
-<pre><code>## Warning: Setting row names on a tibble is deprecated.</code></pre>
-<pre class="r"><code>rd_hclust &lt;-
+  t() 
+
+rd_hclust &lt;-
   rd_for_clust %&gt;% 
   dist() %&gt;%
   hclust() </code></pre>
-<p>And check that two groups of agencies with different funding patterns.</p>
+<p>The results of hierarchical clustering are a bit more complex:</p>
+<ul>
+<li>The <strong>DHS</strong> stays by itself, since it was established late, in the ’00s.</li>
+<li><strong>VA, HHS, NIH</strong> and <strong>HHS</strong> group together, since lately, they have seen an increase in fundings,</li>
+<li><strong>EPA</strong> is also pretty much by itself, since it’s fundings kept decreasing.</li>
+</ul>
 <pre class="r"><code>rd_hclust %&gt;% plot()</code></pre>
-<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-7-1.svg" width="672" /></p>
-<p>Does the k-means algorithm provide similar results?</p>
-<pre class="r"><code># ordered factor
-
-# kmeans
-k_clust &lt;- 
-  rd_for_clust %&gt;%
-  # Try to replicate 2 clusters
-  kmeans(centers = 2)
-
-# Some tidying to check the clusters
-clust_df &lt;- 
-  k_clust$cluster %&gt;% 
-  {tibble(department = names(.),
-          cluster = .)}</code></pre>
-<p>Ok, this is what we expect from previous results, but how do we visualize the clusters? This is a visualization that is used often in biology:</p>
-<pre class="r"><code># First we can provide descriptive department name
-depts &lt;- c(
-  DOD = &quot;Deparment of Defense&quot;,
-  NASA = &quot;National Aeronautics and Space Administration&quot;,
-  DOE = &quot;Department of Energy&quot;,
-  HHS = &quot;Department of Health and Human Services&quot;,
-  NIH = &quot;National Institute of Health&quot;,
-  NSF = &quot;National Science Foundation&quot;,
-  USDA = &quot;US Department of Agriculture&quot;,
-  Interior = &quot;Department of Interior&quot;,
-  DOT = &quot;Deparment of Transportation&quot;,
-  EPA = &quot;Environmental Protection Agency&quot;,
-  DOC = &quot;Department of Corrections&quot;,
-  DHS = &quot;Department of Homeland Security&quot;,
-  VA = &quot;Department of Veterands Affairs&quot;,
-  Other = &quot;other R&amp;D spending&quot;)
-
-# cl_depts &lt;- 
-#   clust_tidy %&gt;% 
-#   mutate(full_name = depts[agency %&gt;% as.character()] %&gt;% unname()) %&gt;%
-#   {split(.$full_name, .$cluster)} %&gt;%
-#   map(unique) %&gt;% 
-#   map_chr(~paste(., collapse = &quot;\n&quot;))
-# 
-#   
-# # plot
-# p &lt;- 
-#   clust_tidy %&gt;%
-#   ggplot(aes(x = year %&gt;% as.numeric(),
-#              y = scaled_funding,
-#              colour = cluster)) +
-#   geom_line(aes(group = agency),
-#             alpha = .5) +
-#   stat_summary(aes(group = cluster),
-#                geom = &quot;line&quot;,
-#                fun.y = median,
-#                size = 2) +
-#   facet_grid(cluster ~ .,
-#              labeller = labeller(cluster = cl_depts)) +
-#   scale_color_viridis_d(begin = .3, end = .8,
-#                         option = &quot;B&quot;, guide = FALSE) 
-#   </code></pre>
-<pre class="r"><code># Tidy clusters
-clust_tidy &lt;- 
-  k_clust %&gt;%
-  broom::augment(data = rd_for_clust)  %&gt;% 
-  rename_all(~str_sub(., 2, -1)) %&gt;% 
-  gather(`1976`:`2017`,
-         key = &quot;year&quot;,
-         value = &quot;scaled_funding&quot;) %&gt;% 
-  rename(agency = &quot;rownames&quot;) %&gt;% 
-  mutate(cluster = cluster %&gt;%
-           as.character()) %&gt;% 
-  mutate(agency = agency %&gt;% 
-           factor(levels = rd_hclust$labels[rd_hclust$order]))
-
-# plot --------------------------------------------------------------------
-
-pwidth &lt;- 5
-lwidth &lt;- .5
-scfill &lt;- 
-  scale_fill_viridis_c(
-    option = &quot;D&quot;,
-    breaks = c(0, .2, .4, .6, .8, 1),
-    guide = guide_legend(
-      label.position = &quot;top&quot;, 
-      keyheight = unit(2, units = &quot;mm&quot;),
-      keywidth=unit(15, units = &quot;mm&quot;), 
-      nrow = 1,
-      title.vjust = 0, 
-      title.theme = element_text(family = &quot;sans&quot;,
-                                 colour = &quot;grey40&quot;,
-                                 size = 12.5,
-                                 face = &quot;bold&quot;))
-  ) 
-
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-8-1.svg" width="672" /></p>
+</div>
+<div id="visualize-the-clusters-with-heatmaps" class="section level2">
+<h2><span class="header-section-number">2.3</span> Visualize the clusters with heatmaps</h2>
+<p>In biology, small numbers of clustered observation are often visualized with a combination of heatmaps and dendrograms.</p>
+<p>You can plot those together with the packages <a href="https://rlbarter.github.io/superheat/clustering.html#dendrogram">superheat</a></p>
+<pre class="r"><code>rd_for_clust %&gt;% 
+  superheat::superheat(row.dendrogram = TRUE,
+                       left.label.text.size = 3,
+                       bottom.label.text.angle = 90,
+                       bottom.label.text.size = 3,
+                       grid.hline.col = &quot;grey40&quot;,
+                       grid.vline.col = &quot;grey40&quot;)</code></pre>
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-9-1.svg" width="672" /></p>
+</div>
+</div>
+<div id="other-visualizations." class="section level1">
+<h1><span class="header-section-number">3</span> Other visualizations.</h1>
+<p>Heatmaps are great for the tight space that scientific journals reserve to figures.</p>
+<p>But, here, because I don’t have limitations and for fun, I wanted to try other visualization.</p>
+<p>The one below has more white space, but might be more pleasurable to the eye than an highly compressed heatmap, and it conveys additional information, such as maximum absolute spending for each department</p>
+<pre class="r"><code># I restarted from the original data,
+# to have both scaled and absolute measurements
+#  in the same dataset
+rd_to_plot &lt;- 
+  rd %&gt;% 
+  select(department, year, rd_budget) %&gt;% 
+  # rescale 0 to 1
+  group_by(department) %&gt;% 
+  mutate(budget_01 = rd_budget %&gt;% 
+           {scales::rescale(., to = c(0, 1),
+                            from = c(0, max(.)))}) %&gt;% 
+  ungroup() </code></pre>
+<p>I would like to prepare a faceted plot, in which facets are ordered based on a dendrogram, and with the dendrogram itself on the side.</p>
+<p>I can order the facets with the dendrogram from hierarchical clustering using a factor. (But I have no idea how to show the dendrogram itself.)</p>
+<pre class="r"><code>rd_to_plot &lt;- 
+  rd_to_plot %&gt;% 
+  mutate(department = department %&gt;% 
+           factor(levels = rd_hclust$labels[rd_hclust$order]))</code></pre>
+<pre class="r"><code>line_col &lt;- &quot;grey70&quot;
+text_col &lt;- &quot;grey40&quot;
+line_size &lt;- .2
+label_spacer &lt;- .4
 
 p &lt;- 
-  clust_tidy %&gt;% 
+  rd_to_plot %&gt;% 
   ggplot(aes(x = year,
-             y = scaled_funding,
-             fill = scaled_funding)) +
-  geom_bar(stat = &quot;identity&quot;, width = .3) +
-  geom_hline(yintercept = 0, colour = &quot;grey80&quot;) +
-  geom_hline(yintercept = .2, colour = &quot;white&quot;, size = lwidth) +
-  geom_hline(yintercept = .4, colour = &quot;white&quot;, size = lwidth) +
-  geom_hline(yintercept = .6, colour = &quot;white&quot;, size = lwidth) +
-  geom_hline(yintercept = .8, colour = &quot;white&quot;, size = lwidth) +
-  facet_grid(agency ~ .) +
+             y = budget_01,
+             colour = budget_01)) +
+  geom_line(colour = line_col,
+            size = line_size) +
+  geom_segment(data = . %&gt;% 
+              group_by(department) %&gt;% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01,
+                yend = budget_01 -label_spacer,
+                xend = year),
+            size = line_size, colour = line_col) +
+  geom_point(aes(size = rd_budget)) +
+  geom_text(data = . %&gt;% 
+              group_by(department) %&gt;% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01 - label_spacer - .1,
+                label = rd_budget %&gt;% scales::scientific(digits = 0)),
+            size = 4) +
+  facet_grid(department ~ .) +
   theme_minimal() + 
-  scale_fill_viridis_c(
-    option = &quot;D&quot;,
-    breaks = c(0, .2, .4, .6, .8, 1),
-    guide = guide_legend(
-      label.position = &quot;top&quot;, 
-      keyheight = unit(2, units = &quot;mm&quot;),
-      keywidth=unit(8, units = &quot;mm&quot;), 
-      nrow = 1,
-      title.vjust = 0, 
-      title.theme = element_text(family = &quot;sans&quot;,
-                                 colour = &quot;grey40&quot;,
-                                 size = 12.5,
-                                 face = &quot;bold&quot;))
-  ) + 
-  theme(text = element_text(family = &quot;sans&quot;),
+  scale_color_scico(palette = &quot;devon&quot;,
+    guide = FALSE, 
+    direction = -1,
+    begin = .2) +
+  lims(y = c(0, 1.1)) +
+  labs(y = &quot;Government R&amp;D Spending&quot;) +
+  scale_size(range = c(.1, 3), guide = FALSE) +
+  theme(text = element_text(family = &quot;sans&quot;,
+                            colour = text_col),
         axis.text.y = element_blank(),
         panel.grid = element_blank(),
+        panel.grid.major.x = element_line(colour = line_col,
+                                          size = line_size/2),
         legend.position = &quot;top&quot;,
-        strip.text = element_text(family = &quot;sans&quot;))</code></pre>
-<pre class="r"><code>p %&gt;% print</code></pre>
-<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-11-1.svg" width="672" /></p>
-<pre class="r"><code>nasa &lt;- 
-  clust_tidy %&gt;% 
-  filter(agency == &quot;NASA&quot;) %&gt;% 
-  pull(scaled_funding)</code></pre>
-<pre class="d3"><code>svg.selectAll(&#39;rect&#39;)
-  .data(data)
-  .enter()
-    .append(&#39;rect&#39;)
-      .attr(&#39;width&#39;, function(d) { return d * 10; })
-      .attr(&#39;height&#39;, &#39;20px&#39;)
-      .attr(&#39;y&#39;, function(d, i) { return i * 22; })
-      .attr(&#39;fill&#39;, options.color);</code></pre>
-<button class="collapsible">
-Open Section 1
-</button>
-<div class="content">
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-</p>
-</div>
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
+        strip.text.y = element_text(family = &quot;sans&quot;,
+                                    angle = 0,
+                                    colour = text_col))
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-} 
-</script>
-</div>
+
+p </code></pre>
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-12-1.svg" width="672" /></p>
+<p>What do you think?</p>
 </div>

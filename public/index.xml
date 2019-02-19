@@ -11,6 +11,247 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Explore US Government R&amp;D Spendings</title>
+      <link>/post/government-funding/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/government-funding/</guid>
+      <description>
+  &lt;link rel=&#34;stylesheet&#34; href=&#34;../custom.css&#34; type=&#34;text/css&#34; /&gt;
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#load-packages-and-download-files&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;1&lt;/span&gt; Load Packages and Download Files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#explore---which-agencies-get-similar-funding&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2&lt;/span&gt; Explore - Which Agencies Get Similar Funding?&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#correlation-between-funding-pattern&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.1&lt;/span&gt; Correlation between funding pattern&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#clusters-of-funding-patterns&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2&lt;/span&gt; Clusters of funding patterns?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#visualize-the-clusters-with-heatmaps&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.3&lt;/span&gt; Visualize the clusters with heatmaps&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#other-visualizations.&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3&lt;/span&gt; Other visualizations.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Recently the &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12&#34;&gt;TidyTuesday social project proposed a dataset documenting R&amp;amp;D spending of the US government&lt;/a&gt;. This dataset was originally collected by the &lt;a href=&#34;https://www.aaas.org/&#34;&gt;American Association for the Advancement of Science&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This tidy dataset stores R&amp;amp;D spending by the US government from 1976 to 2016, devided by agency. It’s available &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div id=&#34;load-packages-and-download-files&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;1&lt;/span&gt; Load Packages and Download Files&lt;/h1&gt;
+&lt;p&gt;Let’s explore this dataset.&lt;/p&gt;
+&lt;p&gt;First we load the packages that we need.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+library(scico)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And then the data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Get data ---------------------------------------------------
+
+rd_path &amp;lt;- &amp;quot;_data/2-07-funding.Rdata&amp;quot;
+rd_url &amp;lt;- paste0(&amp;quot;https://raw.githubusercontent.com/&amp;quot;,
+                 &amp;quot;rfordatascience/tidytuesday/master/data/&amp;quot;,
+                 &amp;quot;2019/2019-02-12/fed_r_d_spending.csv&amp;quot;)
+
+if(!file.exists(rd_path)) {
+  rd &amp;lt;- 
+    read_csv(rd_url)
+  
+  save(rd, file = rd_path)
+  
+} else {
+  load(rd_path)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;rd&lt;/code&gt; dataset has this aspect.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rd %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 588 x 6
+##    department  year  rd_budget total_outlays discretionary_outl…       gdp
+##    &amp;lt;chr&amp;gt;      &amp;lt;int&amp;gt;      &amp;lt;dbl&amp;gt;         &amp;lt;dbl&amp;gt;               &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+##  1 DOD         1976    3.57e10  371800000000        175600000000   1.79e12
+##  2 NASA        1976    1.25e10  371800000000        175600000000   1.79e12
+##  3 DOE         1976    1.09e10  371800000000        175600000000   1.79e12
+##  4 HHS         1976    9.23e 9  371800000000        175600000000   1.79e12
+##  5 NIH         1976    8.02e 9  371800000000        175600000000   1.79e12
+##  6 NSF         1976    2.37e 9  371800000000        175600000000   1.79e12
+##  7 USDA        1976    1.84e 9  371800000000        175600000000   1.79e12
+##  8 Interior    1976    1.15e 9  371800000000        175600000000   1.79e12
+##  9 DOT         1976    1.14e 9  371800000000        175600000000   1.79e12
+## 10 EPA         1976    9.68e 8  371800000000        175600000000   1.79e12
+## # ... with 578 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We are interested in the spending, which, as stated in the &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12#total-federal-rd-spending-by-agencydeparment&#34;&gt;data dictionary&lt;/a&gt; are stored in the variable &lt;strong&gt;rd_budget&lt;/strong&gt;. Their unit is &lt;strong&gt;inflation adjusted dollars&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;explore---which-agencies-get-similar-funding&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;2&lt;/span&gt; Explore - Which Agencies Get Similar Funding?&lt;/h1&gt;
+&lt;p&gt;Which agencies get similar fundings? Do funding to certain groups of research agencies correlate? And what could we learn from that, could we guess policies?&lt;/p&gt;
+&lt;div id=&#34;correlation-between-funding-pattern&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.1&lt;/span&gt; Correlation between funding pattern&lt;/h2&gt;
+&lt;p&gt;This was one of the first things that I explored, and I got lucky. It seems that there are two groups of correlation.&lt;/p&gt;
+&lt;p&gt;To test correlation, we must switch to the wide data format, because the &lt;code&gt;cor()&lt;/code&gt; function requires that each variable is in its own column.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Wide format
+rd_wide &amp;lt;- 
+  rd %&amp;gt;% 
+  select(department, year, rd_budget) %&amp;gt;% 
+  tidyr::spread(key = department,
+                value = rd_budget)
+
+# correlation of everything against everything
+rd_wide %&amp;gt;%
+  column_to_rownames(&amp;quot;year&amp;quot;) %&amp;gt;%
+  # Test correlation
+  cor() %&amp;gt;% 
+  # visualize
+  as_tibble(rownames = &amp;quot;agency&amp;quot;) %&amp;gt;% 
+  gather(DHS:VA, key = &amp;quot;agency_2&amp;quot;, value = &amp;quot;corr&amp;quot;) %&amp;gt;% 
+  ggplot(aes(x = agency,
+             y = agency_2,
+             fill = corr)) +
+  geom_tile() + 
+  scale_fill_viridis_c() +
+  theme(aspect.ratio = 1,
+        axis.text.x = element_text(angle = 90, hjust = .5))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-5-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Lucky, it looks there are two defined groups of correlation. Could we capture this behaviour in clusters?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;clusters-of-funding-patterns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2&lt;/span&gt; Clusters of funding patterns?&lt;/h2&gt;
+&lt;p&gt;With clusters, we want to capture the behaviour of our variables. Meaning that we want to capture how one variable behaves compared to another: when one variable increases in value, does the other do the same?&lt;/p&gt;
+&lt;p&gt;So, to make variables comparable, we must scale them.&lt;/p&gt;
+&lt;p&gt;Probably, the most common scaling is by z-scores. But, because z-scores are centered at 0. This introduces &lt;strong&gt;negative numbers&lt;/strong&gt;, but spendings for R&amp;amp;D agencies are (hopefully ;) ) never negative.&lt;/p&gt;
+&lt;p&gt;Thus, I decided to rescale spendings for each agency &lt;strong&gt;between 0 and 1&lt;/strong&gt;, in this way we can make them comparable and present them in a more intuitive way. Moreover, this kind of scaling &lt;strong&gt;preserves 0 as anchored point&lt;/strong&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# scale each variable between 0 and 1
+rd_wide_01 &amp;lt;- 
+  rd_wide %&amp;gt;%
+  mutate_at(vars(-contains(&amp;quot;year&amp;quot;)),
+            ~scales::rescale(., to = c(0,1),
+                             from = c(0, max(.))))
+
+
+# this is how it looks after scaling
+rd_wide_01 %&amp;gt;% print()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 42 x 15
+##     year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH
+##    &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+##  1  1976     0 0.449 0.378 0.695 0.935 0.824 0.250    0.980 0.852 0.227
+##  2  1977     0 0.459 0.403 0.877 0.897 0.822 0.257    0.920 0.855 0.233
+##  3  1978     0 0.478 0.392 1     0.947 1     0.285    0.957 0.853 0.249
+##  4  1979     0 0.522 0.394 0.997 0.822 0.938 0.274    1     0.891 0.262
+##  5  1980     0 0.518 0.392 0.972 0.858 0.769 0.272    0.920 0.943 0.257
+##  6  1981     0 0.454 0.442 0.945 0.801 0.767 0.261    0.842 0.904 0.243
+##  7  1982     0 0.380 0.497 0.776 0.575 0.546 0.240    0.736 0.703 0.235
+##  8  1983     0 0.384 0.541 0.711 0.655 0.426 0.255    0.710 0.401 0.247
+##  9  1984     0 0.414 0.616 0.749 0.834 0.441 0.274    0.644 0.424 0.272
+## 10  1985     0 0.433 0.683 0.769 0.725 0.523 0.300    0.666 0.489 0.300
+## # ... with 32 more rows, and 4 more variables: NSF &amp;lt;dbl&amp;gt;, Other &amp;lt;dbl&amp;gt;,
+## #   USDA &amp;lt;dbl&amp;gt;, VA &amp;lt;dbl&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After scaling, I tried &lt;strong&gt;hierachical clustering&lt;/strong&gt;. But, clustering functions such as &lt;code&gt;hclust()&lt;/code&gt; or &lt;code&gt;kmeans()&lt;/code&gt;, by default, cluster the rows of a dataset: we must to modify the format of the data again.&lt;/p&gt;
+&lt;p&gt;This time we transpose the data with &lt;code&gt;t()&lt;/code&gt;, to exchange rows and columns.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# For clustering
+# we need to transpose the data
+# because dist() %&amp;gt;% clusters the columns
+rd_for_clust &amp;lt;-   
+  rd_wide_01 %&amp;gt;%
+  column_to_rownames(&amp;quot;year&amp;quot;) %&amp;gt;%
+  t() 
+
+rd_hclust &amp;lt;-
+  rd_for_clust %&amp;gt;% 
+  dist() %&amp;gt;%
+  hclust() &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The results of hierarchical clustering are a bit more complex:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;DHS&lt;/strong&gt; stays by itself, since it was established late, in the ’00s.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VA, HHS, NIH&lt;/strong&gt; and &lt;strong&gt;HHS&lt;/strong&gt; group together, since lately, they have seen an increase in fundings,&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;EPA&lt;/strong&gt; is also pretty much by itself, since it’s fundings kept decreasing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rd_hclust %&amp;gt;% plot()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-8-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualize-the-clusters-with-heatmaps&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.3&lt;/span&gt; Visualize the clusters with heatmaps&lt;/h2&gt;
+&lt;p&gt;In biology, small numbers of clustered observation are often visualized with a combination of heatmaps and dendrograms.&lt;/p&gt;
+&lt;p&gt;You can plot those together with the packages &lt;a href=&#34;https://rlbarter.github.io/superheat/clustering.html#dendrogram&#34;&gt;superheat&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rd_for_clust %&amp;gt;% 
+  superheat::superheat(row.dendrogram = TRUE,
+                       left.label.text.size = 3,
+                       bottom.label.text.angle = 90,
+                       bottom.label.text.size = 3,
+                       grid.hline.col = &amp;quot;grey40&amp;quot;,
+                       grid.vline.col = &amp;quot;grey40&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-9-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;other-visualizations.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;3&lt;/span&gt; Other visualizations.&lt;/h1&gt;
+&lt;p&gt;Heatmaps are great for the tight space that scientific journals reserve to figures.&lt;/p&gt;
+&lt;p&gt;But, here, because I don’t have limitations and for fun, I wanted to try other visualization.&lt;/p&gt;
+&lt;p&gt;The one below has more white space, but might be more pleasurable to the eye than an highly compressed heatmap, and it conveys additional information, such as maximum absolute spending for each department&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# I restarted from the original data,
+# to have both scaled and absolute measurements
+#  in the same dataset
+rd_to_plot &amp;lt;- 
+  rd %&amp;gt;% 
+  select(department, year, rd_budget) %&amp;gt;% 
+  # rescale 0 to 1
+  group_by(department) %&amp;gt;% 
+  mutate(budget_01 = rd_budget %&amp;gt;% 
+           {scales::rescale(., to = c(0, 1),
+                            from = c(0, max(.)))}) %&amp;gt;% 
+  ungroup() &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I would like to prepare a faceted plot, in which facets are ordered based on a dendrogram, and with the dendrogram itself on the side.&lt;/p&gt;
+&lt;p&gt;I can order the facets with the dendrogram from hierarchical clustering using a factor. (But I have no idea how to show the dendrogram itself.)&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rd_to_plot &amp;lt;- 
+  rd_to_plot %&amp;gt;% 
+  mutate(department = department %&amp;gt;% 
+           factor(levels = rd_hclust$labels[rd_hclust$order]))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;line_col &amp;lt;- &amp;quot;grey70&amp;quot;
+text_col &amp;lt;- &amp;quot;grey40&amp;quot;
+line_size &amp;lt;- .2
+label_spacer &amp;lt;- .4
+
+p &amp;lt;- 
+  rd_to_plot %&amp;gt;% 
+  ggplot(aes(x = year,
+             y = budget_01,
+             colour = budget_01)) +
+  geom_line(colour = line_col,
+            size = line_size) +
+  geom_segment(data = . %&amp;gt;% 
+              group_by(department) %&amp;gt;% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01,
+                yend = budget_01 -label_spacer,
+                xend = year),
+            size = line_size, colour = line_col) +
+  geom_point(aes(size = rd_budget)) +
+  geom_text(data = . %&amp;gt;% 
+              group_by(department) %&amp;gt;% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01 - label_spacer - .1,
+                label = rd_budget %&amp;gt;% scales::scientific(digits = 0)),
+            size = 4) +
+  facet_grid(department ~ .) +
+  theme_minimal() + 
+  scale_color_scico(palette = &amp;quot;devon&amp;quot;,
+    guide = FALSE, 
+    direction = -1,
+    begin = .2) +
+  lims(y = c(0, 1.1)) +
+  labs(y = &amp;quot;Government R&amp;amp;D Spending&amp;quot;) +
+  scale_size(range = c(.1, 3), guide = FALSE) +
+  theme(text = element_text(family = &amp;quot;sans&amp;quot;,
+                            colour = text_col),
+        axis.text.y = element_blank(),
+        panel.grid = element_blank(),
+        panel.grid.major.x = element_line(colour = line_col,
+                                          size = line_size/2),
+        legend.position = &amp;quot;top&amp;quot;,
+        strip.text.y = element_text(family = &amp;quot;sans&amp;quot;,
+                                    angle = 0,
+                                    colour = text_col))
+
+
+p &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-12-1.svg&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What do you think?&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Show Absolute and Percent Change in a Time Series</title>
       <link>/post/2019-02-02-butter-consumption/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
@@ -1347,15 +1588,6 @@ the advent of &amp;ldquo;big data&amp;rdquo;. They might have an impact again at
       <pubDate>Fri, 01 Jan 2016 00:00:00 +0100</pubDate>
       
       <guid>/publication/schuler-2016-engineering/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Analysis of the arabidopsis REM gene family predicts functions during flower development</title>
-      <link>/publication/mantegazza-2014-analysis/</link>
-      <pubDate>Wed, 01 Jan 2014 00:00:00 +0100</pubDate>
-      
-      <guid>/publication/mantegazza-2014-analysis/</guid>
       <description></description>
     </item>
     

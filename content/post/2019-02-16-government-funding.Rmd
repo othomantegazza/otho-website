@@ -258,7 +258,7 @@ p <-
                                     colour = text_col))
 
 
-p %>% print()
+p 
 ```
 
 What do you think?

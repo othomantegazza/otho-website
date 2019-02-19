@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.3.0">
+  <meta name="generator" content="Hugo 0.53" />
+  <meta name="author" content="Otho Mantegazza">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="Combine ggplot2 with hierarchical and k-means clustering">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/government-funding/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-101634279-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/government-funding/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@othomn">
+  <meta property="twitter:creator" content="@othomn">
+  
+  <meta property="og:site_name" content="Otho | Sidenotes">
+  <meta property="og:url" content="/post/government-funding/">
+  <meta property="og:title" content="Explore US Government R&amp;D Spendings | Otho | Sidenotes">
+  <meta property="og:description" content="Combine ggplot2 with hierarchical and k-means clustering"><meta property="og:image" content="/img/portrait2.jpg">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-02-16T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-02-16T00:00:00&#43;00:00">
+  
+
+  
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#3f51b5",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#3f51b5"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
+
+  
+
+  <title>Explore US Government R&amp;D Spendings | Otho | Sidenotes</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Otho | Sidenotes</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/publication">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Explore US Government R&amp;D Spendings</h1>
+
+  
+  <p class="page-subtitle">TidyTuesday 7 - Source AAAS</p>
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-02-16 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-02-16 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Feb 16, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/government-funding/#disqus_thread"></a>
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Explore%20US%20Government%20R%26D%20Spendings&amp;url=%2fpost%2fgovernment-funding%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fgovernment-funding%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fgovernment-funding%2f&amp;title=Explore%20US%20Government%20R%26D%20Spendings"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fgovernment-funding%2f&amp;title=Explore%20US%20Government%20R%26D%20Spendings"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Explore%20US%20Government%20R%26D%20Spendings&amp;body=%2fpost%2fgovernment-funding%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+  <link rel="stylesheet" href="../custom.css" type="text/css" />
+
+<div id="TOC">
+<ul>
+<li><a href="#load-packages-and-download-files"><span class="toc-section-number">1</span> Load Packages and Download Files</a></li>
+<li><a href="#explore---which-agencies-get-similar-funding"><span class="toc-section-number">2</span> Explore - Which Agencies Get Similar Funding?</a><ul>
+<li><a href="#correlation-between-funding-pattern"><span class="toc-section-number">2.1</span> Correlation between funding pattern</a></li>
+<li><a href="#clusters-of-funding-patterns"><span class="toc-section-number">2.2</span> Clusters of funding patterns?</a></li>
+<li><a href="#visualize-the-clusters-with-heatmaps"><span class="toc-section-number">2.3</span> Visualize the clusters with heatmaps</a></li>
+</ul></li>
+<li><a href="#other-visualizations."><span class="toc-section-number">3</span> Other visualizations.</a></li>
+</ul>
+</div>
+
+<p>Recently the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12">TidyTuesday social project proposed a dataset documenting R&amp;D spending of the US government</a>. This dataset was originally collected by the <a href="https://www.aaas.org/">American Association for the Advancement of Science</a>.</p>
+<p>This tidy dataset stores R&amp;D spending by the US government from 1976 to 2016, devided by agency. It’s available <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12">here</a>.</p>
+<div id="load-packages-and-download-files" class="section level1">
+<h1><span class="header-section-number">1</span> Load Packages and Download Files</h1>
+<p>Let’s explore this dataset.</p>
+<p>First we load the packages that we need.</p>
+<pre class="r"><code>library(tidyverse)
+library(scico)</code></pre>
+<p>And then the data.</p>
+<pre class="r"><code># Get data ---------------------------------------------------
+
+rd_path &lt;- &quot;_data/2-07-funding.Rdata&quot;
+rd_url &lt;- paste0(&quot;https://raw.githubusercontent.com/&quot;,
+                 &quot;rfordatascience/tidytuesday/master/data/&quot;,
+                 &quot;2019/2019-02-12/fed_r_d_spending.csv&quot;)
+
+if(!file.exists(rd_path)) {
+  rd &lt;- 
+    read_csv(rd_url)
+  
+  save(rd, file = rd_path)
+  
+} else {
+  load(rd_path)
+}</code></pre>
+<p>The <code>rd</code> dataset has this aspect.</p>
+<pre class="r"><code>rd %&gt;% print()</code></pre>
+<pre><code>## # A tibble: 588 x 6
+##    department  year  rd_budget total_outlays discretionary_outl…       gdp
+##    &lt;chr&gt;      &lt;int&gt;      &lt;dbl&gt;         &lt;dbl&gt;               &lt;dbl&gt;     &lt;dbl&gt;
+##  1 DOD         1976    3.57e10  371800000000        175600000000   1.79e12
+##  2 NASA        1976    1.25e10  371800000000        175600000000   1.79e12
+##  3 DOE         1976    1.09e10  371800000000        175600000000   1.79e12
+##  4 HHS         1976    9.23e 9  371800000000        175600000000   1.79e12
+##  5 NIH         1976    8.02e 9  371800000000        175600000000   1.79e12
+##  6 NSF         1976    2.37e 9  371800000000        175600000000   1.79e12
+##  7 USDA        1976    1.84e 9  371800000000        175600000000   1.79e12
+##  8 Interior    1976    1.15e 9  371800000000        175600000000   1.79e12
+##  9 DOT         1976    1.14e 9  371800000000        175600000000   1.79e12
+## 10 EPA         1976    9.68e 8  371800000000        175600000000   1.79e12
+## # ... with 578 more rows</code></pre>
+<p>We are interested in the spending, which, as stated in the <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12#total-federal-rd-spending-by-agencydeparment">data dictionary</a> are stored in the variable <strong>rd_budget</strong>. Their unit is <strong>inflation adjusted dollars</strong>.</p>
+</div>
+<div id="explore---which-agencies-get-similar-funding" class="section level1">
+<h1><span class="header-section-number">2</span> Explore - Which Agencies Get Similar Funding?</h1>
+<p>Which agencies get similar fundings? Do funding to certain groups of research agencies correlate? And what could we learn from that, could we guess policies?</p>
+<div id="correlation-between-funding-pattern" class="section level2">
+<h2><span class="header-section-number">2.1</span> Correlation between funding pattern</h2>
+<p>This was one of the first things that I explored, and I got lucky. It seems that there are two groups of correlation.</p>
+<p>To test correlation, we must switch to the wide data format, because the <code>cor()</code> function requires that each variable is in its own column.</p>
+<pre class="r"><code># Wide format
+rd_wide &lt;- 
+  rd %&gt;% 
+  select(department, year, rd_budget) %&gt;% 
+  tidyr::spread(key = department,
+                value = rd_budget)
+
+# correlation of everything against everything
+rd_wide %&gt;%
+  column_to_rownames(&quot;year&quot;) %&gt;%
+  # Test correlation
+  cor() %&gt;% 
+  # visualize
+  as_tibble(rownames = &quot;agency&quot;) %&gt;% 
+  gather(DHS:VA, key = &quot;agency_2&quot;, value = &quot;corr&quot;) %&gt;% 
+  ggplot(aes(x = agency,
+             y = agency_2,
+             fill = corr)) +
+  geom_tile() + 
+  scale_fill_viridis_c() +
+  theme(aspect.ratio = 1,
+        axis.text.x = element_text(angle = 90, hjust = .5))</code></pre>
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-5-1.svg" width="672" /></p>
+<p>Lucky, it looks there are two defined groups of correlation. Could we capture this behaviour in clusters?</p>
+</div>
+<div id="clusters-of-funding-patterns" class="section level2">
+<h2><span class="header-section-number">2.2</span> Clusters of funding patterns?</h2>
+<p>With clusters, we want to capture the behaviour of our variables. Meaning that we want to capture how one variable behaves compared to another: when one variable increases in value, does the other do the same?</p>
+<p>So, to make variables comparable, we must scale them.</p>
+<p>Probably, the most common scaling is by z-scores. But, because z-scores are centered at 0. This introduces <strong>negative numbers</strong>, but spendings for R&amp;D agencies are (hopefully ;) ) never negative.</p>
+<p>Thus, I decided to rescale spendings for each agency <strong>between 0 and 1</strong>, in this way we can make them comparable and present them in a more intuitive way. Moreover, this kind of scaling <strong>preserves 0 as anchored point</strong>.</p>
+<pre class="r"><code># scale each variable between 0 and 1
+rd_wide_01 &lt;- 
+  rd_wide %&gt;%
+  mutate_at(vars(-contains(&quot;year&quot;)),
+            ~scales::rescale(., to = c(0,1),
+                             from = c(0, max(.))))
+
+
+# this is how it looks after scaling
+rd_wide_01 %&gt;% print()</code></pre>
+<pre><code>## # A tibble: 42 x 15
+##     year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH
+##    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  1976     0 0.449 0.378 0.695 0.935 0.824 0.250    0.980 0.852 0.227
+##  2  1977     0 0.459 0.403 0.877 0.897 0.822 0.257    0.920 0.855 0.233
+##  3  1978     0 0.478 0.392 1     0.947 1     0.285    0.957 0.853 0.249
+##  4  1979     0 0.522 0.394 0.997 0.822 0.938 0.274    1     0.891 0.262
+##  5  1980     0 0.518 0.392 0.972 0.858 0.769 0.272    0.920 0.943 0.257
+##  6  1981     0 0.454 0.442 0.945 0.801 0.767 0.261    0.842 0.904 0.243
+##  7  1982     0 0.380 0.497 0.776 0.575 0.546 0.240    0.736 0.703 0.235
+##  8  1983     0 0.384 0.541 0.711 0.655 0.426 0.255    0.710 0.401 0.247
+##  9  1984     0 0.414 0.616 0.749 0.834 0.441 0.274    0.644 0.424 0.272
+## 10  1985     0 0.433 0.683 0.769 0.725 0.523 0.300    0.666 0.489 0.300
+## # ... with 32 more rows, and 4 more variables: NSF &lt;dbl&gt;, Other &lt;dbl&gt;,
+## #   USDA &lt;dbl&gt;, VA &lt;dbl&gt;</code></pre>
+<p>After scaling, I tried <strong>hierachical clustering</strong>. But, clustering functions such as <code>hclust()</code> or <code>kmeans()</code>, by default, cluster the rows of a dataset: we must to modify the format of the data again.</p>
+<p>This time we transpose the data with <code>t()</code>, to exchange rows and columns.</p>
+<pre class="r"><code># For clustering
+# we need to transpose the data
+# because dist() %&gt;% clusters the columns
+rd_for_clust &lt;-   
+  rd_wide_01 %&gt;%
+  column_to_rownames(&quot;year&quot;) %&gt;%
+  t() 
+
+rd_hclust &lt;-
+  rd_for_clust %&gt;% 
+  dist() %&gt;%
+  hclust() </code></pre>
+<p>The results of hierarchical clustering are a bit more complex:</p>
+<ul>
+<li>The <strong>DHS</strong> stays by itself, since it was established late, in the ’00s.</li>
+<li><strong>VA, HHS, NIH</strong> and <strong>HHS</strong> group together, since lately, they have seen an increase in fundings,</li>
+<li><strong>EPA</strong> is also pretty much by itself, since it’s fundings kept decreasing.</li>
+</ul>
+<pre class="r"><code>rd_hclust %&gt;% plot()</code></pre>
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-8-1.svg" width="672" /></p>
+</div>
+<div id="visualize-the-clusters-with-heatmaps" class="section level2">
+<h2><span class="header-section-number">2.3</span> Visualize the clusters with heatmaps</h2>
+<p>In biology, small numbers of clustered observation are often visualized with a combination of heatmaps and dendrograms.</p>
+<p>You can plot those together with the packages <a href="https://rlbarter.github.io/superheat/clustering.html#dendrogram">superheat</a></p>
+<pre class="r"><code>rd_for_clust %&gt;% 
+  superheat::superheat(row.dendrogram = TRUE,
+                       left.label.text.size = 3,
+                       bottom.label.text.angle = 90,
+                       bottom.label.text.size = 3,
+                       grid.hline.col = &quot;grey40&quot;,
+                       grid.vline.col = &quot;grey40&quot;)</code></pre>
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-9-1.svg" width="672" /></p>
+</div>
+</div>
+<div id="other-visualizations." class="section level1">
+<h1><span class="header-section-number">3</span> Other visualizations.</h1>
+<p>Heatmaps are great for the tight space that scientific journals reserve to figures.</p>
+<p>But, here, because I don’t have limitations and for fun, I wanted to try other visualization.</p>
+<p>The one below has more white space, but might be more pleasurable to the eye than an highly compressed heatmap, and it conveys additional information, such as maximum absolute spending for each department</p>
+<pre class="r"><code># I restarted from the original data,
+# to have both scaled and absolute measurements
+#  in the same dataset
+rd_to_plot &lt;- 
+  rd %&gt;% 
+  select(department, year, rd_budget) %&gt;% 
+  # rescale 0 to 1
+  group_by(department) %&gt;% 
+  mutate(budget_01 = rd_budget %&gt;% 
+           {scales::rescale(., to = c(0, 1),
+                            from = c(0, max(.)))}) %&gt;% 
+  ungroup() </code></pre>
+<p>I would like to prepare a faceted plot, in which facets are ordered based on a dendrogram, and with the dendrogram itself on the side.</p>
+<p>I can order the facets with the dendrogram from hierarchical clustering using a factor. (But I have no idea how to show the dendrogram itself.)</p>
+<pre class="r"><code>rd_to_plot &lt;- 
+  rd_to_plot %&gt;% 
+  mutate(department = department %&gt;% 
+           factor(levels = rd_hclust$labels[rd_hclust$order]))</code></pre>
+<pre class="r"><code>line_col &lt;- &quot;grey70&quot;
+text_col &lt;- &quot;grey40&quot;
+line_size &lt;- .2
+label_spacer &lt;- .4
+
+p &lt;- 
+  rd_to_plot %&gt;% 
+  ggplot(aes(x = year,
+             y = budget_01,
+             colour = budget_01)) +
+  geom_line(colour = line_col,
+            size = line_size) +
+  geom_segment(data = . %&gt;% 
+              group_by(department) %&gt;% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01,
+                yend = budget_01 -label_spacer,
+                xend = year),
+            size = line_size, colour = line_col) +
+  geom_point(aes(size = rd_budget)) +
+  geom_text(data = . %&gt;% 
+              group_by(department) %&gt;% 
+              filter(rd_budget == max(rd_budget)),
+            aes(y = budget_01 - label_spacer - .1,
+                label = rd_budget %&gt;% scales::scientific(digits = 0)),
+            size = 4) +
+  facet_grid(department ~ .) +
+  theme_minimal() + 
+  scale_color_scico(palette = &quot;devon&quot;,
+    guide = FALSE, 
+    direction = -1,
+    begin = .2) +
+  lims(y = c(0, 1.1)) +
+  labs(y = &quot;Government R&amp;D Spending&quot;) +
+  scale_size(range = c(.1, 3), guide = FALSE) +
+  theme(text = element_text(family = &quot;sans&quot;,
+                            colour = text_col),
+        axis.text.y = element_blank(),
+        panel.grid = element_blank(),
+        panel.grid.major.x = element_line(colour = line_col,
+                                          size = line_size/2),
+        legend.position = &quot;top&quot;,
+        strip.text.y = element_text(family = &quot;sans&quot;,
+                                    angle = 0,
+                                    colour = text_col))
+
+
+p </code></pre>
+<p><img src="/post/2019-02-16-government-funding_files/figure-html/unnamed-chunk-12-1.svg" width="672" /></p>
+<p>What do you think?</p>
+</div>
+
+    </div>
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait2.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Otho Mantegazza</a></h5>
+    <h6 class="card-subtitle">Biologist, Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:othomanteotho@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/othomn" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/othomantegazza" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "otho-netlify-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Otho Mantegazza 2018 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//otho-netlify-com.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.07fbebbbf71b021c8836e1d7ecffa489.js"></script>
+
+    
+
+  </body>
+</html>
+

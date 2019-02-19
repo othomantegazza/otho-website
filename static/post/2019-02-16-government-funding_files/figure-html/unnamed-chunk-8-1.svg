@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 504.00 360.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<text transform='translate(76.88,118.98) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='25.34px' lengthAdjust='spacingAndGlyphs'>DHS</text>
+<text transform='translate(106.41,240.17) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='16.01px' lengthAdjust='spacingAndGlyphs'>VA</text>
+<text transform='translate(135.95,255.71) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='24.00px' lengthAdjust='spacingAndGlyphs'>NSF</text>
+<text transform='translate(165.49,280.75) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='25.34px' lengthAdjust='spacingAndGlyphs'>HHS</text>
+<text transform='translate(195.03,276.08) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='20.67px' lengthAdjust='spacingAndGlyphs'>NIH</text>
+<polyline points='163.02,245.42 163.02,229.24 192.55,229.24 192.55,245.42 ' style='stroke-width: 0.75;' />
+<polyline points='133.48,221.72 133.48,205.54 177.78,205.54 177.78,229.24 ' style='stroke-width: 0.75;' />
+<polyline points='103.94,214.17 103.94,197.99 155.63,197.99 155.63,205.54 ' style='stroke-width: 0.75;' />
+<text transform='translate(224.57,240.67) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='32.68px' lengthAdjust='spacingAndGlyphs'>NASA</text>
+<text transform='translate(254.11,248.24) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='25.33px' lengthAdjust='spacingAndGlyphs'>DOT</text>
+<text transform='translate(283.64,259.35) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='26.00px' lengthAdjust='spacingAndGlyphs'>DOE</text>
+<text transform='translate(313.18,270.69) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='37.35px' lengthAdjust='spacingAndGlyphs'>Interior</text>
+<polyline points='281.17,223.35 281.17,207.17 310.71,207.17 310.71,223.35 ' style='stroke-width: 0.75;' />
+<polyline points='251.63,212.91 251.63,196.73 295.94,196.73 295.94,207.17 ' style='stroke-width: 0.75;' />
+<polyline points='222.09,197.99 222.09,181.82 273.78,181.82 273.78,196.73 ' style='stroke-width: 0.75;' />
+<text transform='translate(342.72,241.55) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='24.01px' lengthAdjust='spacingAndGlyphs'>EPA</text>
+<text transform='translate(372.26,247.55) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='30.01px' lengthAdjust='spacingAndGlyphs'>Other</text>
+<polyline points='340.25,207.54 340.25,191.36 369.78,191.36 369.78,207.54 ' style='stroke-width: 0.75;' />
+<text transform='translate(401.80,232.74) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='26.67px' lengthAdjust='spacingAndGlyphs'>DOC</text>
+<text transform='translate(431.34,248.99) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='26.67px' lengthAdjust='spacingAndGlyphs'>DOD</text>
+<text transform='translate(460.88,255.67) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='33.34px' lengthAdjust='spacingAndGlyphs'>USDA</text>
+<polyline points='428.86,212.33 428.86,196.15 458.40,196.15 458.40,212.33 ' style='stroke-width: 0.75;' />
+<polyline points='399.32,196.08 399.32,179.90 443.63,179.90 443.63,196.15 ' style='stroke-width: 0.75;' />
+<polyline points='355.02,191.36 355.02,164.48 421.48,164.48 421.48,179.90 ' style='stroke-width: 0.75;' />
+<polyline points='247.94,181.82 247.94,162.60 388.25,162.60 388.25,164.48 ' style='stroke-width: 0.75;' />
+<polyline points='129.78,197.99 129.78,135.06 318.09,135.06 318.09,162.60 ' style='stroke-width: 0.75;' />
+<polyline points='74.40,83.64 74.40,67.47 223.94,67.47 223.94,135.06 ' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='231.70' x2='59.04' y2='59.04' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='231.70' x2='51.84' y2='231.70' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='194.56' x2='51.84' y2='194.56' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='157.42' x2='51.84' y2='157.42' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='120.29' x2='51.84' y2='120.29' style='stroke-width: 0.75;' />
+<line x1='59.04' y1='83.15' x2='51.84' y2='83.15' style='stroke-width: 0.75;' />
+<text transform='translate(41.76,235.04) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text transform='translate(41.76,197.90) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text transform='translate(41.76,160.76) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text transform='translate(41.76,123.62) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text transform='translate(41.76,86.49) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='6.67px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='198.72' y='34.33' style='font-size: 14.40px; font-weight: bold; font-family: Liberation Sans;' textLength='135.36px' lengthAdjust='spacingAndGlyphs'>Cluster Dendrogram</text>
+<text x='210.79' y='355.68' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='111.22px' lengthAdjust='spacingAndGlyphs'>hclust (*, "complete")</text>
+<text x='264.73' y='341.28' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='3.33px' lengthAdjust='spacingAndGlyphs'>.</text>
+<text transform='translate(12.96,190.14) rotate(-90)' style='font-size: 12.00px; font-family: Liberation Sans;' textLength='34.69px' lengthAdjust='spacingAndGlyphs'>Height</text>
+</svg>
