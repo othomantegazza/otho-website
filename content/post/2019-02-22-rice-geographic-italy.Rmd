@@ -1,0 +1,84 @@
+---
+title: 2019-02-22-rice-geographic-italy
+author: ~
+date: '2019-02-22'
+slug: rice-geographic-italy
+categories: []
+tags: []
+image:
+  caption: ''
+  focal_point: ''
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    dev: svglite
+    css: ../custom.css
+editor_options: 
+  chunk_output_type: console
+---
+
+# Rice in Italy
+
+It has been a while that, for work and personal interest, I wanted to explore the details of rice production in Italy. 
+
+In northern Italy, rice is a very important crop and food.
+It is well integrated in our culinary traditions, and it [has been bred and grown here for centuries](https://www.enterisi.it/servizi/Menu/dinamica.aspx?idSezione=17299&idArea=17395&idCat=17304&ID=17304&TipoElemento=categoria).
+When thinking of Italian food, wheat based pizza and pasta might be the first dishes that come to mind, but rice, especially but not only, in the form of risotto is an pivotal dish of these regions.
+Rice was grown in northen Italy at least since the 15^th^ century. It was bred here, adapting it for [high latitude](https://doi.org/10.1093/jxb/erv004) and temperate growing conditions, and for our culinary tastes.
+
+There are many aspects of italian rice that are worth exploring: its history, its genetic pools, the characterstics of the plant and of its grain and its part in Italian culinary tradition.
+Here I decided to start from the **areas in which rice is cultivated**.
+
+# Italian Agricultural data
+
+```{r}
+library(tidyverse)
+library(sf)
+library(leaflet)
+
+load("_data/rice-ente-shapes.Rdata")
+# load("content/post/_data/rice-ente-shapes.Rdata")
+```
+
+```{r}
+
+# Tokyo palettes with green shades
+pal <- scico::scico(n = 100,
+                    palette = "tokyo",
+                    direction = -1) %>% colorNumeric(NULL)
+
+# add an html label
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g ha",
+  rice_shapes$COMUNE, rice_shapes$acri
+) %>% lapply(htmltools::HTML)
+
+
+m <- 
+  leaflet() %>% 
+  setView(lat = 45.30, ln = 8.60, zoom = 10) %>% 
+  # addTiles() %>%
+  # addProviderTiles(providers$CartoDB.Positron) %>%
+  # addProviderTiles(providers$Stamen.Toner) %>%
+  addProviderTiles(providers$Stamen.TonerLite) %>%
+  addPolygons(data = rice_shapes$geometry,
+              fillColor = pal(rice_shapes$rice_dens),
+              stroke = TRUE, weight = 2,
+              # color = "#2D408F",
+              color = "black",
+              fillOpacity = .8,
+              highlight = highlightOptions(
+                weight = 5),
+              label = labels,
+              labelOptions = labelOptions(
+                style = list("font-weight" = "normal", padding = "3px 8px"),
+                textsize = "15px",
+                direction = "auto")) 
+```
+
+```{r, out.width = "100%", echo=FALSE}
+m
+```
+

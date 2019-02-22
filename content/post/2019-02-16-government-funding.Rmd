@@ -258,9 +258,16 @@ p <-
                                     colour = text_col))
 
 
-p 
+p %>% print()
 ```
 
 What do you think?
 
+```{r, echo = FALSE, eval=FALSE}
+png(filename = "content/post/_plots/2-07-funding-lines.png",
+    height = 2200, width = 1200,
+    res = 300)
+p %>% print()
+dev.off() 
+```
 
