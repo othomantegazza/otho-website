@@ -19,6 +19,11 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+
 # Rice in Italy
 
 It has been a while that, for work and personal interest, I wanted to explore the details of rice production in Italy. 
@@ -31,13 +36,41 @@ Rice was grown in northen Italy at least since the 15^th^ century. It was bred h
 There are many aspects of italian rice that are worth exploring: its history, its genetic pools, the characterstics of the plant and of its grain and its part in Italian culinary tradition.
 Here I decided to start from the **areas in which rice is cultivated**.
 
-# Italian Agricultural data
+# Searching Open Data
+
+To explore and quantify where rice is cultivated in Italy, I had to search for at least two kinds of data.
+
+1. Data about agriculture, quantifying hom much land is dedicated to which culture, and hopefully how much rice they produce.
+2. Geographical data, to aggregate  agricultural data on a map.
+
+## Agricultural data from Regione Lombardia
+
+[Lombardia](https://en.wikipedia.org/wiki/Lombardy) is the administrative region in Italy that has Milan as capital. It's where I'm living right now, and it's also one of the main rice producing regions
+
+It turned out that this region maintains highly detailed datasets on its [open data website](https://www.dati.lombardia.it/), about many topics, including agriculture.
+
+And when I say "higly detailed", I mean it. I was plotting some [shapefiles](https://en.wikipedia.org/wiki/Shapefile) to figure out what they stored, and I was puzzled when the resulting shape was a square. I realized that the square was one single farm/field. And the dataset that I was exploring contained the shapes and coordiantes of every agricultural field in Lombardia, together with what is cultivated on it!
+
+For example, this is every area dedicated to agriculture/farming in Gaggiano, a small town south west of Milan. (The image below is a screeshot of a leaflet app, [here you'll find the code to download the data and launch the interactive app](https://github.com/othomantegazza/lorice/blob/master/gaggiano.R).)
+
+</p><img src="../_img/gaggiano.png" width="1000px"><p>
 
 ```{r}
 library(tidyverse)
 library(sf)
 library(leaflet)
+```
 
+Associated to the shapefiles, [at the same website](https://www.dati.lombardia.it/) there is a [dataset that stores details of what's cultivated in each field](https://www.dati.lombardia.it/Agricoltura/Particelle-agricole-Provincia-di-Milano-dati-gener/8t7w-8tqw). With this dataset I could estimate, for each administrative area of Lombardia, how much land is dedicated to the rice production. 
+
+I downloaded this dataset and summarized the area of land dedicated to rice production at the level of "municipality" (in Italian: "Comuni"), [here you can find the script for those steps](https://github.com/othomantegazza/lorice).
+
+I wanted to visualize the area that is dedicated to rice production in each municipality of Lombardia with a [Choropleth map](https://en.wikipedia.org/wiki/Choropleth_map). But to do this, I needed a file with shapes and coordinates.
+
+## Shapes of Italy on ISTAT
+
+
+```{r}
 load("_data/rice-ente-shapes.Rdata")
 # load("content/post/_data/rice-ente-shapes.Rdata")
 ```
