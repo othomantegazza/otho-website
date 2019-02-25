@@ -9,3 +9,11 @@ h1, h2, h3, h4, h5, h6, p, pre, ol, ul, #TOC, .article-metadata, .author-card, #
     padding: 0 20px 0 20px;
     margin: 20px auto 20px auto;
 }
+
+/* Leaflet legend */
+.leaflet {
+  margin: 0 auto 0 auto;
+}
+
+/* Leaflet legend */
+.leaflet-control br {clear: both;}
