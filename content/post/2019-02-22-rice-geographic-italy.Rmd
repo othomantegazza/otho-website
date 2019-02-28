@@ -26,12 +26,13 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Rice in Italy
 
-It has been a while that, for work and personal interest, I wanted to explore the details of rice production in Italy. 
+It has been a while that, for work and personal interest, I wanted to explore Italian rice production. 
 
-In northern Italy, rice is a very important crop and food.
-It is well integrated in our culinary traditions, and it [has been bred and grown here for centuries](https://www.enterisi.it/servizi/Menu/dinamica.aspx?idSezione=17299&idArea=17395&idCat=17304&ID=17304&TipoElemento=categoria).
-When thinking of Italian food, wheat based pizza and pasta might be the first dishes that come to mind, but rice, especially but not only, in the form of risotto is an pivotal dish of these regions.
-Rice was grown in northen Italy at least since the 15^th^ century. It was bred here, adapting it for [high latitude](https://doi.org/10.1093/jxb/erv004) and temperate growing conditions, and for our culinary tastes.
+In Northern Italy rice is a very important crop and food.
+
+When thinking of Italian food, the first dishes that come to mind might be the wheat based pizza and pasta, but rice, especially in the form of risotto is a pivotal dish of these regions. Risotto is indeed a very famous italian rice based dish, but there are many other, for example cold rice salads for the summer, *risi e bisi* (rice and peas) for the spring, or more tipical from southern Italy: the *Timballo di riso*, which is a baked rice dish with various fillings, or, the best, the *Arancine*, which are fried rice balls typical of the Sicilian street food tradition.
+
+Indeed, rice is used throughout Italy, and it was first imported probably in the south, but it is in the north where is most radicated in the culinary and agricultural tradition. Rice was [cultivated in northen Italy at least since the 15^th^ century](https://www.enterisi.it/servizi/Menu/dinamica.aspx?idSezione=17299&idArea=17395&idCat=17304&ID=17304&TipoElemento=categoria). It was bred here, adapting it for [high latitude](https://doi.org/10.1093/jxb/erv004) and temperate growing conditions, and for our culinary tastes.
 
 There are many aspects of italian rice that are worth exploring: its history, its genetic pools, the characterstics of the plant and of its grain and its part in Italian culinary tradition.
 Here I decided to start from the **areas in which rice is cultivated**.
@@ -49,25 +50,21 @@ To explore and quantify where rice is cultivated in Italy, I had to search for a
 
 It turned out that this region maintains highly detailed datasets on its [open data website](https://www.dati.lombardia.it/), about many topics, including agriculture.
 
-And when I say "higly detailed", I mean it. I was plotting some [shapefiles](https://en.wikipedia.org/wiki/Shapefile) to figure out what they stored, and I was puzzled when the resulting shape was a square. I realized that the square was one single farm/field. And the dataset that I was exploring contained the shapes and coordiantes of every agricultural field in Lombardia, together with what is cultivated on it!
+And when I say "higly detailed", I mean it. I was plotting some of their [shapefiles](https://en.wikipedia.org/wiki/Shapefile) to figure out what they stored, and I was puzzled when the resulting shape was a square. I realized that the square was one single farm/field. And the dataset that I was exploring contained the shapes and coordiantes of every farm field in Lombardia, together with what is cultivated on it!
 
 For example, this is every area dedicated to agriculture/farming in Gaggiano, a municipality south west of Milan. (The image below is a screeshot of a leaflet app, [here you'll find the code to download the data and launch the interactive app](https://github.com/othomantegazza/lorice/blob/master/gaggiano.R).)
 
 </p><img src="../_img/gaggiano.png" width="1000px"><p>
 
-Associated to the shapefiles, [at the same website](https://www.dati.lombardia.it/) there is a [dataset that stores details of what's cultivated in each field](https://www.dati.lombardia.it/Agricoltura/Particelle-agricole-Provincia-di-Milano-dati-gener/8t7w-8tqw). With this dataset I could estimate, for each administrative area of Lombardia, how much land is dedicated to the rice production. 
+Associated to the shapefiles, [at the same website](https://www.dati.lombardia.it/) there is a [dataset that stores details of what's cultivated in each field](https://www.dati.lombardia.it/Agricoltura/Particelle-agricole-Provincia-di-Milano-dati-gener/8t7w-8tqw). With this dataset I could estimate how much land is dedicated to rice production, for each municipality of Lombardia. [Here you can find the script for those steps](https://github.com/othomantegazza/lorice/blob/master/lombardy-rice-choropleth.R).
 
-I downloaded this dataset and summarized the area of land dedicated to rice production at the level of "municipality" (in Italian: "Comuni"), [here you can find the script for those steps](https://github.com/othomantegazza/lorice/blob/master/lombardy-rice-choropleth.R).
+I wanted to visualize the area that is dedicated to rice production in each municipality of Lombardia with a [Choropleth map](https://en.wikipedia.org/wiki/Choropleth_map). But to do this, I needed a file with shapes and coordinates of the municipalities.
 
-I wanted to visualize the area that is dedicated to rice production in each municipality of Lombardia with a [Choropleth map](https://en.wikipedia.org/wiki/Choropleth_map). But to do this, I needed a file with shapes and coordinates.
+## Shapefiles of Italy on ISTAT
 
-## Shapes of Italy on ISTAT
+The Italian Institute for Statistics, ISTAT, [maintains shapefiles of administrative areas at various administrative levels](https://www.istat.it/it/archivio/124086).
 
-The Italian Institute for Statistics, ISTAT, [maintains shapefiles administrative areas at various administrative levels](https://www.istat.it/it/archivio/124086).
-
-You can download and merge this dataset with the one that stores rice production [with this script (the same as above)](https://github.com/othomantegazza/lorice/blob/master/lombardy-rice-choropleth.R). In this script you can find also all the options and the details on how to launch the [leaflet app](https://rstudio.github.io/leaflet/) below.
-
-Afterwards, we can open a leaflet app and plot the map of rice farming in Lombardy:
+You can download and merge this dataset with the one that stores rice production [with this script (the same as above)](https://github.com/othomantegazza/lorice/blob/master/lombardy-rice-choropleth.R). In this script you can find also all the options and the details on how to launch this [leaflet app](https://rstudio.github.io/leaflet/), which shows the map of rice farming in Lombardy:
 
 ```{r}
 library(tidyverse)
@@ -106,12 +103,14 @@ m_lom <-
 m_lom
 ```
 
-It looks like most of rice fields are located South-West of Lombardy. Indeed, the northern part of this region is mostly industrial and then mountainous. On the South-East there is some rice production, but it looks like most of farming is dedicated to different kinds of products, might be foraging grasses or corn (I'll have to check the details, maybe in another post). The South-West area, where rice is cultivated starts from Milan, and extends toward the city of Lodi, Pavia and mostly Vigevano and Mortara. Indeed most of rice productions seems to be concentrated in that parts of Lombardy that extends in that parts that protrudes like a horn in the nearby region of Piedmont.
+It looks like most of rice fields are located in the South-West of Lombardy. Indeed, the northern part of Lombardy is mostly industrial and then mountainous. On the South-East there is some rice production, but it looks like most of farming there is dedicated to different kinds of products, maybe foraging grasses or corn, or animal production (I'll have to check the details, maybe in another post). The South-West area, where rice is cultivated starts from Milan, and extends toward the city of Lodi, Pavia to the south and Vigevano and Mortara to the west. Most of rice productions seems to be concentrated in that parts of Lombardy that extends and protrudes like a horn into the nearby region of Piedmont.
 
-Indeed, by the pattern in the map, it looks like rice production might estend well into Piedmont, the administrative region West of Lombardy. And it makes sense, since [Vercelli](https://en.wikipedia.org/wiki/Vercelli), the Piedmont city right next to the horn, is one of the main centers of Italian rice productions. 
+Moreover, judging by the intensities in the map, it looks like rice production might estend well into Piedmont, the administrative region West of Lombardy. And actually [Vercelli](https://en.wikipedia.org/wiki/Vercelli), the Piedmont city right next to the horn, is the main center of Italian rice productions. 
 
-But where to find open data about Piedmont?
+But where to find open data about Vercelli and Piedmont?
  
+## Data from Enterisi 
+
 ```{r}
 load("_data/rice-ente-shapes.Rdata")
 ```
