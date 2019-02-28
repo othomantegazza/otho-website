@@ -109,7 +109,13 @@ Moreover, judging by the intensities in the map, it looks like rice production m
 
 But where to find open data about Vercelli and Piedmont?
  
-## Data from Enterisi 
+## Data from Enterisi
+
+After a quick search from on the open data websites of the [Piedmont Region](www.dati.piemonte.it) and of the [Italian Institute for statistics](https://www.istat.it/it/dati-analisi-e-prodotti/banche-dati), I could not find anything as detailed.
+
+But as last resource, I tried to see if the [Ente Nazionale  Risi](https://www.enterisi.it/servizi/notizie/notizie_homepage.aspx) provides statistics. Enterisi is a national agency dedicated to rice farming. Indeed, besides providing technical support to rice farmers, it supports the rice market by providing [incredibly detailed statistical reports on rice production and prices](https://www.enterisi.it/servizi/Menu/dinamica.aspx?idSezione=17505&idArea=17548&idCat=17552&ID=17552&TipoElemento=categoria). Thanks to that we can continue explore where rice is grown in Italy.
+
+Rice production by municipality must be downloaded manually from their database, afterwards, the data can be aggregated with this script and served to the usual leaflet app. 
 
 ```{r}
 load("_data/rice-ente-shapes.Rdata")
