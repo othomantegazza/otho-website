@@ -3,7 +3,7 @@ title: "Rice in Italy"
 subtitle: "A series of articles on Italian Rice"
 author: "Otho Mantegazza"
 date: '2019-02-22'
-description: 'The Italian regions of rice farming'
+summary: 'Rice farming in Italy, a geographic overview.'
 slug: rice-geographic-italy
 categories: ['rice', ',maps']
 tags: ['rice', 'gis', 'leaflet', 'Italy']
@@ -157,3 +157,7 @@ m
 This data are from 2017 and they **records the municipality where the farm is registered**, while the field can be actually in another municipality. So, these map might differ slightly from the one above (the map with only Lombardy), but hopefully not much. because. This is stated by the [source website](https://www.enterisi.it/servizi/notizie/notizie_homepage.aspx).
 
 # Conclusions
+
+Vercelli is indeed the center of Italian rice farming and production. Rice is cultivated in the whole area surrounding this city. This area is flat and humid, it is the valley of the Po river, which runs from the Alps at the border with France, south of Vercelli and Milano and into the Adricatic sea, next to Venice. The rice cultivated area is mostly north of the Po river, and it Extends all the way to Milano until Lodi.
+
+Other, smaller, areas rice cultivated in Italy are the delta of the Po river, and some fields in Sardinia, Sicily and Tuscany, but all at a smaller intensity then the Po valley.
