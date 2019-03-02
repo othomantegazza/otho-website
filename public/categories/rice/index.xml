@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>rice on Otho | Sidenotes</title>
+    <link>/categories/rice/</link>
+    <description>Recent content in rice on Otho | Sidenotes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
+    <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/rice/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rice in Italy</title>
+      <link>/post/rice-geographic-italy/</link>
+      <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rice-geographic-italy/</guid>
+      <description>1 Rice in Italy 2 Searching Open Data 2.1 Agricultural data from Regione Lombardia 2.2 Shapefiles of Italy on ISTAT 2.3 Data from Enterisi  3 Conclusions   1 Rice in Italy It has been a while that, for work and for personal interest, I wanted to explore Italian rice production.
+In Northern Italy rice is a very important crop and a very important food.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,9 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
+    <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>,maps</title>
+      <link>/categories/maps/</link>
+      <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/maps/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rice</title>
+      <link>/categories/rice/</link>
+      <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/rice/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
