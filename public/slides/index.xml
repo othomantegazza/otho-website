@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recent &amp; Upcoming Talks on Otho | Sidenotes</title>
+    <link>/slides/</link>
+    <description>Recent content in Recent &amp; Upcoming Talks on Otho | Sidenotes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
+    
+	<atom:link href="/slides/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>/slides/slides/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/slides/slides/</guid>
+      <description>Code Club :) .reveal h1 { font-size: 2.0em; } .reveal h2 { font-size: 1.5em; } .reveal h3 { font-size: 1.25em;	} .reveal h4 { font-size: 1em;	} .reveal .slidessection, .reveal .slidessectionsection { padding: 0px 0px; } .reveal table { border-width: 1px; border-spacing: 2px; border-style: dotted; border-color: gray; border-collapse: collapse; font-size: 0.7em; } .reveal table th { border-width: 1px; padding-left: 10px; padding-right: 25px; font-weight: bold; border-style: dotted; border-color: gray; } .</description>
+    </item>
+    
+  </channel>
+</rss>
