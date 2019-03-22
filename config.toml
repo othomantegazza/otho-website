@@ -310,11 +310,16 @@ enableGitInfo = false
   name = "Slides"
   url = "/slides"
   weight = 6
+  
+[[menu.main]]
+  name = "CV"
+  url = "CV/otho-mantegazza-cv.pdf"
+  weight = 7
 
 [[menu.main]]
   name = "Contact"
   url = "#contact"
-  weight = 7
+  weight = 8
   
 
 # Link to a PDF of your resume/CV from the menu.

@@ -32,7 +32,7 @@ My main scientific skills are molecular genetics, and data analysis, including d
 
 Also, I am interested in methods to teach, publish and communicate science in a way that's easier and more inclusive. Our scientific production can only gain if we open our results to communication and debate.
 
-This is my website and my blog, in here you'll find my CV, my projects and my posts. Feel free to access them, read and comment.
+This is my website and my blog, in here you'll find my {{% staticref "CV/otho-mantegazza-cv.pdf" %}}CV{{% /staticref %}}, my projects and my posts. Feel free to access them, read and comment.
 
 The sources for most of my projects and for this website are on [Github](https://github.com/othomantegazza). Please, if you notice any issue or typo, or if you have any suggestion, pull requests are welcome.  This website is generated with [Blogdown](https://bookdown.org/yihui/blogdown/) and [Hugo](http://gohugo.io/).
 
