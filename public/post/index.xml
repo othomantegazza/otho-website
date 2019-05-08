@@ -18,8 +18,7 @@
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/rice-geographic-italy/</guid>
-      <description>1 Rice in Italy 2 Searching Open Data 2.1 Agricultural data from Regione Lombardia 2.2 Shapefiles of Italy on ISTAT 2.3 Data from Enterisi  3 Conclusions   1 Rice in Italy It has been a while that, for work and for personal interest, I wanted to explore Italian rice production.
-In Northern Italy rice is a very important crop and a very important food.</description>
+      <description>A geographic overview of rice farming in Italy</description>
     </item>
     
     <item>
@@ -28,8 +27,7 @@ In Northern Italy rice is a very important crop and a very important food.</desc
       <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/government-funding/</guid>
-      <description>1 Load Packages and Download Files 2 Explore - Which Agencies Get Similar Funding? 2.1 Correlation between funding pattern 2.2 Clusters of funding patterns? 2.3 Visualize the clusters with heatmaps  3 Other visualizations.   Recently the TidyTuesday social project proposed a dataset documenting R&amp;amp;D spending of the US government. This dataset was originally collected by the American Association for the Advancement of Science.
-This tidy dataset stores R&amp;amp;D spending by the US government from 1976 to 2016, devided by agency.</description>
+      <description>Combine ggplot2 with hierarchical and k-means clustering</description>
     </item>
     
     <item>
@@ -38,7 +36,7 @@ This tidy dataset stores R&amp;amp;D spending by the US government from 1976 to 
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019-02-02-butter-consumption/</guid>
-      <description>1 Load Packages 2 Get the data 3 Wrangle and Estimate Percentage Changes 4 A bit of style 5 Plotting (aka the fun part ;) ) 5.1 Set the basic aesthetic mapping 5.2 Add the first geometric objects 5.3 Specify percent changes explicitly 5.4 Colors colors colors 5.5 Title axis and caption  6 Automate With a Function 7 Waterfall charts   Here I’ll show, you step by step, how to produce the plot in the tweet below.</description>
+      <description>Dataviz: some ggplot2 tricks and the wonderful scico color palette</description>
     </item>
     
     <item>
@@ -47,7 +45,7 @@ This tidy dataset stores R&amp;amp;D spending by the US government from 1976 to 
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2019-02-02-butter.consumption/</guid>
-      <description>1 Load Packages 2 Get the data 3 Wrangle and Estimate Percentage Changes 4 A bit of style 5 Plotting (aka the fun part ;) ) 5.1 Set the basic aesthetic mapping 5.2 Add the first geometric objects 5.3 Specify percent changes explicitly 5.4 Colors colors colors    Here I’ll show you step by step the plot in the tweet below. In this plot you can show explicitly (and redundantly, but this is not always bad) absolute and relative changes among points in a time series.</description>
+      <description>Dataviz: some ggplot2 triks and the wonderful scico color palette</description>
     </item>
     
     <item>
@@ -56,7 +54,7 @@ This tidy dataset stores R&amp;amp;D spending by the US government from 1976 to 
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/2-04-prison/</guid>
-      <description>1 Intro 2 A strategy for missing values [NA] 2.1 Ignore the NAs 2.2 A more solid strategy  3 Which Category is Overrepresented? 3.1 Exploratory plot 3.2 Hypergeometric test  4 Adjust plot for publication 5 Interpretation and closing remarks   1 Intro This is week 4 of the social data project TidyTuesday. In this week, we explore the incarceration trend dataset. This dataset stores US demographic and incarceration data by county and by gender / ethnic profile for the last 30 years.</description>
+      <description>How to deal with missing values, exploratory plots and heatmaps, and the hypergeometric test in R.</description>
     </item>
     
     <item>
@@ -65,7 +63,7 @@ This tidy dataset stores R&amp;amp;D spending by the US government from 1976 to 
       <pubDate>Sun, 16 Jul 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/2017-07-16-back-to-the-books/</guid>
-      <description>1 Back To The Books 2 Tools For Writing Open Books on Github 2.1 Markdown 2.2 Git and Github 2.3 Putting it together: Books, authorship and contributions 2.4 Bonus: Bookdown  3 Publishing 3.1 Own website 3.2 Rstudio connect, through Bookdown 3.3 Publishers  4 Impact 4.1 Paywall 4.2 Updates and crowdsourcing  5 Wrapping it up and what’s next   1 Back To The Books Toward the end of my PhD I was struggling to learn new skills such as data analysis and programming.</description>
+      <description>During my PhD I was struggling to learn new skills, then I discovered open books, available in HTML and on Github</description>
     </item>
     
     <item>
@@ -74,10 +72,7 @@ This tidy dataset stores R&amp;amp;D spending by the US government from 1976 to 
       <pubDate>Fri, 26 May 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/2017-05-26-fill-the-gap/</guid>
-      <description>Can Open Source Hardware help fill the gap and bring technology within reach for everybody?
-I am a biologist in academia. I am curious about how Open Source Hardware can improve the way we do research and the way in which we distribute our results and the technology that we produce.
-Definitions first The Open Source Hardware Association defines Open Source Hardware as:
- “hardware whose design is made publicly available so that anyone can study, modify, distribute, make, and sell the design or hardware based on that design”</description>
+      <description>Can Open Source Hardware help fill the gap and bring technology within reach for everybody?</description>
     </item>
     
     <item>
@@ -86,9 +81,7 @@ Definitions first The Open Source Hardware Association defines Open Source Hardw
       <pubDate>Tue, 16 May 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/2017-05-16-enabling-tools/</guid>
-      <description>As a young scientist, I find myself facing these challenges (or, at least, let&amp;rsquo;s say that I am trying to improve in these areas):
- make research in an interdisciplinary and distributed context, maximize the chances that anybody can access and reproduce my results, engage with the wide public.  Learning these enabling tools are helping me dealing with this:
- A programming language, easier if it is a high level one such as R or Python.</description>
+      <description>Scientists love programming, scientists love writing</description>
     </item>
     
   </channel>

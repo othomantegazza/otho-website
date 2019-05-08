@@ -9,4 +9,9 @@ date = 2019-03-05
 
 {{% staticref "slides/slides-codeclub.html" %}}Slides{{% /staticref %}}
 
+
+### R-ladies Milan, 2019-05-09
+
+{{% staticref "slides/slides-rladies.html" %}}Slides{{% /staticref %}}
+
 --
