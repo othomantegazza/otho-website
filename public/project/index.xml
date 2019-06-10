@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Otho Mantegazza 2018</copyright>
-    <lastBuildDate>Mon, 10 Dec 2018 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 10 Jun 2019 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sunday Blues</title>
+      <link>/project/sunday-blues/</link>
+      <pubDate>Mon, 10 Jun 2019 00:00:00 +0200</pubDate>
+      
+      <guid>/project/sunday-blues/</guid>
+      <description>A blog about genetics, its technological applications and their impact on society. One post each Sunday.</description>
+    </item>
     
     <item>
       <title>PTRAPR</title>
