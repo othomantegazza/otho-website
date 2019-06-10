@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.3.0">
+  <meta name="generator" content="Hugo 0.55.2" />
+  <meta name="author" content="Otho Mantegazza">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="A collection of the dataviz that I did partecipating to the TidyTuesday weekly social project">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/project/tidytuesday/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-101634279-1', 'auto');
+      ga('set', 'anonymizeIp', true);
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Otho | Sidenotes">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/project/tidytuesday/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@othomn">
+  <meta property="twitter:creator" content="@othomn">
+  
+  <meta property="og:site_name" content="Otho | Sidenotes">
+  <meta property="og:url" content="/project/tidytuesday/">
+  <meta property="og:title" content="I love R | Otho | Sidenotes">
+  <meta property="og:description" content="A collection of the dataviz that I did partecipating to the TidyTuesday weekly social project"><meta property="og:image" content="/project/tidytuesday/featured.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-06-09T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-06-09T00:00:00&#43;00:00">
+  
+
+  
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#3f51b5",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "#3f51b5"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
+
+  
+
+  <title>I love R | Otho | Sidenotes</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Otho | Sidenotes</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/publication">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/slides">
+            
+            <span>Slides</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/CV/otho-mantegazza-cv.pdf">
+            
+            <span>CV</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article article-project" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">I love R</h1>
+
+  
+  <p class="page-subtitle">A collection of the dataviz that I did partecipating to the TidyTuesday weekly social project</p>
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2019-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-06-09 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Jun 9, 2019
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Otho Mantegazza">
+  </span>
+
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/project/tidytuesday/#disqus_thread"></a>
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=I%20love%20R&amp;url=%2fproject%2ftidytuesday%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fproject%2ftidytuesday%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fproject%2ftidytuesday%2f&amp;title=I%20love%20R"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fproject%2ftidytuesday%2f&amp;title=I%20love%20R"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=I%20love%20R&amp;body=%2fproject%2ftidytuesday%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+  <link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+<div class="flex-container">
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Ramen ratings for the 10 countries in the dataset with most measurements.<a href="https://twitter.com/hashtag/Tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#Tidytuesday</a> <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a><br><br>🍜🍜🍜 rated by <a href="https://t.co/F46UiOAj5D">https://t.co/F46UiOAj5D</a><br>code: <a href="https://t.co/nvYAAN8aXp">https://t.co/nvYAAN8aXp</a><br><br>Malaysia wins 🥇 <a href="https://t.co/2Re9U7bRUb">pic.twitter.com/2Re9U7bRUb</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1135999792876855296?ref_src=twsrc%5Etfw">June 4, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+The good news is that wine prices don't skyrocket until a rating of 95 or higher.<br><br>Happy <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> 🍷😋😁.<br><br>Data: <a href="https://t.co/lCCobClmIu">https://t.co/lCCobClmIu</a><br>Code: <a href="https://t.co/uqrKmofyX3">https://t.co/uqrKmofyX3</a> <a href="https://t.co/kUcpixn3lT">pic.twitter.com/kUcpixn3lT</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1133465460496850948?ref_src=twsrc%5Etfw">May 28, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>, trying also a bit of clustering of:<br><br>- GDP, <br>- plastic waste,<br>- mismanaged plastic w.<br><br>Clusters overlap a bit, but you can see three patterns of plastic use and mismanaged wastes in high, medium and low GDP countries.<br><br>Untidy 😬🙄 code <a href="https://t.co/xHtuIbmSmk">https://t.co/xHtuIbmSmk</a> <a href="https://t.co/JXKLfHuYgE">pic.twitter.com/JXKLfHuYgE</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1131552788968804352?ref_src=twsrc%5Etfw">May 23, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+My Wednesday <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> 😋 <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <br><br>Is inequality mirrored also in waste plastic management?<br><br>I checked the distribution of the percentage of mismanaged plastic waste, and it's kind of bimodal.<br><br>🗞️ <a href="https://t.co/tbLganZ3V2">https://t.co/tbLganZ3V2</a><br>👨
+💻 <a href="https://t.co/xHtuIbmSmk">https://t.co/xHtuIbmSmk</a> <a href="https://t.co/f7BTsS6y3Q">pic.twitter.com/f7BTsS6y3Q</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1131240439087083521?ref_src=twsrc%5Etfw">May 22, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Happy <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>!<br><br>I took inspiration from the concept of <a href="https://twitter.com/MargaCorralG?ref_src=twsrc%5Etfw"><span class="citation">@MargaCorralG</span></a>, showing Nobel categories by age and gender.<br><br>Data source: <a href="https://t.co/BAMDMewGwW">https://t.co/BAMDMewGwW</a><br>Code: <a href="https://t.co/2XblXycrp5">https://t.co/2XblXycrp5</a><br><br>…way beyond gender imbalance <a href="https://t.co/cmVBongNRq">pic.twitter.com/cmVBongNRq</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1128426237834276865?ref_src=twsrc%5Etfw">May 14, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+For a late <a href="https://twitter.com/hashtag/FunctionFriday?src=hash&amp;ref_src=twsrc%5Etfw">#FunctionFriday</a>, I would propose ggforce::geom_link(). <br><br>It draws a segment, and it computes the ..index.. variable. So you can change aesthetics (such as alpha and size) along that segment.<br><br>⬇️⬇️Like in the plot below⬇️😋 <a href="https://t.co/2EOT9GF8Xa">pic.twitter.com/2EOT9GF8Xa</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1126956751025258497?ref_src=twsrc%5Etfw">May 10, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Refined a bit the <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> model (still, big margin for improvement 😅).<br><br>New plot: Every species ranked from the most likely to be vulnerable to windows light. The last rows contain only very sparse observations.<br><br>⬆️⬆️Data source and code: see above ⬆️⬆️<a href="https://twitter.com/hashtag/Tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#Tidytuesday</a> <a href="https://t.co/xRVt4CHH2R">pic.twitter.com/xRVt4CHH2R</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1124231387626770433?ref_src=twsrc%5Etfw">May 3, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+For this <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> I tried to make a graph of Anime genres, and how they are connected.<br><br>Source: <a href="https://t.co/sYi52aZbqG">https://t.co/sYi52aZbqG</a><br>code: <a href="https://t.co/GgQljYmCNc">https://t.co/GgQljYmCNc</a><a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://t.co/hU4HJIyhKm">pic.twitter.com/hU4HJIyhKm</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1121742531061002241?ref_src=twsrc%5Etfw">April 26, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+For this <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> I tried to tackle the plot “Still a man's world”, which is left as an open question in this very interesting blog post by <a href="https://twitter.com/MissSarahLeo?ref_src=twsrc%5Etfw"><span class="citation">@MissSarahLeo</span></a> <br><br>Source blog post 🗞️ : <a href="https://t.co/nJL4RPKNiI">https://t.co/nJL4RPKNiI</a><br>code 👨
+💻: <a href="https://t.co/yGqK7wVjQi">https://t.co/yGqK7wVjQi</a> <a href="https://t.co/Ay9S3pj7WG">pic.twitter.com/Ay9S3pj7WG</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1118572259227181058?ref_src=twsrc%5Etfw">April 17, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+365 days cycling in Seattle 🚴
+♂️🚴
+♀️🚴
+♂️🚴
+♀️<br><br>For this <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> I tried to make a big poster with bike measurements for every day in 2017, to practice a bit layouts of heavily faceted plots.<br><br>data: <a href="https://t.co/KnjLuLZH0R">https://t.co/KnjLuLZH0R</a> <a href="https://t.co/MnVQ8HshAd">pic.twitter.com/MnVQ8HshAd</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1114323237268283394?ref_src=twsrc%5Etfw">April 6, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+When you want to highlight or discuss (relatively) small effects, what about a ridge plot, with arrows that show the median percent different from the reference group?<br><br>code on a simulated dataset: <a href="https://t.co/G7esC1pJ7q">https://t.co/G7esC1pJ7q</a><br><br>Done with <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> and <a href="https://twitter.com/hashtag/ggplot2?src=hash&amp;ref_src=twsrc%5Etfw">#ggplot2</a> <a href="https://t.co/fLgEjANggY">pic.twitter.com/fLgEjANggY</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1112749587704528897?ref_src=twsrc%5Etfw">April 1, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+TIL, <br><br>a detailed choropleth map might be easier to understand if you show only selected borders, instead of all of them.<br><br>Of course it depends from you audience, and which area/administrative region you think they know best.<a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a> in <a href="https://twitter.com/hashtag/ggplot2?src=hash&amp;ref_src=twsrc%5Etfw">#ggplot2</a> <a href="https://t.co/kiTpsvhZNH">pic.twitter.com/kiTpsvhZNH</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1111983577766547456?ref_src=twsrc%5Etfw">March 30, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+An alternative version to the previous <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a>. Always dataviz in <a href="https://twitter.com/hashtag/ggplot2?src=hash&amp;ref_src=twsrc%5Etfw">#ggplot2</a><br><br>Inspired to the famous “Baby Spike” design by <a href="https://twitter.com/NadiehBremer?ref_src=twsrc%5Etfw"><span class="citation">@NadiehBremer</span></a> and <a href="https://twitter.com/zanstrong?ref_src=twsrc%5Etfw"><span class="citation">@zanstrong</span></a> <a href="https://t.co/uLDLSrQzsg">https://t.co/uLDLSrQzsg</a><br><br>Data maintained by Stanford Open Policing <br>code: <a href="https://t.co/ZEI4ZhQOsx">https://t.co/ZEI4ZhQOsx</a> <a href="https://t.co/q88y1KRYIy">pic.twitter.com/q88y1KRYIy</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1110207604041629696?ref_src=twsrc%5Etfw">March 25, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Late <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a>. A bit of <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a> in ggplot2.<br>Trying to reproduce the mirrored density plot discussed here <a href="https://t.co/sYHIxR5WF4">https://t.co/sYHIxR5WF4</a> by <a href="https://twitter.com/kennelliott?ref_src=twsrc%5Etfw"><span class="citation">@kennelliott</span></a>.<br><br>data source: <a href="https://t.co/ZbUkDOUak5">https://t.co/ZbUkDOUak5</a><br>code: <a href="https://t.co/V2gITxIHEf">https://t.co/V2gITxIHEf</a> <a href="https://t.co/fgEHmAo1TZ">pic.twitter.com/fgEHmAo1TZ</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1109922887195070465?ref_src=twsrc%5Etfw">March 24, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> week 10, <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a><br><br>No margin for doubts.<br><br>Source: <a href="https://t.co/8gLWOO5MCD">https://t.co/8gLWOO5MCD</a><br>Code: <a href="https://t.co/rhIeLBgegF">https://t.co/rhIeLBgegF</a> <a href="https://t.co/LmWRO8nnnH">pic.twitter.com/LmWRO8nnnH</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1103045177403424774?ref_src=twsrc%5Etfw">March 5, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> week 10, <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a><br><br>No margin for doubts.<br><br>Source: <a href="https://t.co/8gLWOO5MCD">https://t.co/8gLWOO5MCD</a><br>Code: <a href="https://t.co/rhIeLBgegF">https://t.co/rhIeLBgegF</a> <a href="https://t.co/LmWRO8nnnH">pic.twitter.com/LmWRO8nnnH</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1103045177403424774?ref_src=twsrc%5Etfw">March 5, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Last minute blogpost on the last week <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>.<br><br>A bit of scaling and clustering observations :) <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a><br><br>🙌😊<a href="https://t.co/0jrwMGbEcX">https://t.co/0jrwMGbEcX</a>🌙☀️ <a href="https://t.co/3Hn6KPrgiV">pic.twitter.com/3Hn6KPrgiV</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1097811160009723905?ref_src=twsrc%5Etfw">February 19, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+I was searching new visualizations for a <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>, instead I found some <a href="https://twitter.com/accidental__aRt?ref_src=twsrc%5Etfw"><span class="citation">@accidental__aRt</span></a> 😁 <a href="https://t.co/VSiYDODKN6">pic.twitter.com/VSiYDODKN6</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1096066277737668609?ref_src=twsrc%5Etfw">February 14, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+2⃣nd plot for this <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> 😅<br><br> I tried to scale the spending between 0 and 1 (to highlight relative patterns), and to visualize clusters with heatmaps.<br><br>👨
+💻<a href="https://t.co/yO7S3jQO1D">https://t.co/yO7S3jQO1D</a> <a href="https://t.co/GaotwRsEFr">pic.twitter.com/GaotwRsEFr</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1095507634097188865?ref_src=twsrc%5Etfw">February 13, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Two clusters of R&amp;D spending for this week <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>? <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a><br><br>Coming soon:<br><br>1⃣A better way to scale/normalize data?<br>2⃣What happens if you cluster only the Pres. Obama era?<br>3⃣A blog post with tidy code<br><br>for now:<br>🗞️<a href="https://t.co/SJElIPfJXg">https://t.co/SJElIPfJXg</a><br>👨
+💻<a href="https://t.co/znoeo6IbvV">https://t.co/znoeo6IbvV</a> <a href="https://t.co/wd6HivpAE2">pic.twitter.com/wd6HivpAE2</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1095475108121100289?ref_src=twsrc%5Etfw">February 13, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Late <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> , <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a><br><br>Visualization practice, I'm showing consumption of butter and its percent change compared to the previous year.<br><br>I did this plot on “butter” just because its consumption changes.<br><br>Source: <a href="https://t.co/yNp2qkOVO5">https://t.co/yNp2qkOVO5</a><br>Code: <a href="https://t.co/flNedKO1kh">https://t.co/flNedKO1kh</a> <a href="https://t.co/yoTHspwBxZ">pic.twitter.com/yoTHspwBxZ</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1091413719320547328?ref_src=twsrc%5Etfw">February 1, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+A small modification to an old <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>, with a bit of <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> 🙂.<br><br>Probabability estimates that a new captive cetaceans was acquired by friendly means (not captured) as a function of time, by logistic regression.<br><br>⬇️⬇️⬇️source <span class="citation">[&lt;a href=&quot;https://twitter.com/puddingviz?ref_src=twsrc%5Etfw&quot;&gt;@puddingviz&lt;/a&gt;]</span> and code in tweet below ⬇️⬇️⬇️ <a href="https://t.co/W6M0yYHwiq">pic.twitter.com/W6M0yYHwiq</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1085489775929380864?ref_src=twsrc%5Etfw">January 16, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Week 38 of <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a>, luckily, the practice of capturing cetaceans has declined in the '90s. <br><br>Check the code :) <a href="https://t.co/4y6611Ilbn">https://t.co/4y6611Ilbn</a> <a href="https://t.co/Q0eIpbDYyq">pic.twitter.com/Q0eIpbDYyq</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1075126059559989249?ref_src=twsrc%5Etfw">December 18, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Yes <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> (or tardythursday 😅) #36, again based on plots found on <a href="https://t.co/cxBXdnkZPd">https://t.co/cxBXdnkZPd</a> <a href="https://twitter.com/hashtag/rstat?src=hash&amp;ref_src=twsrc%5Etfw">#rstat</a><br><br>Check the code: <a href="https://t.co/7X7sHmwKfu">https://t.co/7X7sHmwKfu</a> <a href="https://t.co/0wMtrgCiVR">pic.twitter.com/0wMtrgCiVR</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1070832428460183552?ref_src=twsrc%5Etfw">December 7, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+An alternative version, with ggalluvial. Great package :)<a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a><a href="https://t.co/4pPaHyBMQn">https://t.co/4pPaHyBMQn</a> <a href="https://t.co/1qBa29FiYt">pic.twitter.com/1qBa29FiYt</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1065383804343369728?ref_src=twsrc%5Etfw">November 21, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Also, a week old <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> on CRAN downloads. <br><br>I have drafted a small script that models package download data as Poisson and tells you which packages, among those you have installed, had the most unexpected surge in download counts. <a href="https://twitter.com/hashtag/rstat?src=hash&amp;ref_src=twsrc%5Etfw">#rstat</a><br><br>Code 🙂: <a href="https://t.co/AZqm58m9G5">https://t.co/AZqm58m9G5</a> <a href="https://t.co/QX907N312H">pic.twitter.com/QX907N312H</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1061396042288107520?ref_src=twsrc%5Etfw">November 10, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Still much to learn about plotting maps. This is my take on last week <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a><br><br>Check the code 🙂: <a href="https://t.co/ym8MuX4H4s">https://t.co/ym8MuX4H4s</a> <a href="https://t.co/fi18MKDJox">pic.twitter.com/fi18MKDJox</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1061329527538925568?ref_src=twsrc%5Etfw">November 10, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Old <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>, but I had it ready. Week28, US election. Indeed midterm elections are consistently less attended. <a href="https://twitter.com/hashtag/rstat?src=hash&amp;ref_src=twsrc%5Etfw">#rstat</a><br><br>Data (PDF):<a href="https://t.co/6Qkgy9fgOH">https://t.co/6Qkgy9fgOH</a><br>Code: <a href="https://t.co/EAYRBjvdHC">https://t.co/EAYRBjvdHC</a> <a href="https://t.co/VxbVSda7UD">pic.twitter.com/VxbVSda7UD</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1054825457756094464?ref_src=twsrc%5Etfw">October 23, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+I had to keep this week <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> simple, because: time 😅<br><br>That pattern though, amazing. Now I want to know who of the people that I know was born on a weekend, looks like a rarity 😄<br><br>check the code: <a href="https://t.co/syC68dXXsC">https://t.co/syC68dXXsC</a> <a href="https://t.co/mtoXYz7Ghk">pic.twitter.com/mtoXYz7Ghk</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1047850874402430977?ref_src=twsrc%5Etfw">October 4, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Some takes on this week <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> <a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a><br><br>Italy has a rather low threat<br><br>code: <a href="https://t.co/cVO2XgBSY0">https://t.co/cVO2XgBSY0</a> <a href="https://t.co/WG4xcpZI2C">pic.twitter.com/WG4xcpZI2C</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1046030216223690752?ref_src=twsrc%5Etfw">September 29, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+I'm sure that this is, by far, not the right way to model this data😅<br><br>Anyway, late <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> <a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a>, passengers in 2012 vs. increase in passengers between 2012 and 2017. With a robust fit, prediction boundaries and labelled outliers.<br><br>code: <a href="https://t.co/pb5XBduKRo">https://t.co/pb5XBduKRo</a> <a href="https://t.co/R3F8dgnLun">pic.twitter.com/R3F8dgnLun</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1043942368842592256?ref_src=twsrc%5Etfw">September 23, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Households with cats and dogs in the US for this week <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> <a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a><br><br>Again, modeled after the plots in <a href="https://twitter.com/kjhealy?ref_src=twsrc%5Etfw"><span class="citation">@kjhealy</span></a> great Socviz book.<br><br>Code: <a href="https://t.co/0yhFHC0hFd">https://t.co/0yhFHC0hFd</a> <a href="https://t.co/uFkn8dackk">pic.twitter.com/uFkn8dackk</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1039660896925245441?ref_src=twsrc%5Etfw">September 11, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+My take on <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> fast-food dataset.<br><br>Which word in item's names is associated with the most calories?<br>A lot more tidying to do to get nice results 😅 but it's funny to see “Tenders” up there at the top with “King”, “Super” and “Footlong”.<a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a> <a href="https://t.co/77sbsKbITA">pic.twitter.com/77sbsKbITA</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1038879031268139009?ref_src=twsrc%5Etfw">September 9, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Week old <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> <a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a>, but I had it there.<br><br>Not an expert on football, took me some guessing, and I'm still not sure I'm guessing it right. <br><br>The more rush attempts, the more yards rushed. I also labeled some outliers that did better then expected.<a href="https://t.co/NRoF466Gd6">https://t.co/NRoF466Gd6</a> <a href="https://t.co/t8ZXGuGI3C">pic.twitter.com/t8ZXGuGI3C</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1037796625765285889?ref_src=twsrc%5Etfw">September 6, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Yes, done it! :) <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> <a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a><br><br>Is there a 6 year pattern in big fires? Does it match heatwaves?<br>Also, overall, are big fires increasing since the '90s?<br><br>data: <a href="https://t.co/xXeZjjSlrc">https://t.co/xXeZjjSlrc</a><br>code: <a href="https://t.co/3p6m4k7WTk">https://t.co/3p6m4k7WTk</a> <a href="https://t.co/Q1JwNkkbM3">pic.twitter.com/Q1JwNkkbM3</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1032998205804429312?ref_src=twsrc%5Etfw">August 24, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Very late <a href="https://twitter.com/hashtag/tidytuesday?src=hash&amp;ref_src=twsrc%5Etfw">#tidytuesday</a> <a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a><br><br>IRA tweets in the <a href="https://twitter.com/FiveThirtyEight?ref_src=twsrc%5Etfw"><span class="citation">@FiveThirtyEight</span></a> dataset, curated by <a href="https://twitter.com/ollie?ref_src=twsrc%5Etfw"><span class="citation">@ollie</span></a> , credits for the original set to Darren Linvil and Patrick Warren.<br><br>Russian tweets among the most followed.<br><br>data: <a href="https://t.co/eRA9aVoZnM">https://t.co/eRA9aVoZnM</a> <br>code: <a href="https://t.co/uQrujKzvZ5">https://t.co/uQrujKzvZ5</a> <a href="https://t.co/5cYs6BtzPN">pic.twitter.com/5cYs6BtzPN</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1031613330228760576?ref_src=twsrc%5Etfw">August 20, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+A bit of data wrangling with the <a href="https://twitter.com/hashtag/tidyverse?src=hash&amp;ref_src=twsrc%5Etfw">#tidyverse</a> for this <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> <br>Checkout the code on github :) <a href="https://t.co/xtEA7jSRZr">https://t.co/xtEA7jSRZr</a> <a href="https://t.co/9tfaAnwTe2">pic.twitter.com/9tfaAnwTe2</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1009500601674321923?ref_src=twsrc%5Etfw">June 20, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Fun with visualization for this <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> :)<br>Two versions, with and without number.<br>Inspired by: <a href="https://t.co/Jd6IZCC56h">https://t.co/Jd6IZCC56h</a><br>Code here: <a href="https://t.co/QCYP6gB1H2">https://t.co/QCYP6gB1H2</a> <a href="https://t.co/6vLbYPMEfO">pic.twitter.com/6vLbYPMEfO</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1006668090678136842?ref_src=twsrc%5Etfw">June 12, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div>
+<blockquote class="twitter-tweet">
+<p lang="en" dir="ltr">
+Great idea this <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> :) Code here <a href="https://t.co/q3W7dHu3Zu">https://t.co/q3W7dHu3Zu</a> <a href="https://t.co/rifC5iw2tZ">pic.twitter.com/rifC5iw2tZ</a>
+</p>
+— Otho (<span class="citation">@othomn</span>) <a href="https://twitter.com/othomn/status/1005913260443553793?ref_src=twsrc%5Etfw">June 10, 2018</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+</div>
+
+    </div>
+
+    
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait2.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Otho Mantegazza</a></h5>
+    <h6 class="card-subtitle">Biologist, Data Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:othomanteotho@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/othomn" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.com/citations?user=mDL1DEkAAAAJ&amp;hl" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/othomantegazza" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+    
+
+  </div>
+</article>
+
+
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Otho Mantegazza 2018 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+    <script id="dsq-count-scr" src="//otho-netlify-com.disqus.com/count.js" async></script>
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.07fbebbbf71b021c8836e1d7ecffa489.js"></script>
+
+    
+
+  </body>
+</html>
+
