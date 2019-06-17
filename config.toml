@@ -316,10 +316,6 @@ enableGitInfo = false
   url = "CV/otho-mantegazza-cv.pdf"
   weight = 7
 
-[[menu.main]]
-  name = "Contact"
-  url = "#contact"
-  weight = 8
   
 
 # Link to a PDF of your resume/CV from the menu.
