@@ -18,6 +18,16 @@ editor_options:
 <div class="flex-container">
 
 <div>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Same plot, with some important fixes ;) <a href="https://t.co/kHgrhdGVZH">pic.twitter.com/kHgrhdGVZH</a></p>&mdash; Otho (@othomn) <a href="https://twitter.com/othomn/status/1151194044040732673?ref_src=twsrc%5Etfw">July 16, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+</div>
+
+
+<div>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I should add hover events to this plot :)<br><br>A bit of fun packing circles as in this great blog post by <a href="https://twitter.com/chisatini?ref_src=twsrc%5Etfw">@chisatini</a> <a href="https://t.co/xeKlWH5haW">https://t.co/xeKlWH5haW</a><br><br>🗞️ <a href="https://t.co/HdtNACbEys">https://t.co/HdtNACbEys</a><br>👨
+💻 <a href="https://t.co/8B5M8AUHz1">https://t.co/8B5M8AUHz1</a><br><br>Happy <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a> ! 🙌 <a href="https://t.co/UDFmcHtNuW">pic.twitter.com/UDFmcHtNuW</a></p>&mdash; Otho (@othomn) <a href="https://twitter.com/othomn/status/1146176430939791360?ref_src=twsrc%5Etfw">July 2, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+</div>
+
+<div>
 <blockquote class="twitter-tweet"><p lang="it" dir="ltr">UFO ❤️ NY<br><br>Data: <a href="https://t.co/KTpDAvmcK9">https://t.co/KTpDAvmcK9</a><br>Code: <a href="https://t.co/9fGc0nfUnF">https://t.co/9fGc0nfUnF</a><br><br>👽Happy <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>😁 <a href="https://t.co/WKsw4RvN6H">pic.twitter.com/WKsw4RvN6H</a></p>&mdash; Otho (@othomn) <a href="https://twitter.com/othomn/status/1143594348682121216?ref_src=twsrc%5Etfw">June 25, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 </div>
 
