@@ -6,7 +6,7 @@ title = "Sunday Blues"
 date = 2019-06-10
 
 # Project summary to display on homepage.
-summary = "A blog about genetics, its technological applications and their impact on society. One post each Sunday."
+summary = "A blog about genetics, its technological applications and their impact on society. One post every other week, on Sunday."
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["communication", "genetics", "data journalism" "regulation"]`
